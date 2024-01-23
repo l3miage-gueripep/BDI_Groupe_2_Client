@@ -1,1 +1,42 @@
-<p>register works!</p>
+
+<div class="wrapper">
+    <!-- register form -->
+    <!--  -->
+    <form [formGroup]="this.registerForm" (ngSubmit)="this.register()">
+        <h2 class="mat-primary">Register</h2>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Your email address" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Your password" formControlName="password" autocomplete="new-password">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Confirm password</mat-label>
+            <input matInput placeholder="Repeat your password" formControlName="confirmPassword">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="this.registerForm.invalid">Submit</button>
+    </form>
+
+
+    <!--  -->
+    <!-- login form -->
+    <!--  -->
+    <form [formGroup]="this.loginForm" (ngSubmit)="this.login()">
+        <h2>Login</h2>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Your email address" formControlName="email" autocomplete="email">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Your password" formControlName="password" autocomplete="off">
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Submit</button>
+    </form>
+    
+    <button mat-raised-button color="accent" (click)="this.loginWithGoogle()">Login with Google</button>
+
+</div>
