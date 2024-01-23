@@ -1,0 +1,56 @@
+.word-search-phrase {
+  margin-left: 20px;
+}
+.word-search {
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  font-size: 11pt;
+}
+
+.search-page-toolbar-container {
+  margin-left: 30px;
+  margin-right: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.search-page-choice-bar {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.search-page-choice-bar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  > *:not(:last-child) {
+    margin-right: 50px;
+  }
+}
+.search-page-result-card {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.search-page-result-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-page-result-card-col {
+  flex: 1;
+  padding: 10px;
+}
+
+.festival-image {
+  width: 35%;
+  height: 35%;
+}
+
+.search-page-festival-name {
+  font-weight: bold;
+  font-family: Open, sans-serif;
+  font-size: 11pt;
+}
+

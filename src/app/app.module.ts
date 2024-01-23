@@ -10,13 +10,16 @@ import { HeaderComponent } from './header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { AuthenticationModule } from './authentication/authentication.module';
+import {
+  ResultSearchPageComponent
+} from "./resultat-recherche/resultat-recherche-page/result-search-page.component";
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

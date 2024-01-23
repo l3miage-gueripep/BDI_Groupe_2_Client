@@ -64,10 +64,10 @@
          },
           "configurations": {
             "production": {
-              "browserTarget": "Angular16App:build:production"
+              "buildTarget": "Angular16App:build:production"
             },
             "development": {
-              "browserTarget": "Angular16App:build:development"
+              "buildTarget": "Angular16App:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Angular16App:build"
+            "buildTarget": "Angular16App:build"
           }
         },
         "test": {
