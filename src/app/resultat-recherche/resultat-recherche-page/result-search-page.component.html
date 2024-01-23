@@ -1,0 +1,72 @@
+<p>Votre recherche pour {{wordSearch}} a donné les résultats suivants</p>
+<p>{{ nbResult }} résultats</p>
+<button mat-button [matMenuTriggerFor]="filterMenu" (menuOpened)="isFilterMenuOpen = true" (menuClosed)="isFilterMenuOpen = false">
+    <span class="material-icons">{{ isFilterMenuOpen ? 'expand_less' : 'expand_more' }}</span>
+    {{ filterSelected }}
+</button>
+<mat-menu #filterMenu="matMenu">
+    <button mat-menu-item>Par pertinence</button>
+    <button mat-menu-item>De A à Z</button>
+    <button mat-menu-item>Par dates</button>
+</mat-menu>
+
+<button mat-button>
+    <span class="material-icons">tune</span>
+    Ville & Date
+</button>
+
+<mat-card>
+    <mat-card-content>
+        <button mat-button [matMenuTriggerFor]="cityMenu" (menuOpened)="isCityMenuOpen = true" (menuClosed)="isCityMenuOpen = false">
+            {{ citySelected }}
+            <span class="material-icons">{{ isCityMenuOpen ? 'expand_less' : 'expand_more' }}</span>
+        </button>
+        <mat-menu #cityMenu="matMenu">
+            <section class="example-section" [formGroup]="toppings">
+                <p><mat-checkbox formControlName="grenoble">Grenoble</mat-checkbox></p>
+                <p><mat-checkbox formControlName="lyon">Lyon</mat-checkbox></p>
+            </section>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="categoriesMenu" (menuOpened)="isCategoriesMenuOpen = true" (menuClosed)="isCategoriesMenuOpen = false">
+            {{ categoriesSelected }}
+            <span class="material-icons">{{ isCategoriesMenuOpen ? 'expand_less' : 'expand_more' }}</span>
+        </button>
+        <mat-menu #categoriesMenu="matMenu">
+            <section class="example-section" [formGroup]="toppings">
+                <p><mat-checkbox formControlName="rock">Rock</mat-checkbox></p>
+                <p><mat-checkbox formControlName="pop">Pop</mat-checkbox></p>
+            </section>
+        </mat-menu>
+
+        <mat-form-field class="example-form-field">
+            <mat-label>First campaign</mat-label>
+            <mat-date-range-input
+                    [formGroup]="campaignOne"
+                    [rangePicker]="campaignOnePicker"
+                    [comparisonStart]="campaignTwo.value.start"
+                    [comparisonEnd]="campaignTwo.value.end">
+                <input matStartDate placeholder="Start date" formControlName="start">
+                <input matEndDate placeholder="End date" formControlName="end">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+        </mat-form-field>
+
+        <mat-form-field class="example-form-field">
+            <mat-label>Second campaign</mat-label>
+            <mat-date-range-input
+                    [formGroup]="campaignTwo"
+                    [rangePicker]="campaignTwoPicker"
+                    [comparisonStart]="campaignOne.value.start"
+                    [comparisonEnd]="campaignOne.value.end">
+                <input matStartDate placeholder="Start date" formControlName="start">
+                <input matEndDate placeholder="End date" formControlName="end">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="campaignTwoPicker"></mat-datepicker-toggle>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-date-range-picker #campaignTwoPicker></mat-date-range-picker>
+        </mat-form-field>
+    </mat-card-content>
+</mat-card>
