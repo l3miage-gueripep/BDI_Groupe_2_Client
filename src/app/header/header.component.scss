@@ -1,3 +1,61 @@
 .spacer{
   flex: 1 1 auto;
 }
+.icon{
+margin: 1%;
+
+text-align: center;
+}
+img{
+  height: 100%;
+}
+.SearchBar{
+outline: 1px solid #ccc;
+background-color: white;
+width: 35%;
+display: flex;
+border-radius: 20px ;
+padding: none;
+margin-left:3% ;
+height: 40px;
+}
+input{
+  height: 25px;
+  border-radius: 20px ;
+  border: none;
+  padding: 7px 2px 7px 2px;
+  width: 100%;
+}
+textarea:focus, input:focus{
+  outline: none;
+}
+.center {
+  padding: 8px 5px 15px 5px;
+  width: auto;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+a{
+  text-decoration: none;
+  color: grey;
+}
+a:hover{
+  color: black;
+}
+@media screen and (max-width: 700px) {
+  .SearchBar{
+    height: 30px;
+  }
+  input{
+    height: 10px;
+    padding: 9px 3px 8px 3px;
+   margin: 1%;
+  }
+  .center {
+    padding: 2px 5px 5px 5px;
+    width: auto;
+  }
+  label{
+    font-size: 10px;
+  }
+}
