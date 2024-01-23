@@ -12,7 +12,7 @@ import { canActivateUser } from './services/permissions.service';
 
 
 const routes: Routes = [{ path: 'register', component: RegisterComponent },
-  {path: 'user', component: UserComponent, canActivate: [canActivateUser]}
+  {path: 'user', component: UserComponent, canActivate: [canActivateUser]},
   {path:'recherche', component: ResultSearchPageComponent },
   {path:'recherche/covoiturage', component: CovoiturageRecherchePageComponent}];
 
