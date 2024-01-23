@@ -1,14 +1,22 @@
 .spacer{
   flex: 1 1 auto;
 }
+.icon{
+margin: 1%;
+
+text-align: center;
+}
+img{
+  height: 100%;
+}
 .SearchBar{
-outline: 3px solid #ccc;
+outline: 1px solid #ccc;
 background-color: white;
-width: 30%;
+width: 35%;
 display: flex;
 border-radius: 20px ;
 padding: none;
-margin-left:5% ;
+margin-left:3% ;
 height: 40px;
 }
 input{
@@ -27,6 +35,13 @@ textarea:focus, input:focus{
   margin-right: 1%;
   margin-left: 1%;
 }
+a{
+  text-decoration: none;
+  color: grey;
+}
+a:hover{
+  color: black;
+}
 @media screen and (max-width: 700px) {
   .SearchBar{
     height: 30px;
@@ -39,5 +54,8 @@ textarea:focus, input:focus{
   .center {
     padding: 2px 5px 5px 5px;
     width: auto;
+  }
+  label{
+    font-size: 10px;
   }
 }

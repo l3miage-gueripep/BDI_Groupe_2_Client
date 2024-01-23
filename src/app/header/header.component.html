@@ -1,14 +1,24 @@
 <mat-toolbar>
-  <img src="assets/FestCar.png" alt="Logo" height="50">
+  <img src="assets/FestCar.png" alt="Logo">
   <div class="SearchBar">
     <div class="center">
-      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search" ></mat-icon>
+      <a routerLink="recherche">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search" ></mat-icon>
+      </a>
     </div>
-    <input type="text" placeholder="Search...">
+    <input type="text" placeholder="Rechercher ...">
   </div>
   <span class="spacer"></span>
-  <a routerLink="register">
-    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle"></mat-icon>
-  </a>
-
+  <div class="icon">
+    <a routerLink="register">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle"></mat-icon><br>
+      <label for="connexion">Connexion</label>
+    </a>
+  </div>
+  <div class="icon">
+    <a routerLink="register">
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart"></mat-icon><br>
+      <label for="connexion">Mon panier</label>
+    </a>
+  </div>
 </mat-toolbar>
