@@ -1,24 +1,27 @@
 <mat-toolbar>
-  <img src="assets/FestCar.png" alt="Logo">
-  <div class="SearchBar">
+  <a routerLink=""><img src="assets/FestCar.png" alt="Logo"></a>
+  <div class="searchBar">
     <div class="center">
       <a routerLink="recherche">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search" ></mat-icon>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon>
       </a>
     </div>
     <input type="text" placeholder="Rechercher ...">
   </div>
   <span class="spacer"></span>
-  <div class="icon">
+  <div class="icons">
     <a routerLink="user">
-      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle"></mat-icon><br>
-      <label for="connexion">Connexion</label>
+      <div class="icon">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle"></mat-icon><br>
+        <label for="utilisateur">Utilisateur</label>
+      </div>
     </a>
-  </div>
-  <div class="icon">
     <a routerLink="register">
-      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart"></mat-icon><br>
-      <label for="connexion">Mon panier</label>
+      <div class="icon">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart"></mat-icon><br>
+        <label for="connexion">Mon panier</label>
+      </div>
     </a>
   </div>
+  
 </mat-toolbar>

@@ -2,22 +2,28 @@
   flex: 1 1 auto;
 }
 .icon{
-margin: 1%;
+  margin: 1%;
+  text-align: center;
+}
 
-text-align: center;
+.icons{
+  display: flex;
+  gap: 10px;
 }
+
 img{
-  height: 100%;
+  height: 60px;
 }
-.SearchBar{
-outline: 1px solid #ccc;
-background-color: white;
-width: 35%;
-display: flex;
-border-radius: 20px ;
-padding: none;
-margin-left:3% ;
-height: 40px;
+
+.searchBar{
+  outline: 1px solid #ccc;
+  background-color: white;
+  width: 35%;
+  display: flex;
+  border-radius: 20px ;
+  padding: none;
+  margin-left:3% ;
+  height: 40px;
 }
 input{
   height: 25px;
