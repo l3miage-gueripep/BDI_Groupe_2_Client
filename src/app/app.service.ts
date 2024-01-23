@@ -6,10 +6,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppService {
 
-  constructor(private http: HttpClient) { }
+  // constructor(private http: HttpClient) { }
 
-  getPerson() {
-    return this.http.get('/hello');
-  }
+  // getPerson() {
+  //   return this.http.get('/hello');
+  // }
 
 }

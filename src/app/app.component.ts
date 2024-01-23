@@ -6,21 +6,21 @@ import { AppService } from './app.service';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-	constructor(private appService: AppService) { }
+	// constructor(private appService: AppService) { }
 
-	title = 'angular-nodejs-example';
+	// title = 'angular-nodejs-example';
 
-	person: any;
+	// person: any;
     
-    connected = false;
+    // connected = false;
 
-	ngOnInit() {
-		this.appService.getPerson()
-			.subscribe((person: any) => {
-				this.person = person;
-                this.connected = true;
-			});
-	}
+	// ngOnInit() {
+	// 	this.appService.getPerson()
+	// 		.subscribe((person: any) => {
+	// 			this.person = person;
+    //             this.connected = true;
+	// 		});
+	// }
 }
