@@ -1,22 +1,28 @@
-<p>Votre recherche pour {{wordSearch}} a donné les résultats suivants</p>
-<p>{{ nbResult }} résultats</p>
-<button mat-button [matMenuTriggerFor]="filterMenu" (menuOpened)="isFilterMenuOpen = true" (menuClosed)="isFilterMenuOpen = false">
-    <span class="material-icons">{{ isFilterMenuOpen ? 'expand_less' : 'expand_more' }}</span>
-    {{ filterSelected }}
-</button>
-<mat-menu #filterMenu="matMenu">
-    <button mat-menu-item>Par pertinence</button>
-    <button mat-menu-item>De A à Z</button>
-    <button mat-menu-item>Par dates</button>
-</mat-menu>
+<p class="word-search-phrase">Votre recherche pour <span class="word-search">{{wordSearch}}</span> a donné les résultats suivants</p>
+<div class="search-page-toolbar-container">
+    <p>{{ nbResult }} résultats</p>
 
-<button mat-button>
-    <span class="material-icons">tune</span>
-    Ville & Date
-</button>
+    <div class="search-page-toolbar-container-fliter">
+    <button mat-button [matMenuTriggerFor]="filterMenu" (menuOpened)="isFilterMenuOpen = true" (menuClosed)="isFilterMenuOpen = false">
+        <span class="material-icons">{{ isFilterMenuOpen ? 'expand_less' : 'expand_more' }}</span>
+        {{ filterSelected }}
+    </button>
+    <mat-menu #filterMenu="matMenu">
+        <button mat-menu-item>Par pertinence</button>
+        <button mat-menu-item>De A à Z</button>
+        <button mat-menu-item>Par dates</button>
+    </mat-menu>
 
-<mat-card>
+        <button mat-button (click)="toggleChoiceBar()">
+            <span class="material-icons">tune</span>
+            Ville & Date
+        </button>
+    </div>
+</div>
+
+<mat-card class="search-page-choice-bar" *ngIf="isChoiceBarVisible">
     <mat-card-content>
+        <div class="search-page-choice-bar-container">
         <button mat-button [matMenuTriggerFor]="cityMenu" (menuOpened)="isCityMenuOpen = true" (menuClosed)="isCityMenuOpen = false">
             {{ citySelected }}
             <span class="material-icons">{{ isCityMenuOpen ? 'expand_less' : 'expand_more' }}</span>
@@ -39,34 +45,50 @@
             </section>
         </mat-menu>
 
-        <mat-form-field class="example-form-field">
-            <mat-label>First campaign</mat-label>
-            <mat-date-range-input
-                    [formGroup]="campaignOne"
-                    [rangePicker]="campaignOnePicker"
-                    [comparisonStart]="campaignTwo.value.start"
-                    [comparisonEnd]="campaignTwo.value.end">
-                <input matStartDate placeholder="Start date" formControlName="start">
-                <input matEndDate placeholder="End date" formControlName="end">
+        <mat-form-field>
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                <input matStartDate formControlName="start" placeholder="Start date">
+                <input matEndDate formControlName="end" placeholder="End date">
             </mat-date-range-input>
-            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
-            <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
-        </mat-form-field>
 
-        <mat-form-field class="example-form-field">
-            <mat-label>Second campaign</mat-label>
-            <mat-date-range-input
-                    [formGroup]="campaignTwo"
-                    [rangePicker]="campaignTwoPicker"
-                    [comparisonStart]="campaignOne.value.start"
-                    [comparisonEnd]="campaignOne.value.end">
-                <input matStartDate placeholder="Start date" formControlName="start">
-                <input matEndDate placeholder="End date" formControlName="end">
-            </mat-date-range-input>
-            <mat-datepicker-toggle matIconSuffix [for]="campaignTwoPicker"></mat-datepicker-toggle>
-            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-            <mat-date-range-picker #campaignTwoPicker></mat-date-range-picker>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+
+            @if (range.controls.start.hasError('matStartDateInvalid')) {
+                <mat-error>Invalid start date</mat-error>
+            }
+            @if (range.controls.end.hasError('matEndDateInvalid')) {
+                <mat-error>Invalid end date</mat-error>
+            }
         </mat-form-field>
+        </div>
+
+        <p><mat-checkbox class="example-margin">Réservable uniquement</mat-checkbox></p>
+    </mat-card-content>
+</mat-card>
+<br/>
+<mat-card class="search-page-result-card">
+    <mat-card-content>
+        <div class="search-page-result-card-row">
+        <div class="search-page-result-card-col">
+            <img src="assets/musilac.jpg" alt="pd1" class="festival-image">
+        </div>
+
+        <div class="search-page-result-card-col">
+            <p class="search-page-festival-name">Musilac</p>
+            <p>festival intro</p>
+            <p>du 25/02/2024 au 27/02/2024</p>
+        </div>
+
+        <div class="search-page-result-card-col">
+            <p>A partir de 30 euros</p>
+            <p>
+                <a routerLink="covoiturage">
+                    <button mat-raised-button>Voir les offres de covoiturage  </button>
+                </a>
+            </p>
+        </div>
+        </div>
     </mat-card-content>
 </mat-card>
