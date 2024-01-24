@@ -6,16 +6,14 @@ import { MatCard, MatCardContent } from "@angular/material/card";
 import { JsonPipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { CovoiturageDriverCardComponent } from '../covoiturage-driver-card/covoiturage-driver-card.component';
 import { MatButton } from "@angular/material/button";
 import { MatCheckbox } from "@angular/material/checkbox";
 import { MatMenu } from "@angular/material/menu";
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { CovoiturageDriverCardComponent } from "../covoiturage-driver-card/covoiturage-driver-card.component";
 @Component({
   selector: 'app-covoiturage-recherche-page',
-  standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatCard, MatCardContent, MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule, JsonPipe, MatButton, MatCheckbox, MatMenu, MatButtonModule, MatMenuModule, CovoiturageDriverCardComponent],
   providers: [provideNativeDateAdapter()],
   templateUrl: './covoiturage-recherche-page.component.html',
   styleUrl: './covoiturage-recherche-page.component.scss'

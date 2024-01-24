@@ -10,6 +10,7 @@ import {
 import { UserComponent } from './authentication/user/user.component';
 import { canActivateUser } from './services/permissions.service';
 import { LoginComponent } from './authentication/login/login.component';
+import { PanierPageComponent } from './panier/panier-page/panier-page.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'recherche', component: ResultSearchPageComponent },
   {path:'recherche/covoiturage', component: CovoiturageRecherchePageComponent},
   {path: 'login', component: LoginComponent },
+  {path: 'panier', component: PanierPageComponent}
 ];
 
 @NgModule({

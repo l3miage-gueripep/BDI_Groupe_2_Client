@@ -5,13 +5,6 @@ import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-covoiturage-driver-card',
-  standalone: true,
-    imports: [
-        MatCard,
-        MatCardContent,
-        MatButton,
-        RouterLink
-    ],
   templateUrl: './covoiturage-driver-card.component.html',
   styleUrl: './covoiturage-driver-card.component.scss'
 })

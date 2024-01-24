@@ -10,8 +10,6 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class RegisterComponent {
 
   protected registerForm: FormGroup;
-  
-  
 
   constructor(private firebaseService: FirebaseService) { 
     this.registerForm = new FormGroup({
