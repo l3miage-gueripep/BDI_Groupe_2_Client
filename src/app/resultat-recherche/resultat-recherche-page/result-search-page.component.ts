@@ -1,28 +1,12 @@
 import { Component } from '@angular/core';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {FormBuilder, FormsModule, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
-import {JsonPipe, NgIf} from '@angular/common';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {provideNativeDateAdapter} from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIcon} from "@angular/material/icon";
-import {RouterLink} from "@angular/router";
-
-const today = new Date();
-const month = today.getMonth();
-const year = today.getFullYear();
-
+import {FormBuilder, FormGroup, FormControl} from '@angular/forms';
+import {provideNativeDateAdapter} from "@angular/material/core";
 
 @Component({
   selector: 'app-resultat-recherche-page',
+  providers: [provideNativeDateAdapter()],
   templateUrl: './result-search-page.component.html',
   styleUrls: ['./result-search-page.component.scss'],
-  standalone: true,
-  providers: [provideNativeDateAdapter()],
-  imports: [MatButtonModule, MatMenuModule, MatCardModule, FormsModule, ReactiveFormsModule, MatCheckboxModule, JsonPipe, MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule, NgIf, MatIcon, RouterLink],
 })
 export class ResultSearchPageComponent {
   wordSearch = 'grenoble';
@@ -34,11 +18,15 @@ export class ResultSearchPageComponent {
   filterSelected= 'Par pertinence'
   citySelected='grenoble'
   categoriesSelected='rock'
-  toppings = this._formBuilder.group({
+  cities = this._formBuilder.group({
     grenoble: false,
     lyon: false,
   });
 
+  categories = this._formBuilder.group({
+    pop: false,
+    rock: false,
+  });
   constructor(private _formBuilder: FormBuilder) {}
 
   range = new FormGroup({

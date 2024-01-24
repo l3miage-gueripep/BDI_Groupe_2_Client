@@ -10,12 +10,10 @@ import { HeaderComponent } from './header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { AuthenticationModule } from './authentication/authentication.module';
-import {
-  ResultSearchPageComponent
-} from "./resultat-recherche/resultat-recherche-page/result-search-page.component";
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CovoiturageRechercheModule } from './covoiturage-recherche/covoiturage-recherche.module';
 import {ReservationModule } from './reservation/reservation.module';
+import {ResultatRechercheModule} from "./resultat-recherche/resultat-recherche.module";
 
 
 
@@ -37,8 +35,9 @@ import {ReservationModule } from './reservation/reservation.module';
     MatCheckboxModule,
     CovoiturageRechercheModule,
     MatIconModule,
-    ReservationModule
+    ReservationModule,
 
+    ResultatRechercheModule
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

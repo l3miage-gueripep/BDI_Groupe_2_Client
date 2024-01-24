@@ -11,13 +11,13 @@
             <mat-label>Password</mat-label>
             <input matInput placeholder="Your password" formControlName="password" autocomplete="off" type="password">
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Submit</button>
+        <button mat-raised-button color="primary" type="submit" class="login-submit-button" [disabled]="!loginForm.valid">Submit</button>
     </form>
     <div class="separator">
         <!-- faire le separateur avec le ou au milieu -->
         ----------------------- OU -----------------------
     </div>
-    <button mat-raised-button color="accent" (click)="this.loginWithGoogle()">Se connecter avec Google</button>
+    <button mat-raised-button color="accent" class="login-google-button" (click)="this.loginWithGoogle()">Se connecter avec Google</button>
 </div>
 
 <div>Vous n'avez pas de compte ? <a routerLink="/register">Créer un compte</a></div>

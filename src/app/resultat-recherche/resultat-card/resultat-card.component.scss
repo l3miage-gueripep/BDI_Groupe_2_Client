@@ -1,0 +1,19 @@
+.search-page-result-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-page-result-card-col {
+    flex: 1;
+    padding: 10px;
+}
+
+.festival-image {
+    width: 35%;
+    height: 35%;
+}
+
+.search-card-button {
+    background-color: #f1ce53ff;
+}

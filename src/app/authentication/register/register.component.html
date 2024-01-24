@@ -16,7 +16,7 @@
             <mat-label>Confirm password</mat-label>
             <input matInput placeholder="Repeat your password" formControlName="confirmPassword" type="password">
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit" [disabled]="this.registerForm.invalid">Submit</button>
+        <button mat-raised-button color="primary" type="submit" class="register-submit-button" [disabled]="this.registerForm.invalid">Submit</button>
     </form>
 
 
@@ -25,6 +25,6 @@
         ----------------------- OU -----------------------
     </div>
 
-    <button mat-raised-button color="accent" (click)="this.loginWithGoogle()">Créer un compte avec Google</button>
+    <button mat-raised-button color="accent" class="register-google-button" (click)="this.loginWithGoogle()">Créer un compte avec Google</button>
     <div>Vous avez déjà un compte ? <a routerLink="/login">Se connecter</a></div>
 </div>
