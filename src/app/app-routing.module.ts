@@ -11,6 +11,8 @@ import { UserComponent } from './authentication/user/user.component';
 import { canActivateUser } from './services/permissions.service';
 import { LoginComponent } from './authentication/login/login.component';
 import { PanierPageComponent } from './panier/panier-page/panier-page.component';
+import { ReservationCovoiturageComponent } from './reservation/reservation-covoiturage/reservation-covoiturage.component';
+import { ReservationReussieComponent } from './reservation/reservation-reussie/reservation-reussie.component';
 
 
 const routes: Routes = [
@@ -19,7 +21,9 @@ const routes: Routes = [
   {path:'recherche', component: ResultSearchPageComponent },
   {path:'recherche/covoiturage', component: CovoiturageRecherchePageComponent},
   {path: 'login', component: LoginComponent },
-  {path: 'panier', component: PanierPageComponent}
+  {path: 'panier', component: PanierPageComponent},
+  { path: 'reservation', component: ReservationCovoiturageComponent },
+  { path: 'reservationReussie', component: ReservationReussieComponent }
 ];
 
 @NgModule({
