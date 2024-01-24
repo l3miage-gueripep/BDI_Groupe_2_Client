@@ -8,10 +8,19 @@ form{
     display: grid;
     width: 100%;
     justify-content: center;
-    gap: 50px;
+    gap: 30px;
     place-items: center;
 }
 
 button{
     color: white;
+}
+
+.register-submit-button {
+    background-color: #9ed186ff !important;
+}
+
+.register-google-button {
+    background-color: #f1ce53ff !important;
+    color: black !important;
 }

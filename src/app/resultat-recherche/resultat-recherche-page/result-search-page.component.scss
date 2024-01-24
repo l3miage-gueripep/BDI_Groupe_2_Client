@@ -24,22 +24,13 @@
   }
 }
 
-.search-page-result-card-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.search-page-choice-bar {
+  background-color: #9ed186ff;
 }
 
-.search-page-result-card-col {
-  flex: 1;
-  padding: 10px;
+.search-page-choice-bar-container-button {
+  background-color: whitesmoke;
 }
-
-.festival-image {
-  width: 35%;
-  height: 35%;
-}
-
 .search-page-festival-name {
   font-weight: bold;
   font-family: Open, sans-serif;

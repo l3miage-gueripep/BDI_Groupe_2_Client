@@ -1,0 +1,23 @@
+<mat-card class="search-page-result-card">
+    <mat-card-content>
+        <div class="search-page-result-card-row">
+            <div class="search-page-result-card-col">
+                <img [src]="imageUrl" alt="festival" class="festival-image">
+            </div>
+            <div class="search-page-result-card-col">
+                <p class="search-page-festival-name">{{ festivalName }}</p>
+                <p>{{ festivalIntro }}</p>
+                <p>du {{startDate}} au {{endDate}}</p>
+            </div>
+
+            <div class="search-page-result-card-col">
+                <p>A partir de {{price}} euros</p>
+                <p>
+                    <a routerLink="covoiturage">
+                        <button mat-raised-button class="search-card-button">Voir les offres de covoiturage  </button>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

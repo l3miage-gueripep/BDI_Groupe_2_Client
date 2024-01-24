@@ -15,6 +15,7 @@ import {
 } from "./resultat-recherche/resultat-recherche-page/result-search-page.component";
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CovoiturageRechercheModule } from './covoiturage-recherche/covoiturage-recherche.module';
+import {ResultatRechercheModule} from "./resultat-recherche/resultat-recherche.module";
 
 
 
@@ -35,6 +36,7 @@ import { CovoiturageRechercheModule } from './covoiturage-recherche/covoiturage-
     AuthenticationModule,
     MatCheckboxModule,
     CovoiturageRechercheModule,
+    ResultatRechercheModule
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

@@ -1,17 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators, FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCard, MatCardContent } from "@angular/material/card";
-import { JsonPipe } from '@angular/common';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { CovoiturageDriverCardComponent } from '../covoiturage-driver-card/covoiturage-driver-card.component';
-import { MatButton } from "@angular/material/button";
-import { MatCheckbox } from "@angular/material/checkbox";
-import { MatMenu } from "@angular/material/menu";
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
+
 @Component({
   selector: 'app-covoiturage-recherche-page',
   providers: [provideNativeDateAdapter()],
@@ -24,6 +14,7 @@ export class CovoiturageRecherchePageComponent {
   departureFormControl = new FormControl('', [Validators.required]);
   arrivalFormControl = new FormControl('', [Validators.required]);
   nbPassenger = 2;
+
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
