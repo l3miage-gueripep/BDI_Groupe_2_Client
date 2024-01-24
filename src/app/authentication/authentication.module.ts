@@ -7,12 +7,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
+import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 @NgModule({
   declarations: [
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +23,8 @@ import { UserComponent } from './user/user.component';
     MatFormFieldModule,
     MatCardModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ]
 })
 export class AuthenticationModule { }

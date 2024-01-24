@@ -1,0 +1,25 @@
+:host{
+    display: grid;
+    place-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.error
+{
+    color: red;
+}
+
+.login{
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+form{
+    display: grid;
+    place-items: stretch;
+    width: 500px;
+    margin-bottom: 10px;
+}

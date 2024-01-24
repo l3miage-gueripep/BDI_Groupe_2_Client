@@ -26,9 +26,8 @@ export class FirebaseService {
     this.user = this.getUserFromLocalStorage();
   }
 
-  public async login(email: string, password: string) {
-
-    await signInWithEmailAndPassword(this.auth, email, password)
+  public async login(email: string, password: string): Promise<string | void> {
+    return await signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         this.authenticate(userCredential);
       })
@@ -36,6 +35,7 @@ export class FirebaseService {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        return errorCode;
       });
   }
 

@@ -11,7 +11,7 @@ export class AuthGuard {
 
   canActivate(redirectTo: string): UrlTree | boolean {
     if (!this.firebaseService.user) {
-      return this.router.createUrlTree(['register'], { queryParams: { returnUrl: redirectTo } });
+      return this.router.createUrlTree(['login'], { queryParams: { returnUrl: redirectTo } });
     }
     else{
       return true;
