@@ -13,6 +13,8 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import {
   ResultSearchPageComponent
 } from "./resultat-recherche/resultat-recherche-page/result-search-page.component";
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 
@@ -29,7 +31,8 @@ import {
     HttpClientModule,
     MatToolbarModule,
     MatIconModule,
-    AuthenticationModule
+    AuthenticationModule,
+    MatCheckboxModule,
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of
