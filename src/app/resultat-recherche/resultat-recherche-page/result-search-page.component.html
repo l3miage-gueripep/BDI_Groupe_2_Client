@@ -1,3 +1,4 @@
+<div class="search-page">
 <p class="word-search-phrase">Votre recherche pour <span class="word-search">{{wordSearch}}</span> a donné les résultats suivants</p>
 <div class="search-page-toolbar-container">
     <p>{{ nbResult }} résultats</p>
@@ -46,7 +47,7 @@
         </mat-menu>
 
         <mat-form-field>
-            <mat-label>Enter a date range</mat-label>
+            <mat-label>Choisir la date</mat-label>
             <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
                 <input matStartDate formControlName="start" placeholder="Start date">
                 <input matEndDate formControlName="end" placeholder="End date">
@@ -92,3 +93,4 @@
         </div>
     </mat-card-content>
 </mat-card>
+</div>
