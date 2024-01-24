@@ -1,0 +1,22 @@
+
+.carpool-search-driver-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carpool-search-driver-card-col {
+  flex: 1;
+  padding: 10px;
+}
+.carpool-search-driver-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 30px;
+  gap: 30px;
+}
+
+.carpool-search-driver-card > .carpool-search-driver-card-info {
+  flex: 1;
+}

@@ -1,1 +1,81 @@
-<p>covoiturage-recherche-page works!</p>
+<div class="carpool-search-page">
+<p class="carpool-word-search-phrase">Votre recherche pour <span class="word-search">{{wordSearch}}</span> a donné les résultats suivants</p>
+<p>{{ nbResult }} résultats</p>
+<mat-card class="carpool-search-bar">
+    <mat-card-content>
+        <div class="carpool-search-bar-row">
+            <form class="carpool-departure-form">
+                <mat-form-field class="carpool-departure-full-width">
+                    <mat-label>Ville départ</mat-label>
+                    <input type="string" matInput [formControl]="departureFormControl" placeholder="Ville">
+                    @if (departureFormControl.hasError('required')) {
+                        <mat-error>Veuillez saisir une ville</mat-error>
+                    }
+                </mat-form-field>
+            </form>
+
+            <form class="carpool-arrival-form">
+                <mat-form-field class="carpool-arrival-full-width">
+                    <mat-label>Ville arrivée</mat-label>
+                    <input type="string" matInput [formControl]="arrivalFormControl" placeholder="Ville">
+                    @if (arrivalFormControl.hasError('required')) {
+                        <mat-error>Veuillez saisir une ville</mat-error>
+                    }
+                </mat-form-field>
+            </form>
+
+            <mat-form-field>
+                <mat-label>Choisir la date</mat-label>
+                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                    <input matStartDate formControlName="start" placeholder="Start date">
+                    <input matEndDate formControlName="end" placeholder="End date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+
+                @if (range.controls.start.hasError('matStartDateInvalid')) {
+                    <mat-error>Invalide début de date </mat-error>
+                }
+                @if (range.controls.end.hasError('matEndDateInvalid')) {
+                    <mat-error>Invalide fin de date</mat-error>
+                }
+            </mat-form-field>
+
+            <span class="carpool-search-passenger-button">
+                <span class="material-icons">person</span>
+                {{nbPassenger}}
+                <button mat-flat-button><span class="material-icons">add</span></button>
+            </span>
+
+            <button mat-flat-button color="primary">Rechercher</button>
+        </div>
+        <div class="carpool-search-bar-row">
+            <mat-checkbox class="example-margin">Réservable uniquement</mat-checkbox>
+
+            <button mat-button [matMenuTriggerFor]="categoriesMenu" (menuOpened)="isFilterMenuOpen = true" (menuClosed)="isFilterMenuOpen = false">
+                {{ filterSelected }}
+                <span class="material-icons">{{ isFilterMenuOpen ? 'expand_less' : 'expand_more' }}</span>
+            </button>
+            <mat-menu #categoriesMenu="matMenu">
+                <section class="example-section">
+                    <p><button mat-flat-button>Départ le plus tôt</button></p>
+                    <p><button mat-flat-button>Trajet le plus court</button></p>
+                    <p><button mat-flat-button>Prix le moins cher</button></p>
+                </section>
+            </mat-menu>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<app-covoiturage-driver-card
+        imageUrl="/assets/photoDriver.jpg"
+        driverName="Jérome"
+        departureTime="8: 00"
+        departureCity="Grenoble"
+        arrivalCity="Musilac"
+        arrivalTime="13: 12"
+        [placeLibre]= "5"
+        [price]="30"
+>
+</app-covoiturage-driver-card>
+</div>
