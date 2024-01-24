@@ -10,7 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { ReservationModule } from './reservation/reservation.module';
+import {ReservationModule } from './reservation/reservation.module';
 
 
 
