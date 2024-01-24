@@ -88,3 +88,29 @@ img{
     cursor: pointer;
     transform: translateY(-2px);
 }
+@media screen and (max-width: 800px) {
+    .trajetChoisi{
+        width: 100%;
+    }
+    .reservation{
+        flex-direction: column;
+    }
+    .contactezMoi{
+        width: 100%;
+        margin-top: 2%;
+    }
+    
+    #right{
+        font-size: 11px;
+    }
+    .detailCovoiturage{
+        padding-right: 2%;
+        padding-left: 4%;
+    }
+    .flex{
+        padding-left: 5%;
+    }
+    #icone{
+        padding-top: 4%;
+     }
+}
