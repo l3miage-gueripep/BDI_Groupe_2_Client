@@ -60,7 +60,7 @@ h1{
     width: 15%;
 }
 hr{
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 button{
@@ -84,4 +84,19 @@ button{
   button:active {
     box-shadow: none;
     transform: translateY(0);
+  }
+  @media screen and (max-width: 800px) {
+    h1{
+        font-size: 15px;
+        width: 100%;
+    }
+    .montant{
+        padding-right: 3%;
+    }
+    .quantiteCovoiturage{
+        width: 100%;
+    }
+    .selectionTicket{
+        padding-top: 20%;
+    }
   }
