@@ -1,47 +1,32 @@
 
-<div class="wrapper">
-    <!-- register form -->
-    <!--  -->
-    <form [formGroup]="this.registerForm" (ngSubmit)="this.register()">
-        <h2 class="mat-primary">Inscription</h2>
-        <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="Your email address" formControlName="email">
-            <mat-error *ngIf="registerForm.get('email')?.hasError('email') && !registerForm.get('email')?.hasError('required')">
-                Veuillez saisir une adresse mail valide
-            </mat-error>
-            <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
-                L'email est <strong>obligatoire</strong>
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput placeholder="Your password" formControlName="password" autocomplete="new-password" type="password">
-            <mat-error *ngIf="registerForm.get('password')?.hasError('minlength') && !registerForm.get('password')?.hasError('required')">
-                Votre mot de passe est trop courte.
-            </mat-error>
-            <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
-                Le mot de passe est <strong>obligatoire</strong>
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Confirm password</mat-label>
-            <input matInput placeholder="Repeat your password" formControlName="confirmPassword" type="password">
-            <mat-error *ngIf="registerForm.errors?.['passwordsNotMatching']">
-                Veuillez saisir le même mot de passe
-            </mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="submit" class="register-submit-button" [disabled]="this.registerForm.invalid">Submit</button>
-    </form>
-
-
-    <div class="separator">
-        <!-- faire le separateur avec le ou au milieu -->
-        ----------------------- OU -----------------------
+<div class="register">
+    <div class="wrapper">
+        <!-- register form -->
+        <!--  -->
+        <form [formGroup]="this.registerForm" (ngSubmit)="this.register()">
+            <h2 class="mat-primary">INSCRIPTION</h2>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Your email address" formControlName="email">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Your password" formControlName="password" autocomplete="new-password" type="password">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Confirm password</mat-label>
+                <input matInput placeholder="Repeat your password" formControlName="confirmPassword" type="password">
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" class="register-submit-button" [disabled]="this.registerForm.invalid">Submit</button>
+        </form>
+    
+    
+        <div class="separator">
+            <!-- faire le separateur avec le ou au milieu -->
+            ----------------------- OU -----------------------
+        </div>
+    
+        <button mat-raised-button color="accent" class="register-google-button" (click)="this.loginWithGoogle()">Créer un compte avec Google</button>
+        <div>Vous avez déjà un compte ? <a routerLink="/login">Se connecter</a></div>
     </div>
-
-    <button mat-raised-button color="accent" class="register-google-button" (click)="this.loginWithGoogle()">Créer un compte avec Google</button>
-    <div>Vous avez déjà un compte ? <a routerLink="/login">Se connecter</a></div>
 </div>

@@ -1,24 +1,22 @@
-<div class="login">
-    <b>Connextion</b>
-    <div>Connectez avec votre compte Google</div>
-    <div class="login">
-        <form [formGroup]="this.loginForm" (ngSubmit)="this.login()">
-            <div class="error" *ngIf="this.error">Identifiants invalides, veuillez reessayer</div>
-            <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input matInput placeholder="Your email address" formControlName="email" autocomplete="email" type="email">
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>Password</mat-label>
-                <input matInput placeholder="Your password" formControlName="password" autocomplete="off" type="password">
-            </mat-form-field>
-            <button mat-raised-button color="primary" type="submit" class="login-submit-button" [disabled]="!loginForm.valid">Submit</button>
-        </form>
-        <div class="separator">
-            <!-- faire le separateur avec le ou au milieu -->
-            ----------------------- OU -----------------------
-        </div>
-        <button mat-raised-button color="accent" class="login-google-button" (click)="this.loginWithGoogle()">Se connecter avec Google</button>
+<div class="connexion">
+    <b>CONNEXION</b>
+<p>Connectez avec votre compte Google ou créer un compte</p>
+<div class="wrapper">
+    <form [formGroup]="this.loginForm" (ngSubmit)="this.login()">
+        <div class="error" *ngIf="this.error">Identifiants invalides, veuillez reessayer</div>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input  matInput placeholder="Your email address" formControlName="email" autocomplete="email" type="email">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Your password" formControlName="password" autocomplete="off" type="password">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" class="login-submit-button" [disabled]="!loginForm.valid">Submit</button>
+    </form>
+    <div class="separator">
+        <!-- faire le separateur avec le ou au milieu -->
+        ----------------------- OU -----------------------
     </div>
 
     <div>Vous n'avez pas de compte ? <a routerLink="/register">Créer un compte</a></div>
