@@ -7,7 +7,6 @@ import {
 import {
   CovoiturageRecherchePageComponent
 } from "./covoiturage-recherche/covoiturage-recherche-page/covoiturage-recherche-page.component";
-import { UserComponent } from './authentication/user/user.component';
 import { canActivateUser } from './services/permissions.service';
 import { LoginComponent } from './authentication/login/login.component';
 import { PanierPageComponent } from './panier/panier-page/panier-page.component';
@@ -17,7 +16,6 @@ import { ReservationReussieComponent } from './reservation/reservation-reussie/r
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
-  { path: 'user', component: UserComponent, canActivate: [canActivateUser]},
   { path:'recherche', component: ResultSearchPageComponent },
   { path:'recherche/covoiturage', component: CovoiturageRecherchePageComponent},
   { path: 'login', component: LoginComponent },
