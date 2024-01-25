@@ -87,7 +87,8 @@ export class FirebaseService {
     this.auth.signOut().then(() => {
       this.user = undefined;
       localStorage.removeItem('userAuth');
-      this.autoRedirect();
+      //this.autoRedirect();
+      this.router.navigate(['/login']);
     });
   }
 

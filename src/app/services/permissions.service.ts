@@ -17,6 +17,10 @@ export class AuthGuard {
       return true;
     }
   }
+
+  public getUser() {
+    return this.firebaseService.user;
+  }
 }
 
 export const canActivateUser: CanActivateFn =

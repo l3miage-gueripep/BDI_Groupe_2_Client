@@ -14,6 +14,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CovoiturageRechercheModule } from './covoiturage-recherche/covoiturage-recherche.module';
 import {ReservationModule } from './reservation/reservation.module';
 import {ResultatRechercheModule} from "./resultat-recherche/resultat-recherche.module";
+import {MatButton} from "@angular/material/button";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 
 
 
@@ -23,55 +25,58 @@ import {ResultatRechercheModule} from "./resultat-recherche/resultat-recherche.m
     AppComponent,
     HeaderComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatToolbarModule,
-    MatIconModule,
-    AuthenticationModule,
-    MatCheckboxModule,
-    CovoiturageRechercheModule,
-    MatIconModule,
-    ReservationModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatToolbarModule,
+        MatIconModule,
+        AuthenticationModule,
+        MatCheckboxModule,
+        CovoiturageRechercheModule,
+        MatIconModule,
+        ReservationModule,
+        ResultatRechercheModule,
+        MatButton,
+        MatMenu,
+        MatMenuItem,
+        MatMenuTrigger,
+        /**
+         * StoreModule.forRoot is imported once in the root module, accepting a reducer
+         * function or object map of reducer functions. If passed an object of
+         * reducers, combineReducers will be run creating your application
+         * meta-reducer. This returns all providers for an @ngrx/store
+         * based application.
 
-    ResultatRechercheModule
-    /**
-     * StoreModule.forRoot is imported once in the root module, accepting a reducer
-     * function or object map of reducer functions. If passed an object of
-     * reducers, combineReducers will be run creating your application
-     * meta-reducer. This returns all providers for an @ngrx/store
-     * based application.
+         StoreModule.forRoot(reducers, { metaReducers }),
 
-    StoreModule.forRoot(reducers, { metaReducers }),
+         /**
+         * @ngrx/router-store keeps router state up-to-date in the store.
 
-    /**
-     * @ngrx/router-store keeps router state up-to-date in the store.
+         StoreRouterConnectingModule,
 
-    StoreRouterConnectingModule,
+         /**
+         * Store devtools instrument the store retaining past versions of state
+         * and recalculating new states. This enables powerful time-travel
+         * debugging.
+         *
+         * To use the debugger, install the Redux Devtools extension for either
+         * Chrome or Firefox
+         *
+         * See: https://github.com/zalmoxisus/redux-devtools-extension
 
-    /**
-     * Store devtools instrument the store retaining past versions of state
-     * and recalculating new states. This enables powerful time-travel
-     * debugging.
-     *
-     * To use the debugger, install the Redux Devtools extension for either
-     * Chrome or Firefox
-     *
-     * See: https://github.com/zalmoxisus/redux-devtools-extension
+         !environment.production ? StoreDevtoolsModule.instrument() : [],
 
-     !environment.production ? StoreDevtoolsModule.instrument() : [],
-
-    /**
-     * EffectsModule.forRoot() is imported once in the root module and
-     * sets up the effects class to be initialized immediately when the
-     * application starts.
-     *
-     * See: https://github.com/ngrx/platform/blob/master/docs/effects/api.md#forroot
-     */
-  ],
+         /**
+         * EffectsModule.forRoot() is imported once in the root module and
+         * sets up the effects class to be initialized immediately when the
+         * application starts.
+         *
+         * See: https://github.com/ngrx/platform/blob/master/docs/effects/api.md#forroot
+         */
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

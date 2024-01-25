@@ -11,17 +11,23 @@
       </div>
       <span class="spacer"></span>
       <div class="icons">
-        <a routerLink="user">
-          <div class="icon">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle"></mat-icon><br>
-            <label for="utilisateur">Utilisateur</label>
-          </div>
-        </a>
-        <a routerLink="panier">
-          <div class="icon">
-            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart"></mat-icon><br>
+              <button mat-button class="icon" [matMenuTriggerFor]="connectionMenu">
+                 <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="account_circle"></mat-icon>
+                  <br/>
+                  <label for="utilisateur">{{ userName }}</label>
+              </button>
+          <mat-menu #connectionMenu="matMenu">
+              <button *ngIf="estConnecte" mat-menu-item (click)="logout()">Se déconnecter</button>
+              <button *ngIf="!estConnecte" mat-menu-item [routerLink]="['/login']">Se connecter</button>
+          </mat-menu>
+
+
+          <a routerLink="panier">
+          <button mat-button class="icon">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart"></mat-icon>
+              <br/>
             <label for="panier">Mon panier</label>
-          </div>
+          </button>
         </a>
       </div>
     </mat-toolbar>
