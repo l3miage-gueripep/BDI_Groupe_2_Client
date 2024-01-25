@@ -24,7 +24,7 @@
                 </mat-form-field>
             </form>
 
-            <mat-form-field>
+            <mat-form-field class="carpool-search-page-calendar">
                 <mat-label>Choisir la date</mat-label>
                 <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
                     <input matStartDate formControlName="start" placeholder="Start date">
@@ -41,18 +41,20 @@
                 }
             </mat-form-field>
 
-            <span class="carpool-search-passenger-button">
+
+            <div class="carpool-search-passenger-button">
                 <span class="material-icons">person</span>
                 {{nbPassenger}}
                 <button mat-flat-button><span class="material-icons">add</span></button>
-            </span>
+            </div>
 
-            <button mat-flat-button color="primary">Rechercher</button>
+            <button mat-flat-button color="primary" class="carpool-search-button">Rechercher</button>
         </div>
+
         <div class="carpool-search-bar-row">
             <mat-checkbox class="example-margin">Réservable uniquement</mat-checkbox>
 
-            <button mat-button [matMenuTriggerFor]="categoriesMenu" (menuOpened)="isFilterMenuOpen = true" (menuClosed)="isFilterMenuOpen = false">
+            <button mat-button class="carpool-search-filter" [matMenuTriggerFor]="categoriesMenu" (menuOpened)="isFilterMenuOpen = true" (menuClosed)="isFilterMenuOpen = false">
                 {{ filterSelected }}
                 <span class="material-icons">{{ isFilterMenuOpen ? 'expand_less' : 'expand_more' }}</span>
             </button>

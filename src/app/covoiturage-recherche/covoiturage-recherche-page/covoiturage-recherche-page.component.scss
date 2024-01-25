@@ -1,11 +1,14 @@
-.word-search {
-  font-weight: bold;
-  font-family: Arial, sans-serif;
-  font-size: 11pt;
-}
 .carpool-search-page {
   margin: 0;
   padding: 30px;
+  font-family: OPEN SANS SEMIBOLD, sans-serif;
+  font-size: 14px;
+}
+
+.word-search {
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  font-size: 14pt;
 }
 
 .carpool-search-passenger-button {
@@ -15,6 +18,42 @@
 
 .carpool-search-bar-row {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
+}
+.carpool-search-bar {
+  background-color: #9ed186ff;
+ }
+
+.carpool-search-passenger-button {
+  background-color: whitesmoke;
+  border-radius: 4px;
+  height: 50px;
+}
+
+.carpool-search-filter {
+  background-color: whitesmoke;
+}
+
+.carpool-search-button {
+  height: 50px;
+}
+
+@media screen and (max-width: 800px) {
+  .carpool-search-bar {
+    width: 100%;
+  }
+  .carpool-search-bar-row {
+    flex-direction: column;
+  }
+
+  .carpool-departure-form,
+  .carpool-arrival-form,
+  .carpool-search-page-calendar,
+  .carpool-search-passenger-button,
+  .carpool-search-button {
+    width: 100%;
+  }
 }

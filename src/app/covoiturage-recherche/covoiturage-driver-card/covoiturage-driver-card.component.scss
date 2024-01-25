@@ -1,4 +1,7 @@
-
+.carpool-search-driver-card {
+  font-family: OPEN SANS SEMIBOLD, sans-serif;
+  font-size: 14px;
+}
 .carpool-search-driver-card-row {
   display: flex;
   justify-content: space-between;
@@ -19,4 +22,8 @@
 
 .carpool-search-driver-card > .carpool-search-driver-card-info {
   flex: 1;
+}
+
+.carpool-driver-card-reserve {
+  background-color: #f1ce53ff;
 }

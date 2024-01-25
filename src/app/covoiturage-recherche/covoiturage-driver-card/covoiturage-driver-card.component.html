@@ -1,35 +1,35 @@
 <div class="carpool-search-driver-card">
-<mat-card class="carpool-search-driver-card-info">
-    <mat-card-content>
-        <div class="carpool-search-driver-card-row">
-            <div class="carpool-search-driver-card-col">
-                <img [src]="imageUrl" alt="driver" class="driver-image">
-            </div>
-
-            <div class="carpool-search-driver-card-col">
-                <p class="search-page-driver-name">{{driverName}}</p>
-            </div>
-            <div class="carpool-search-driver-card-col">
-                <p>{{departureTime}} {{departureCity}}</p>
-                <p>{{arrivalTime}}  {{arrivalCity}}</p>
-            </div>
-        </div>
-    </mat-card-content>
-</mat-card>
-
-<mat-card class="carpool-search-driver-card-price">
-    <mat-card-content>
+    <mat-card class="carpool-search-driver-card-info">
+        <mat-card-content>
             <div class="carpool-search-driver-card-row">
-                <p>{{placeLibre}} places restent</p>
-            </div>
-            <div class="carpool-search-driver-card-row">
-                <p>
-                    <a routerLink="">
-                        <button mat-raised-button>A partir de {{price}} euros</button>
-                    </a>
-                </p>
-            </div>
+                <div class="carpool-search-driver-card-col">
+                    <img [src]="imageUrl" alt="driver" class="driver-image">
+                </div>
 
-    </mat-card-content>
-</mat-card>
+                <div class="carpool-search-driver-card-col">
+                    <p class="search-page-driver-name">{{driverName}}</p>
+                </div>
+                <div class="carpool-search-driver-card-col">
+                    <p>{{departureTime}} {{departureCity}}</p>
+                    <p>{{arrivalTime}}  {{arrivalCity}}</p>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="carpool-search-driver-card-price">
+        <mat-card-content>
+                <div class="carpool-search-driver-card-row">
+                    <p>{{placeLibre}} places restent</p>
+                </div>
+                <div class="carpool-search-driver-card-row">
+                    <p>A partir de {{price}} euros </p>
+                </div>
+            <div class="carpool-search-driver-card-row">
+            <a routerLink="/reservation">
+                <button mat-raised-button class="carpool-driver-card-reserve">Réserver maintenant</button>
+            </a>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </div>

@@ -21,8 +21,8 @@
     </div>
 </div>
 
-<mat-card class="search-page-choice-bar" *ngIf="isChoiceBarVisible">
-    <mat-card-content>
+<mat-card *ngIf="isChoiceBarVisible">
+    <mat-card-content class="search-page-choice-bar">
         <div class="search-page-choice-bar-container">
             <button mat-button class="search-page-choice-bar-container-button" [matMenuTriggerFor]="cityMenu" (menuOpened)="isCityMenuOpen = true" (menuClosed)="isCityMenuOpen = false">
                 {{ citySelected }}
@@ -64,7 +64,7 @@
             </mat-form-field>
         </div>
 
-        <p><mat-checkbox class="result-search-reserve-button">Réservable uniquement</mat-checkbox></p>
+        <div><mat-checkbox class="result-search-reserve-button">Réservable uniquement</mat-checkbox></div>
     </mat-card-content>
 </mat-card>
 <br/>
