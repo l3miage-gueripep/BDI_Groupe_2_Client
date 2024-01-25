@@ -7,13 +7,11 @@ import {Component, Input} from '@angular/core';
 export class ResultatCardComponent {
     @Input() imageUrl: string = 'assets/musilac.jpg';
     @Input() festivalName: string = 'Default Festival Name';
-    @Input() festivalIntro: string = 'Default Festival Intro';
+    @Input() codePostal: string = 'Default codePostale';
+    @Input() lieuPrincipal : string = 'Default lieuPrincipal';
+    @Input() siteWeb : string = 'Default siteWeb';
     @Input() startDate: string = 'Default StartDate';
     @Input() endDate: string = 'Default EndDate';
     @Input() price: number = 0;
 
-    ngOnInit() {
-        console.log('Image URL:', this.imageUrl);
-        console.log('festivalName', this.festivalName)
-    }
 }
