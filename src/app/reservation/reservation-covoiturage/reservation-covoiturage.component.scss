@@ -87,6 +87,10 @@ img{
     cursor: pointer;
     transform: translateY(-2px);
 }
+
+.reservation-button {
+    background-color: #f1ce53ff;
+}
 @media screen and (max-width: 800px) {
     .trajetChoisi{
         width: 100%;
