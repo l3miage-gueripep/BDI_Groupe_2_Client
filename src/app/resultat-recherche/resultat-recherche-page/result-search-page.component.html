@@ -30,8 +30,8 @@
                 </button>
                 <mat-menu #cityMenu="matMenu">
                     <section class="example-section" [formGroup]="cities">
-                        <p><mat-checkbox formControlName="grenoble">Grenoble</mat-checkbox></p>
-                        <p><mat-checkbox formControlName="lyon">Lyon</mat-checkbox></p>
+                        <p><mat-checkbox formControlName="ARLES">Arles</mat-checkbox></p>
+                        <p><mat-checkbox formControlName="LYON">Lyon</mat-checkbox></p>
                     </section>
                 </mat-menu>
 
@@ -62,6 +62,7 @@
                         <mat-error>Invalide fin de date</mat-error>
                     }
                 </mat-form-field>
+                <button mat-flat-button color="primary" class="result-search-button" (click)="loadFestivalsByFilter(this.filterQuery)">Rechercher</button>
             </div>
 
             <div><mat-checkbox class="result-search-reserve-button">Réservable uniquement</mat-checkbox></div>

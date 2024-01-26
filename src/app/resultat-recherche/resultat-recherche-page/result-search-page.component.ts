@@ -4,6 +4,7 @@ import {provideNativeDateAdapter} from "@angular/material/core";
 import {ActivatedRoute} from "@angular/router";
 import { AppService } from '../../services/app.service';
 import { Festival } from '../../modele/festival.model';
+import { FilterQuery } from '../../modele/filterQuery.model';
 @Component({
   selector: 'app-resultat-recherche-page',
   providers: [provideNativeDateAdapter()],
@@ -21,13 +22,19 @@ export class ResultSearchPageComponent {
   isCategoriesMenuOpen = false;
   isChoiceBarVisible: boolean = true;
   filterSelected = 'Par pertinence'
-  citySelected = 'grenoble'
-  categoriesSelected = 'rock'
-  query: string | undefined;
+  citySelected = 'Ville'
+  categoriesSelected = 'Type'
+  queryByName: string | undefined;
+  filterQuery: FilterQuery =  {
+    dateDebut: "",
+    dateFin: "",
+    lieuPrincipal:""
+  };
+
   festivals: Festival[]= [];
   cities = this._formBuilder.group({
-    grenoble: false,
-    lyon: false,
+    ARLES: false,
+    LYON: false,
   });
 
   categories = this._formBuilder.group({
@@ -48,18 +55,6 @@ export class ResultSearchPageComponent {
   }
 
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.query = params['query'];
-      console.log('this.query', this.query);
-      if (this.query) {
-        this.loadFestivalsByQuery();
-      } else {
-        this.loadAllFestivals();
-      }
-    });
-  }
-
   loadAllFestivals() {
     this.appService.getFestivals().subscribe(
         (data) => {
@@ -72,8 +67,80 @@ export class ResultSearchPageComponent {
     );
   }
 
-  loadFestivalsByQuery(){
-    this.festivals = [];
+  loadFestivalsById(name: string) {
+    this.appService.getFestivalsById(name).subscribe(
+        (data) => {
+          this.festivals = Array.isArray(data) ? data : [data];
+          console.log('this.festivals', this.festivals);
+        },
+        (error) => {
+          console.error('Error fetching festivals', error);
+        }
+    );
   }
+
+
+  loadFestivalsByFilter(query: FilterQuery) {
+    this.appService.getFestivalsByFilter(query).subscribe(
+        (data) => {
+          this.festivals = Array.isArray(data) ? data : [data];
+          console.log('this.festivals', this.festivals);
+        },
+        (error) => {
+          console.log('query',query)
+          console.error('Error fetching festivals', error);
+
+        }
+    );
+  }
+
+  updateFilterQuery() {
+    const cityValues = this.cities.getRawValue() as { [key: string]: any };
+    const rangeValues = this.range.getRawValue();
+
+    const formatDate = (date: Date | null): string => {
+      return date ? date.toISOString() : '';
+    };
+
+    let lieuPrincipal = '';
+    Object.keys(cityValues).forEach(key => {
+      if (cityValues[key]) {
+        lieuPrincipal = key;
+      }
+    });
+
+    this.filterQuery = {
+      lieuPrincipal: lieuPrincipal,
+      dateDebut: formatDate(rangeValues.start),
+      dateFin: formatDate(rangeValues.end)
+    };
+
+    console.log('Updated filterQuery:', this.filterQuery);
+  }
+
+
+
+
+  ngOnInit() {
+    this.cities.valueChanges.subscribe(() => this.updateFilterQuery());
+   this.categories.valueChanges.subscribe(() => this.updateFilterQuery());
+
+
+    this.route.queryParams.subscribe(params => {
+      this.queryByName = params['query'];
+      console.log('this.query', this.queryByName);
+      if (this.queryByName) {
+        this.loadFestivalsById(this.queryByName);
+      } else {
+        this.loadAllFestivals();
+      }
+    });
+
+    this.cities.valueChanges.subscribe((val:any) => {
+      const selectedCities = Object.keys(val).filter(city => val[city]);
+      this.citySelected = selectedCities.join(', ');
+    });
+  }
+
 }
 
