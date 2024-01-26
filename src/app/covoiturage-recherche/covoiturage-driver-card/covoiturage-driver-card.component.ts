@@ -9,7 +9,6 @@ import {RouterLink} from "@angular/router";
   styleUrl: './covoiturage-driver-card.component.scss'
 })
 export class CovoiturageDriverCardComponent {
-    @Input() imageUrl: string = 'assets/photoDriver.jpg';
     @Input() driverName: string = 'Default Driver Name';
     @Input() departureTime: string = 'Default DepartureTime';
     @Input() arrivalTime: string = 'Default ArrivalTime';

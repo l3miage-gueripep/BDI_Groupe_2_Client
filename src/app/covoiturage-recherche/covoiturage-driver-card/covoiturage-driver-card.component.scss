@@ -6,11 +6,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  overflow: visible;
+  min-width: 50px;
+  min-height: 50px;
 }
 
 .carpool-search-driver-card-col {
-  flex: 1;
+  flex: 1 1 auto;
   padding: 10px;
+  overflow: visible;
+  min-width: 50px;
+  min-height: 50px;
 }
 .carpool-search-driver-card {
   display: flex;
@@ -26,4 +32,11 @@
 
 .carpool-driver-card-reserve {
   background-color: #f1ce53ff;
+}
+
+
+.mat-icon {
+  font-size: 50px;
+  height: 50px !important;
+  width: 50px !important;
 }
