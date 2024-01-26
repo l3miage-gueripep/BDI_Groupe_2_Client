@@ -11,6 +11,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatIcon} from "@angular/material/icon";
 import {RouterLink} from "@angular/router";
+import {provideNativeDateAdapter} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,6 @@ import {RouterLink} from "@angular/router";
     MatIcon,
     RouterLink
   ],
-
+  providers: [provideNativeDateAdapter()],
 })
 export class ResultatRechercheModule { }

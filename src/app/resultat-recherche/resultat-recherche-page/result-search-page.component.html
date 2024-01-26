@@ -1,79 +1,84 @@
 <div class="search-page">
-<p class="word-search-phrase">Votre recherche pour <span class="word-search">{{wordSearch}}</span> a donné les résultats suivants</p>
-<div class="search-page-toolbar-container">
-    <p>{{ nbResult }} résultats</p>
+    <p class="word-search-phrase">Votre recherche pour <span class="word-search">{{wordSearch}}</span> a donné les résultats suivants</p>
+    <div class="search-page-toolbar-container">
+        <p>{{ nbResult }} résultats</p>
 
-    <div class="search-page-toolbar-container-fliter">
-    <button mat-button [matMenuTriggerFor]="filterMenu" (menuOpened)="isFilterMenuOpen = true" (menuClosed)="isFilterMenuOpen = false">
-        <span class="material-icons">{{ isFilterMenuOpen ? 'expand_less' : 'expand_more' }}</span>
-        {{ filterSelected }}
-    </button>
-    <mat-menu #filterMenu="matMenu">
-        <button mat-menu-item>Par pertinence</button>
-        <button mat-menu-item>De A à Z</button>
-        <button mat-menu-item>Par dates</button>
-    </mat-menu>
-
-        <button mat-button (click)="toggleChoiceBar()">
-            <span class="material-icons">tune</span>
-            Ville & Date
+        <div class="search-page-toolbar-container-fliter">
+        <button mat-button [matMenuTriggerFor]="filterMenu" (menuOpened)="isFilterMenuOpen = true" (menuClosed)="isFilterMenuOpen = false">
+            <span class="material-icons">{{ isFilterMenuOpen ? 'expand_less' : 'expand_more' }}</span>
+            {{ filterSelected }}
         </button>
-    </div>
-</div>
+        <mat-menu #filterMenu="matMenu">
+            <button mat-menu-item>Par pertinence</button>
+            <button mat-menu-item>De A à Z</button>
+            <button mat-menu-item>Par dates</button>
+        </mat-menu>
 
-<mat-card *ngIf="isChoiceBarVisible">
-    <mat-card-content class="search-page-choice-bar">
-        <div class="search-page-choice-bar-container">
-            <button mat-button class="search-page-choice-bar-container-button" [matMenuTriggerFor]="cityMenu" (menuOpened)="isCityMenuOpen = true" (menuClosed)="isCityMenuOpen = false">
-                {{ citySelected }}
-                <span class="material-icons">{{ isCityMenuOpen ? 'expand_less' : 'expand_more' }}</span>
+            <button mat-button (click)="toggleChoiceBar()">
+                <span class="material-icons">tune</span>
+                Ville & Date
             </button>
-            <mat-menu #cityMenu="matMenu">
-                <section class="example-section" [formGroup]="cities">
-                    <p><mat-checkbox formControlName="grenoble">Grenoble</mat-checkbox></p>
-                    <p><mat-checkbox formControlName="lyon">Lyon</mat-checkbox></p>
-                </section>
-            </mat-menu>
-
-            <button mat-button class="search-page-choice-bar-container-button" [matMenuTriggerFor]="categoriesMenu" (menuOpened)="isCategoriesMenuOpen = true" (menuClosed)="isCategoriesMenuOpen = false">
-                {{ categoriesSelected }}
-                <span class="material-icons">{{ isCategoriesMenuOpen ? 'expand_less' : 'expand_more' }}</span>
-            </button>
-            <mat-menu #categoriesMenu="matMenu">
-                <section class="example-section" [formGroup]="categories">
-                    <p><mat-checkbox formControlName="rock">Rock</mat-checkbox></p>
-                    <p><mat-checkbox formControlName="pop">Pop</mat-checkbox></p>
-                </section>
-            </mat-menu>
-
-            <mat-form-field>
-                <mat-label>Choisir la date</mat-label>
-                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-                    <input matStartDate formControlName="start" placeholder="Start date">
-                    <input matEndDate formControlName="end" placeholder="End date">
-                </mat-date-range-input>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
-
-                @if (range.controls.start.hasError('matStartDateInvalid')) {
-                    <mat-error>Invalide début de date </mat-error>
-                }
-                @if (range.controls.end.hasError('matEndDateInvalid')) {
-                    <mat-error>Invalide fin de date</mat-error>
-                }
-            </mat-form-field>
         </div>
+    </div>
 
-        <div><mat-checkbox class="result-search-reserve-button">Réservable uniquement</mat-checkbox></div>
-    </mat-card-content>
-</mat-card>
-<br/>
-<app-resultat-card
-        imageUrl="assets/musilac.jpg"
-        festivalName="musilac"
-        festivalIntro="Introduce"
-        startDate="25/02/2024"
-        endDate="27/02/2024"
-        [price]="30"
-></app-resultat-card>
+    <mat-card *ngIf="isChoiceBarVisible">
+        <mat-card-content class="search-page-choice-bar">
+            <div class="search-page-choice-bar-container">
+                <button mat-button class="search-page-choice-bar-container-button" [matMenuTriggerFor]="cityMenu" (menuOpened)="isCityMenuOpen = true" (menuClosed)="isCityMenuOpen = false">
+                    {{ citySelected }}
+                    <span class="material-icons">{{ isCityMenuOpen ? 'expand_less' : 'expand_more' }}</span>
+                </button>
+                <mat-menu #cityMenu="matMenu">
+                    <section class="example-section" [formGroup]="cities">
+                        <p><mat-checkbox formControlName="grenoble">Grenoble</mat-checkbox></p>
+                        <p><mat-checkbox formControlName="lyon">Lyon</mat-checkbox></p>
+                    </section>
+                </mat-menu>
+
+                <button mat-button class="search-page-choice-bar-container-button" [matMenuTriggerFor]="categoriesMenu" (menuOpened)="isCategoriesMenuOpen = true" (menuClosed)="isCategoriesMenuOpen = false">
+                    {{ categoriesSelected }}
+                    <span class="material-icons">{{ isCategoriesMenuOpen ? 'expand_less' : 'expand_more' }}</span>
+                </button>
+                <mat-menu #categoriesMenu="matMenu">
+                    <section class="example-section" [formGroup]="categories">
+                        <p><mat-checkbox formControlName="rock">Rock</mat-checkbox></p>
+                        <p><mat-checkbox formControlName="pop">Pop</mat-checkbox></p>
+                    </section>
+                </mat-menu>
+
+                <mat-form-field>
+                    <mat-label>Choisir la date</mat-label>
+                    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                        <input matStartDate formControlName="start" placeholder="Start date">
+                        <input matEndDate formControlName="end" placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+
+                    @if (range.controls.start.hasError('matStartDateInvalid')) {
+                        <mat-error>Invalide début de date </mat-error>
+                    }
+                    @if (range.controls.end.hasError('matEndDateInvalid')) {
+                        <mat-error>Invalide fin de date</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+
+            <div><mat-checkbox class="result-search-reserve-button">Réservable uniquement</mat-checkbox></div>
+        </mat-card-content>
+    </mat-card>
+    <br/>
+    <div *ngFor="let festival of festivals">
+        <app-resultat-card
+                imageUrl="assets/musilac.jpg"
+                [festivalName]="festival.nomManifestation"
+                [codePostal]="festival.codePostal"
+                [lieuPrincipal]="festival.lieuPrincipal"
+                [siteWeb]="festival.siteWeb"
+                [startDate]="festival.dateDebut"
+                [endDate]="festival.dateFin"
+                [price]="festival.tarifPass"
+        ></app-resultat-card>
+        <br/>
+    </div>
 </div>

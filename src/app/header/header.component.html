@@ -3,11 +3,11 @@
       <a routerLink=""><img src="assets/FestCar.png" alt="Logo"></a>
       <div class="searchBar">
         <div class="center">
-          <a routerLink="recherche">
+          <a (click)="navigateToRecherche()">
             <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon>
           </a>
         </div>
-        <input type="text" placeholder="Rechercher ...">
+        <input type="text" placeholder="Rechercher ..." [(ngModel)]="searchQuery">
       </div>
       <span class="spacer"></span>
       <div class="icons">

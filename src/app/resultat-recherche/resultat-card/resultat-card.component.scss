@@ -10,8 +10,8 @@
 }
 
 .festival-image {
-    width: 35%;
-    height: 35%;
+    width: 80%;
+    height: 80%;
 }
 
 .search-card-button {
@@ -20,4 +20,11 @@
 
 .search-page-result-card {
     font-family: OPEN SANS SEMIBOLD, sans-serif;
+    border: 2px dashed #f1ce53ff;
+}
+
+.search-page-festival-name {
+    font-weight: bold;
+    font-size: 20px;
+    color: #007f5fff;
 }

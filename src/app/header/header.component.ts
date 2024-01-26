@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  searchQuery: string = '';
+  navigateToRecherche() {
+    this.router.navigate(['/recherche'], { queryParams: { query: this.searchQuery } });
+  }
 
   constructor(private firebaseService: FirebaseService, private authGuard: AuthGuard, private router: Router) {
   }
