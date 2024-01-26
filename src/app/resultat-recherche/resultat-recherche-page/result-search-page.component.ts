@@ -96,9 +96,10 @@ export class ResultSearchPageComponent {
 
   updateFilterQuery() {
     const cityValues = this.cities.getRawValue() as { [key: string]: any };
-    const rangeValues = this.range.getRawValue();
+    const rangeValues = this.range.value;
+    console.log('rangeValues', rangeValues);
 
-    const formatDate = (date: Date | null): string => {
+    const formatDate = (date: Date | null | undefined): string => {
       return date ? date.toISOString() : '';
     };
 
@@ -114,6 +115,9 @@ export class ResultSearchPageComponent {
       dateDebut: formatDate(rangeValues.start),
       dateFin: formatDate(rangeValues.end)
     };
+
+    console.log('filterQuery', this.filterQuery);
+
 
     console.log('Updated filterQuery:', this.filterQuery);
   }

@@ -68,15 +68,16 @@
         </div>
     </mat-card-content>
 </mat-card>
-
+    <div *ngFor="let offerCarpool of offerCarpools">
 <app-covoiturage-driver-card
         driverName="Jérome"
         departureTime="8: 00"
         departureCity="Grenoble"
         arrivalCity="Musilac"
         arrivalTime="13: 12"
-        [placeLibre]= "5"
-        [price]="30"
+        [placeLibre]= "offerCarpool.nbPlaces"
+        [price]="offerCarpool.prixCovoiturage"
 >
 </app-covoiturage-driver-card>
+    </div>
 </div>

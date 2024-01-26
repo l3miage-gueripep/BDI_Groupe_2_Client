@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-resultat-card',
   templateUrl: './resultat-card.component.html',
@@ -13,5 +14,8 @@ export class ResultatCardComponent {
     @Input() startDate: string = 'Default StartDate';
     @Input() endDate: string = 'Default EndDate';
     @Input() price: number = 0;
-
+    constructor( private router: Router) {}
+    navigateToCovoiturage() {
+        this.router.navigate(['recherche/covoiturage'], { queryParams: { query: this.festivalName } });
+    }
 }
