@@ -28,9 +28,10 @@ export class ResultSearchPageComponent {
   filterQuery: FilterQuery =  {
     dateDebut: "",
     dateFin: "",
-    lieuPrincipal:""
+    lieuPrincipal:"",
+    cityDeparture:""
   };
-
+  cityDepartureValue = '';
   festivals: Festival[]= [];
   cities = this._formBuilder.group({
     ARLES: false,
@@ -113,7 +114,8 @@ export class ResultSearchPageComponent {
     this.filterQuery = {
       lieuPrincipal: lieuPrincipal,
       dateDebut: formatDate(rangeValues.start),
-      dateFin: formatDate(rangeValues.end)
+      dateFin: formatDate(rangeValues.end),
+      cityDeparture: this.cityDepartureValue,
     };
 
     console.log('filterQuery', this.filterQuery);
@@ -123,12 +125,15 @@ export class ResultSearchPageComponent {
   }
 
 
+  clearCityDeparture() {
+    this.cityDepartureValue = '';
+    this.updateFilterQuery();
+  }
 
 
   ngOnInit() {
     this.cities.valueChanges.subscribe(() => this.updateFilterQuery());
-   this.categories.valueChanges.subscribe(() => this.updateFilterQuery());
-
+    this.categories.valueChanges.subscribe(() => this.updateFilterQuery());
 
     this.route.queryParams.subscribe(params => {
       this.queryByName = params['query'];
