@@ -24,16 +24,23 @@
     <mat-card *ngIf="isChoiceBarVisible">
         <mat-card-content class="search-page-choice-bar">
             <div class="search-page-choice-bar-container">
-                <button mat-button class="search-page-choice-bar-container-button" [matMenuTriggerFor]="cityMenu" (menuOpened)="isCityMenuOpen = true" (menuClosed)="isCityMenuOpen = false">
-                    {{ citySelected }}
-                    <span class="material-icons">{{ isCityMenuOpen ? 'expand_less' : 'expand_more' }}</span>
-                </button>
-                <mat-menu #cityMenu="matMenu">
-                    <section class="example-section" [formGroup]="cities">
-                        <p><mat-checkbox formControlName="ARLES">Arles</mat-checkbox></p>
-                        <p><mat-checkbox formControlName="LYON">Lyon</mat-checkbox></p>
-                    </section>
-                </mat-menu>
+
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Ville</mat-label>
+                        <input type="text"
+                               placeholder="Pick one"
+                               aria-label="Number"
+                               matInput
+                               [formControl]="myControl"
+                               [matAutocomplete]="auto">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            @for (option of filteredOptions | async; track option) {
+                                <mat-option [value]="option">{{option}}</mat-option>
+                            }
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </form>
 
                 <button mat-button class="search-page-choice-bar-container-button" [matMenuTriggerFor]="categoriesMenu" (menuOpened)="isCategoriesMenuOpen = true" (menuClosed)="isCategoriesMenuOpen = false">
                     {{ categoriesSelected }}

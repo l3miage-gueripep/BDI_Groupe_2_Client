@@ -15,6 +15,14 @@ export class AppService {
     return this.http.get<Festival[]>('festival/');
   }
 
+  getAllCity() {
+    return this.http.get<string[]>('festival/allCity');
+  }
+
+  saveCitiesToLocal(data: string[]): void {
+    localStorage.setItem('cities', JSON.stringify(data));
+  }
+
   getFestivalsById(idFestival: string) {
     return this.http.get<Festival[]>(`festival/${idFestival}`);
   }
