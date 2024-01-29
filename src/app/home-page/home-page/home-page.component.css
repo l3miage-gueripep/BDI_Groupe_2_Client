@@ -1,0 +1,28 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:  #9ed186ff;
+    background-image: url('/assets/FestCar.png');
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: 30% auto;
+    min-height: 100vh;
+    min-width: 100vw;
+    text-align: center;
+}
+.home-page-container {
+    border: #f1ce53ff dashed 3px;
+   padding: 30px;
+}
+.home-page-title {
+    font-family: OPEN SANS SEMIBOLD, sans-serif;
+    font-size: xx-large;
+}
+
+.home-page-button {
+    background-color: #f1ce53ff !important;
+    padding: 10px 20px;
+    font-size: 25px;
+}
