@@ -3,6 +3,7 @@
     <div class="wrapper">
         <!-- register form -->
         <!--  -->
+        <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
         <form [formGroup]="this.registerForm" (ngSubmit)="this.register()">
             <h2 class="mat-primary">INSCRIPTION</h2>
             <mat-form-field>
