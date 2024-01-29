@@ -1,11 +1,23 @@
-<div class="home-page">
-    <div class="home-page-container">
-    <div class="home-page-title">
-        Bienvenue au Festicar
+<div class="body">
+    <div class="home-page">
+        <div class="home-page-container">
+            <div class="home-page-title">
+                BIENVENUE SUR FESTICAR
+            </div>
+            <br/>
+            <a (click)="navigateToRecherche()">
+                <button mat-raised-button class="home-page-button">Voir les festivals</button>
+            </a>
+        </div>
     </div>
-    <br/>
-        <a (click)="navigateToRecherche()">
-        <button mat-raised-button class="home-page-button">Voir les festivals</button>
-    </a>
+    <div class="palmier-container">
+        <img class="palmier" src="assets/palmier.png" class="home-page-image" alt="palmier"/>
+    </div>
+    <span class="spacer"></span>
+    <div class="roue-container">
+        <img class="roue" src="assets/guirlande.png" class="home-page-image" alt="grandeRoue"/>
+    </div>
+    <div class="billet-container">
+        <img class="billet" src="assets/billet.png" class="home-page-image" alt="billet"/>
     </div>
 </div>

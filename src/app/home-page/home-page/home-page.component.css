@@ -1,28 +1,67 @@
-.home-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color:  #9ed186ff;
-    background-image: url('/assets/FestCar.png');
-    background-position: left bottom;
-    background-repeat: no-repeat;
-    background-size: 30% auto;
-    min-height: 100vh;
-    min-width: 100vw;
-    text-align: center;
-}
+
 .home-page-container {
-    border: #f1ce53ff dashed 3px;
-   padding: 30px;
+    border: #f1ce53ff dashed 5px;  
+   border-radius: 10px;
+    padding: 50px;
+    width: 25%; /* Définissez une largeur. Vous pouvez ajuster cette valeur en fonction de vos besoins */
+   
+    text-align: center;
+    height: auto; /* Ajoutez ceci */
+    display: flex; /* Ajoutez ceci */
+    flex-direction: column; /* Ajoutez ceci */
+    align-items: center; /* Ajoutez ceci */
+    justify-content: center; /* Ajoutez ceci */
+    position: absolute;
+    top: 40%;
+    left: 53%;
+    transform: translate(-50%, -50%);
 }
 .home-page-title {
     font-family: OPEN SANS SEMIBOLD, sans-serif;
-    font-size: xx-large;
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
 }
 
 .home-page-button {
     background-color: #f1ce53ff !important;
     padding: 10px 20px;
-    font-size: 25px;
+    font-size: 14px;
+}
+.spacer{
+    flex: 1 1 auto;
+  }
+.palmier-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.palmier-container  img{
+    height: 500px;
+}
+
+.roue-container {
+    position: absolute;
+    top: 80px;
+    right: 0;
+}
+.roue-container img{
+    height: 150px;
+    transform: rotate(25deg);
+    max-width: 80%; 
+}
+.billet-container {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+.billet-container img{
+    height: 250px;;
+    max-width: 100%; 
+
+}
+
+.body {
+    background: linear-gradient(#007F5F, #9ed186);
+    height: 100%;
 }
