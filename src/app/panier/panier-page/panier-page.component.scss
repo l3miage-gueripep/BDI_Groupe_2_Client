@@ -61,7 +61,7 @@ h1{
     width: 15%;
 }
 hr{
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 button{
@@ -88,5 +88,20 @@ button{
   }
 
   .panier-valide-boutton {
-    background-color: #f1ce53ff;;
+    background-color: #f1ce53ff;
+  }
+  @media screen and (max-width: 800px) {
+    h1{
+        font-size: 15px;
+        width: 100%;
+    }
+    .montant{
+        padding-right: 3%;
+    }
+    .quantiteCovoiturage{
+        width: 100%;
+    }
+    .selectionTicket{
+        padding-top: 20%;
+    }
   }
