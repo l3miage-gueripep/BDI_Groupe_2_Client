@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 export class FirebaseService {
   public app: FirebaseApp;
   private auth: Auth;
-  public user?: User;
+  public user?: User | null;
   public googleProvider: GoogleAuthProvider;
   prenomSource = new BehaviorSubject<string>('');
   currentPrenom = this.prenomSource.asObservable();
@@ -75,7 +75,7 @@ export class FirebaseService {
       });
   }
 
-/*
+
   public async register(prenom: string,email: string, password: string): Promise<string> {
     console.log("inscription");
     try {
@@ -86,12 +86,11 @@ export class FirebaseService {
       const user = userCredential.user;
       if (user) {
         try {
-          await updateProfile(user, {
+          await updateProfile(userCredential.user, {
             displayName: prenom
           });
-          console.log("Profile updated successfully");
           this.prenomSource.next(prenom);
-          localStorage.setItem('prenom', prenom);
+          //localStorage.setItem('prenom', prenom);
         } catch (error: any) {
           console.warn("Error updating profile", error);
         }
@@ -106,34 +105,7 @@ export class FirebaseService {
     }
   }
 
- */
-  public async register(prenom: string,email: string, password: string) {
-    console.log("inscription");
-    console.log('prenom',prenom)
-    await createUserWithEmailAndPassword(this.auth, email, password)
-        .then((userCredential) => {
-          // Signed in
-          this.authenticate(userCredential);
 
-          const user = userCredential.user;
-          if (user) {
-            updateProfile(user, {
-              displayName: prenom
-            }).then(() => {
-              console.log("Profile updated successfully");
-              this.prenomSource.next(prenom);
-              localStorage.setItem('prenom', prenom);
-            }).catch((error) => {
-              console.warn("Error updating profile", error);
-            });
-          }
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.warn(errorCode, errorMessage);
-        });
-  }
 
   private authenticate(userCredential: UserCredential): void {
     this.user = userCredential.user;

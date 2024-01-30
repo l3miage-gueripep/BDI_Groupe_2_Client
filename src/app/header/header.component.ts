@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FirebaseService} from "../services/firebase.service";
 import { AuthGuard } from "../services/permissions.service";
 import { Router } from '@angular/router';
+import {getAuth, onAuthStateChanged} from "firebase/auth";
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ export class HeaderComponent {
     this.router.navigate(['/recherche'], { queryParams: { query: this.searchQuery } });
   }
 
-  constructor(private firebaseService: FirebaseService, private authGuard: AuthGuard, private router: Router) {
+  constructor( private firebaseService: FirebaseService, private authGuard: AuthGuard, private router: Router) {
   }
 
   user: any;
@@ -29,20 +30,27 @@ export class HeaderComponent {
       console.error('Logout failed', error);
     }
   }
-  ngOnInit() {
-    this.user = this.authGuard.getUser();
-    this.estConnecte = !!this.user;
-    this.userName = this.estConnecte ? this.user.displayName : 'Utilisateur';
-    console.log('user',this.user);
 
+  ngOnInit() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = this.authGuard.getUser();
+        this.estConnecte = true;
+        this.userName = user.displayName || 'Utilisateur';
+      } else {
+        this.estConnecte = false;
+        this.userName = 'Utilisateur';
+      }
+    });
 
     this.firebaseService.currentPrenom.subscribe(prenom => {
       if (this.estConnecte) {
-        this.userName = prenom;
+        this.userName = prenom || this.user.displayName;
       } else {
         this.userName = 'Utilisateur';
       }
-      console.log('prenom', this.user.displayName);
+      console.log('userName updated to', this.userName);
     });
   }
 

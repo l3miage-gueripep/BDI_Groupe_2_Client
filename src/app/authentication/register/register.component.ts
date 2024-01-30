@@ -73,17 +73,11 @@ export class RegisterComponent {
     this.isLoading = true;
     const { prenom, email, password,  } = this.registerForm.value;
     const result =  await this.firebaseService.register(prenom, email, password );
-    /*
     if (result !== "success" && result === "auth/email-already-in-use"){
       this.estMailExit = true;
     }
-
-     */
     this.creatAdherent(this.adherent)
-
   }
-
-
 
   public async loginWithGoogle(){
     await this.firebaseService.loginWithGoogle();
