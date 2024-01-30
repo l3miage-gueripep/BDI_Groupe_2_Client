@@ -10,6 +10,7 @@ import {map, startWith} from 'rxjs/operators';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {Subject} from 'rxjs';
 import { $localize } from '@angular/localize/init';
+import {FestivalList} from "../../modele/festivalList.model";
 @Injectable()
 export class MyCustomPaginatorIntl implements MatPaginatorIntl {
     changes = new Subject<void>();
@@ -53,6 +54,21 @@ export class ResultSearchPageComponent {
     nomDomaine:"",
   };
   cityDepartureValue = '';
+
+  festivalList : FestivalList = {
+      content: [],
+      empty: false,
+      first: false,
+      last: false,
+      number: 0,
+      numberOfElements: 0,
+      pageable: {offset: 0, pageNumber: 0, pageSize: 0, paged: false, sort: {}, unpaged: false},
+      size: 0,
+      sort: {},
+      totalElements: 0,
+      totalPages: 0
+  };
+
   festivals: Festival[]= [];
 
   cityControl = new FormControl('');
@@ -63,7 +79,6 @@ export class ResultSearchPageComponent {
   domaineOptions: string[] = [];
   filteredDomaineOptions: Observable<string[]> | undefined;
 
-    totalFestivals = 140;
     pageSize = 10;
     currentPage = 0;
   constructor(private _formBuilder: FormBuilder, private route: ActivatedRoute, private appService: AppService ) {
@@ -118,8 +133,9 @@ export class ResultSearchPageComponent {
 
         this.appService.getFestivals(page, pageSize).subscribe(
             (data) => {
-              this.festivals = data;
-              this.nbResult = this.totalFestivals
+              this.festivalList = data;
+              this.festivals = data.content;
+              this.nbResult = data.totalElements
               console.log('this.festivals',this.festivals)
             },
             (error) => {
@@ -129,9 +145,11 @@ export class ResultSearchPageComponent {
   }
 
   loadFestivalsById(name: string) {
+      this.currentPage = 1;
+      this.pageSize = 1;
     this.appService.getFestivalsById(name).subscribe(
         (data) => {
-          this.festivals = Array.isArray(data) ? data : [data];
+            this.festivals = Array.isArray(data) ? data : [data];
             this.nbResult = data.length
             const filterQueryValues = Object.keys(this.filterQuery)
                 .filter(key => this.filterQuery[key])
@@ -147,11 +165,15 @@ export class ResultSearchPageComponent {
   }
 
 
-  loadFestivalsByFilter(query: FilterQuery) {
+  loadFestivalsByFilter(query: FilterQuery, page: number, pageSize: number) {
+      this.currentPage = page;
+      this.pageSize = pageSize;
+
     this.appService.getFestivalsByFilter(query).subscribe(
         (data) => {
-          this.festivals = Array.isArray(data) ? data : [data];
-            this.nbResult = data.length
+            this.festivalList = data;
+            this.festivals = Array.isArray(data.content) ? data.content : [data.content];
+            this.nbResult = data.totalElements
             const filterQueryValues = Object.keys(this.filterQuery)
                 .filter(key => this.filterQuery[key])
                 .map(key => this.filterQuery[key]);

@@ -86,7 +86,7 @@
                 </button>
             </mat-form-field>
 
-            <button mat-flat-button color="primary" class="result-search-button" (click)="loadFestivalsByFilter(this.filterQuery)">Rechercher</button>
+            <button mat-flat-button color="primary" class="result-search-button" (click)="loadFestivalsByFilter(this.filterQuery, currentPage, pageSize)">Rechercher</button>
 
             </div>
         </mat-card-content>
@@ -105,7 +105,7 @@
         ></app-resultat-card>
         <br/>
     </div>
-    <mat-paginator [length]="totalFestivals"
+    <mat-paginator [length]="festivalList.totalElements"
                    [pageSize]="pageSize"
                    [pageSizeOptions]="[5, 10, 20]"
                    (page)="onPageChange($event)">
