@@ -12,8 +12,9 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatIcon} from "@angular/material/icon";
 import {RouterLink} from "@angular/router";
 import {MatOption, provideNativeDateAdapter} from "@angular/material/core";
-import {MatInput} from "@angular/material/input";
 import {MatAutocomplete, MatAutocompleteTrigger} from "@angular/material/autocomplete";
+import {MatIconModule} from '@angular/material/icon';
+import {MatInput, MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
