@@ -3,7 +3,7 @@ import { FormControl, Validators, FormsModule, ReactiveFormsModule, FormGroup } 
 import { provideNativeDateAdapter } from '@angular/material/core';
 import {ActivatedRoute} from "@angular/router";
 import {AppService} from "../../services/app.service";
-import {covoiturage} from "../../modele/covoiturage.model";
+import {Covoiturage} from "../../modele/covoiturage.model";
 
 @Component({
   selector: 'app-covoiturage-recherche-page',
@@ -27,7 +27,7 @@ export class CovoiturageRecherchePageComponent {
   isFilterMenuOpen = false;
   filterSelected = 'Départ le plus tôt';
   queryByFestivalId='';
-  offerCarpools : covoiturage[] = [];
+  offerCarpools : Covoiturage[] = [];
 
   loadAllCarpools() {
     this.appService.getCarpools().subscribe(

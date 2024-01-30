@@ -7,17 +7,67 @@
         <form [formGroup]="this.registerForm" (ngSubmit)="this.register()">
             <h2 class="mat-primary">INSCRIPTION</h2>
             <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input matInput placeholder="Your email address" formControlName="email">
+                <mat-label>Nom</mat-label>
+                <input matInput placeholder="Votre nom de famille" formControlName="nom">
+                <mat-error *ngIf="registerForm.get('nom')?.hasError('required')">
+                    Votre nom est <strong>obligatoire</strong>
+                </mat-error>
             </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Prénom</mat-label>
+                <input matInput placeholder="Votre prénom" formControlName="prenom">
+                <mat-error *ngIf="registerForm.get('prenom')?.hasError('required')">
+                    Votre prénom est <strong>obligatoire</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Numéro téléphone</mat-label>
+                <input matInput placeholder="Votre numéro téléphone" formControlName="tel">
+                <mat-error *ngIf="registerForm.get('tel')?.hasError('minlength') && !registerForm.get('tel')?.hasError('required')">
+                    Votre numéro téléphone est trop court.
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('tel')?.hasError('required')">
+                    Votre numéro téléphone est <strong>obligatoire</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Votre adresse mail" formControlName="email">
+                <mat-error *ngIf="registerForm.get('email')?.hasError('email') && !registerForm.get('email')?.hasError('required')">
+                    Veuillez saisir une adresse mail valide
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+                    L'email est <strong>obligatoire</strong>
+                </mat-error>
+            </mat-form-field>
+
             <mat-form-field>
                 <mat-label>Password</mat-label>
                 <input matInput placeholder="Your password" formControlName="password" autocomplete="new-password" type="password">
+                <mat-error *ngIf="registerForm.get('password')?.hasError('minlength') && !registerForm.get('password')?.hasError('required')">
+                    Votre mot de passe est trop court.
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+                    Le mot de passe est <strong>obligatoire</strong>
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Confirm password</mat-label>
                 <input matInput placeholder="Repeat your password" formControlName="confirmPassword" type="password">
+                <mat-error *ngIf="registerForm.errors?.['passwordsNotMatching']">
+                    Veuillez saisir le même mot de passe
+                </mat-error>
             </mat-form-field>
+
+            <div>
+                <p *ngIf="estMailExit">
+                    L'adresse mail existe déjà.
+                </p>
+            </div>
+
             <button mat-raised-button color="primary" type="submit" class="register-submit-button" [disabled]="this.registerForm.invalid">Submit</button>
         </form>
     

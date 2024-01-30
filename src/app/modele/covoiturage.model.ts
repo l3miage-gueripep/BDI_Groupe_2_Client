@@ -1,4 +1,4 @@
-export interface covoiturage {
+export interface Covoiturage {
     idOffreCovoiturage: number,
     modeleVoiture: string,
     nbPlaces: number,

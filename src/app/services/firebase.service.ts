@@ -64,19 +64,20 @@ export class FirebaseService {
       });
   }
 
-  public async register(email: string, password: string) {
+  public async register(email: string, password: string): Promise<string> {
     console.log("test");
-    await createUserWithEmailAndPassword(this.auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        this.authenticate(userCredential);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.warn(errorCode, errorMessage);
-      });
+    try {
+      const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+      this.authenticate(userCredential);
+      return "success";
+    } catch (error: any) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.warn(errorCode, errorMessage);
+      return errorCode;
+    }
   }
+
 
   private authenticate(userCredential: UserCredential): void {
     this.user = userCredential.user;
