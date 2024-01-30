@@ -1,16 +1,13 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormBuilder, FormGroup, FormControl} from '@angular/forms';
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {ActivatedRoute} from "@angular/router";
 import { AppService } from '../../services/app.service';
 import { Festival } from '../../modele/festival.model';
 import { FilterQuery } from '../../modele/filterQuery.model';
-import {debounceTime, distinctUntilChanged, firstValueFrom, Observable} from 'rxjs';
+import {debounceTime, distinctUntilChanged, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {AsyncPipe} from '@angular/common';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+
 @Component({
   selector: 'app-resultat-recherche-page',
   providers: [provideNativeDateAdapter()],
@@ -21,37 +18,28 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 export class ResultSearchPageComponent {
 
-  wordSearch = 'grenoble';
   nbResult = 16;
   isFilterMenuOpen = false;
-  isCityMenuOpen = false;
-  isCategoriesMenuOpen = false;
   isChoiceBarVisible: boolean = true;
   filterSelected = 'Par pertinence'
-  citySelected = 'Ville'
-  categoriesSelected = 'Type'
   queryByName: string | undefined;
   filterQuery: FilterQuery =  {
     dateDebut: "",
     dateFin: "",
     lieuPrincipal:"",
-    cityDeparture:""
+    cityDeparture:"",
+    nomDomaine:"",
   };
   cityDepartureValue = '';
   festivals: Festival[]= [];
-  cities = this._formBuilder.group({
-    ARLES: false,
-    LYON: false,
-  });
 
-  categories = this._formBuilder.group({
-    pop: false,
-    rock: false,
-  });
+  cityControl = new FormControl('');
+  cityOptions: string[] = [];
+  filteredCityOptions: Observable<string[]> | undefined;
 
-  myControl = new FormControl('');
-  options: string[] = [];
-  filteredOptions: Observable<string[]> | undefined;
+  domaineControl = new FormControl('');
+  domaineOptions: string[] = [];
+  filteredDomaineOptions: Observable<string[]> | undefined;
 
   constructor(private _formBuilder: FormBuilder, private route: ActivatedRoute, private appService: AppService ) {
   }
@@ -68,11 +56,11 @@ export class ResultSearchPageComponent {
     loadCities(): void {
         const cachedCities = localStorage.getItem('cities');
         if (cachedCities) {
-            this.options = JSON.parse(cachedCities);
+            this.cityOptions = JSON.parse(cachedCities);
         } else {
             this.appService.getAllCity().subscribe(
                 (data) => {
-                    this.options = data;
+                    this.cityOptions = data;
                     this.appService.saveCitiesToLocal(data);
                 },
                 (error) => {
@@ -82,11 +70,28 @@ export class ResultSearchPageComponent {
         }
     }
 
+    loadDomaines(): void {
+        const cachedDomaines = localStorage.getItem('domaines');
+        if (cachedDomaines) {
+            this.domaineOptions = JSON.parse(cachedDomaines);
+        } else {
+            this.appService.getAllDomaine().subscribe(
+                (data) => {
+                    this.domaineOptions = data;
+                    this.appService.saveDomaineToLocal(data);
+                },
+                (error) => {
+                    console.error('Error fetching domaines', error);
+                }
+            );
+        }
+    }
 
   loadAllFestivals() {
     this.appService.getFestivals().subscribe(
         (data) => {
           this.festivals = data;
+          this.nbResult = data.length
           console.log('this.festivals',this.festivals)
         },
         (error) => {
@@ -99,6 +104,12 @@ export class ResultSearchPageComponent {
     this.appService.getFestivalsById(name).subscribe(
         (data) => {
           this.festivals = Array.isArray(data) ? data : [data];
+            this.nbResult = data.length
+            const filterQueryValues = Object.keys(this.filterQuery)
+                .filter(key => this.filterQuery[key])
+                .map(key => this.filterQuery[key]);
+
+            this.queryByName = filterQueryValues.join(', ');
           console.log('this.festivals', this.festivals);
         },
         (error) => {
@@ -112,6 +123,12 @@ export class ResultSearchPageComponent {
     this.appService.getFestivalsByFilter(query).subscribe(
         (data) => {
           this.festivals = Array.isArray(data) ? data : [data];
+            this.nbResult = data.length
+            const filterQueryValues = Object.keys(this.filterQuery)
+                .filter(key => this.filterQuery[key])
+                .map(key => this.filterQuery[key]);
+
+            this.queryByName = filterQueryValues.join(', ');
           console.log('this.festivals', this.festivals);
         },
         (error) => {
@@ -123,7 +140,8 @@ export class ResultSearchPageComponent {
   }
 
   updateFilterQuery() {
-    const cityValues = this.myControl.value;
+    const cityValue = this.cityControl.value;
+    const domaineValue = this.domaineControl.value;
     const rangeValues = this.range.value;
     console.log('rangeValues', rangeValues);
 
@@ -134,11 +152,13 @@ export class ResultSearchPageComponent {
 
 
     this.filterQuery = {
-      lieuPrincipal: cityValues || "",
+      lieuPrincipal: cityValue || "",
       dateDebut: formatDate(rangeValues.start),
       dateFin: formatDate(rangeValues.end),
       cityDeparture: this.cityDepartureValue,
+      nomDomaine: domaineValue || "",
     };
+
 
     console.log('filterQuery', this.filterQuery);
 
@@ -155,8 +175,9 @@ export class ResultSearchPageComponent {
 
   async ngOnInit() {
       this.loadCities();
+      this.loadDomaines();
 
-      this.myControl?.valueChanges
+      this.cityControl?.valueChanges
           ?.pipe(
               debounceTime(300),
               distinctUntilChanged()
@@ -164,7 +185,14 @@ export class ResultSearchPageComponent {
           ?.subscribe(() => {
               this.updateFilterQuery();
           });
-      this.categories.valueChanges.subscribe(() => this.updateFilterQuery());
+      this.domaineControl?.valueChanges
+          ?.pipe(
+              debounceTime(300),
+              distinctUntilChanged()
+          )
+          ?.subscribe(() => {
+              this.updateFilterQuery();
+          });
 
 
       this.route.queryParams.subscribe(params => {
@@ -177,41 +205,29 @@ export class ResultSearchPageComponent {
           }
       });
 
-      this.cities.valueChanges.subscribe((val: any) => {
-          const selectedCities = Object.keys(val).filter(city => val[city]);
-          this.citySelected = selectedCities.join(', ');
-      });
 
-      this.filteredOptions = this.myControl.valueChanges.pipe(
+      this.filteredCityOptions = this.cityControl.valueChanges.pipe(
           startWith(''),
-          map(value => this._filter(value || '')),
+          map(value => this._filterCity(value || '')),
+      );
+
+      this.filteredDomaineOptions = this.domaineControl.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filterDomaine(value || '')),
       );
   }
 
-  private _filter(value: string): string[] {
+  private _filterCity(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.cityOptions.filter(option => option.toLowerCase().includes(filterValue));
   }
-  /*
-    async loadAllCitiesFromLocalOrAPI(): Promise<string[]> {
-        const citiesKey = 'allCities';
-        const citiesFromStorage = localStorage.getItem(citiesKey);
 
-        if (citiesFromStorage) {
-            return JSON.parse(citiesFromStorage) as string[];
-        } else {
-            try {
-                const data: string[] = await this.loadAllCities();
-                localStorage.setItem(citiesKey, JSON.stringify(data));
-                return data;
-            } catch (error) {
-                console.error('Error loading cities from server', error);
-                return [];
-            }
-        }
+    private _filterDomaine(value: string): string[] {
+        const filterValue = value.toLowerCase();
+
+        return this.domaineOptions.filter(option => option.toLowerCase().includes(filterValue));
     }
 
-   */
 }
 

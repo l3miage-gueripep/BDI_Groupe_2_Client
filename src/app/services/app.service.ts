@@ -23,6 +23,14 @@ export class AppService {
     localStorage.setItem('cities', JSON.stringify(data));
   }
 
+  getAllDomaine() {
+    return this.http.get<string[]>('festival/allDomaine');
+  }
+
+  saveDomaineToLocal(data: string[]): void {
+    localStorage.setItem('domaines', JSON.stringify(data));
+  }
+
   getFestivalsById(idFestival: string) {
     return this.http.get<Festival[]>(`festival/${idFestival}`);
   }

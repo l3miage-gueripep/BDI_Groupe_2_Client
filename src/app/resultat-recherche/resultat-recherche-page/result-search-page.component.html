@@ -1,5 +1,5 @@
 <div class="search-page">
-    <p class="word-search-phrase">Votre recherche pour <span class="word-search">{{wordSearch}}</span> a donné les résultats suivants</p>
+    <p class="word-search-phrase">Votre recherche pour <span class="word-search">{{queryByName? queryByName : "Tous" }}</span> a donné les résultats suivants</p>
     <div class="search-page-toolbar-container">
         <p>{{ nbResult }} résultats</p>
 
@@ -32,26 +32,33 @@
                                placeholder="Ville"
                                aria-label="Number"
                                matInput
-                               [formControl]="myControl"
-                               [matAutocomplete]="auto">
-                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                            @for (option of filteredOptions | async; track option) {
+                               [formControl]="cityControl"
+                               [matAutocomplete]="autoCity">
+                        <mat-autocomplete autoActiveFirstOption #autoCity="matAutocomplete">
+                            @for (option of filteredCityOptions | async; track option) {
                                 <mat-option [value]="option">{{option}}</mat-option>
                             }
                         </mat-autocomplete>
                     </mat-form-field>
                 </form>
 
-                <button mat-button class="search-page-choice-bar-container-button" [matMenuTriggerFor]="categoriesMenu" (menuOpened)="isCategoriesMenuOpen = true" (menuClosed)="isCategoriesMenuOpen = false">
-                    {{ categoriesSelected }}
-                    <span class="material-icons">{{ isCategoriesMenuOpen ? 'expand_less' : 'expand_more' }}</span>
-                </button>
-                <mat-menu #categoriesMenu="matMenu">
-                    <section class="example-section" [formGroup]="categories">
-                        <p><mat-checkbox formControlName="rock">Rock</mat-checkbox></p>
-                        <p><mat-checkbox formControlName="pop">Pop</mat-checkbox></p>
-                    </section>
-                </mat-menu>
+
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Domaine</mat-label>
+                        <input type="text"
+                               placeholder="Domaine"
+                               aria-label="Number"
+                               matInput
+                               [formControl]="domaineControl"
+                               [matAutocomplete]="autoDomaine">
+                        <mat-autocomplete autoActiveFirstOption #autoDomaine="matAutocomplete">
+                            @for (option of filteredDomaineOptions | async; track option) {
+                                <mat-option [value]="option">{{option}}</mat-option>
+                            }
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </form>
 
                 <mat-form-field>
                     <mat-label>Choisir la date</mat-label>
