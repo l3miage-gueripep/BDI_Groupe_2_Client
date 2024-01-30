@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import { environment } from '../../environment';
-import { User, signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth, Auth, UserCredential, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { User, signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth, Auth, UserCredential, GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -13,6 +14,8 @@ export class FirebaseService {
   private auth: Auth;
   public user?: User;
   public googleProvider: GoogleAuthProvider;
+  prenomSource = new BehaviorSubject<string>('');
+  currentPrenom = this.prenomSource.asObservable();
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.app = initializeApp(environment.firebaseConfig);
@@ -24,12 +27,20 @@ export class FirebaseService {
 
 
     this.user = this.getUserFromLocalStorage();
+    const prenom = localStorage.getItem('prenom');
+    if (prenom) {
+      this.prenomSource.next(prenom);
+    }
   }
 
   public async login(email: string, password: string): Promise<string | void> {
     return await signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         this.authenticate(userCredential);
+        const user = userCredential.user;
+        if (user) {
+          console.log("User's name is", user.displayName);
+        }
         //window.location.reload();
       })
       .catch((error) => {
@@ -64,12 +75,25 @@ export class FirebaseService {
       });
   }
 
-  public async register(email: string, password: string) {
-    console.log("test");
+  public async register(prenom: string,email: string, password: string) {
+    console.log("inscription");
     await createUserWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         // Signed in 
         this.authenticate(userCredential);
+         
+         const user = userCredential.user;
+         if (user) {
+             updateProfile(user, {
+                 displayName: prenom
+             }).then(() => {
+                 console.log("Profile updated successfully");
+                 this.prenomSource.next(prenom);
+                 localStorage.setItem('prenom', prenom);
+             }).catch((error) => {
+                 console.warn("Error updating profile", error);
+             });
+         }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -81,6 +105,12 @@ export class FirebaseService {
   private authenticate(userCredential: UserCredential): void {
     this.user = userCredential.user;
     localStorage.setItem('userAuth', JSON.stringify(userCredential));
+    if (this.user) {
+      if (this.user.displayName) {
+        this.prenomSource.next(this.user.displayName);
+        localStorage.setItem('prenom', this.user.displayName);
+      }
+    }
     this.router.navigate(['/recherche']).then(() => window.location.reload());
   }
 
@@ -91,6 +121,8 @@ export class FirebaseService {
       //this.autoRedirect();
       //this.router.navigate(['/login']);
       window.location.reload();
+      console.log('logout');
+      localStorage.removeItem('prenom');
     });
   }
 

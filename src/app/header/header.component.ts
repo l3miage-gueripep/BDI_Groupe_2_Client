@@ -34,6 +34,16 @@ export class HeaderComponent {
     this.estConnecte = !!this.user;
     this.userName = this.estConnecte ? this.user.displayName : 'Utilisateur';
     console.log('user',this.user);
+
+
+    this.firebaseService.currentPrenom.subscribe(prenom => {
+      if (this.estConnecte) {
+        this.userName = prenom;
+      } else {
+        this.userName = 'Utilisateur';
+      }
+      console.log('prenom', prenom);
+    });
   }
 
 
