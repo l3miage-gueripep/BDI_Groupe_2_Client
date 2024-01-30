@@ -30,6 +30,7 @@ export class FirebaseService {
     return await signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         this.authenticate(userCredential);
+        //window.location.reload();
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -80,7 +81,7 @@ export class FirebaseService {
   private authenticate(userCredential: UserCredential): void {
     this.user = userCredential.user;
     localStorage.setItem('userAuth', JSON.stringify(userCredential));
-    this.autoRedirect();
+    this.router.navigate(['/recherche']).then(() => window.location.reload());
   }
 
   public logout() {
@@ -88,7 +89,8 @@ export class FirebaseService {
       this.user = undefined;
       localStorage.removeItem('userAuth');
       //this.autoRedirect();
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
+      window.location.reload();
     });
   }
 

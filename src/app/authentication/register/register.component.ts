@@ -10,6 +10,8 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class RegisterComponent {
 
   protected registerForm: FormGroup;
+  protected isLoading = false;
+
 
   constructor(private firebaseService: FirebaseService) {
     this.passwordsMatchValidator = this.passwordsMatchValidator.bind(this);
@@ -29,6 +31,7 @@ export class RegisterComponent {
   }
 
   public async register(){
+    this.isLoading = true;
     const { email, password } = this.registerForm.value;
     await this.firebaseService.register(email, password);
   }

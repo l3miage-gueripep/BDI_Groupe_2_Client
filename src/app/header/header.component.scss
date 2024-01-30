@@ -56,12 +56,18 @@ textarea:focus, input:focus{
   margin-right: 1%;
   margin-left: 1%;
 }
+button{
+  border: none;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
 a{
   text-decoration: none;
   color: grey;
 }
 a:hover{
   color: black;
+  cursor: pointer;
 }
 @media screen and (max-width: 700px) {
   .SearchBar{

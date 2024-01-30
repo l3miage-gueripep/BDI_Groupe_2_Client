@@ -1,4 +1,5 @@
 <div class="connexion">
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
     <b>CONNEXION</b>
 <p>Connectez avec votre compte Google ou créer un compte</p>
 <div class="wrapper">
@@ -18,6 +19,7 @@
         <!-- faire le separateur avec le ou au milieu -->
         ----------------------- OU -----------------------
     </div>
+    <button mat-raised-button color="accent" class="register-google-button" (click)="this.loginWithGoogle()">Se connecter avec Google</button>
 
     <div>Vous n'avez pas de compte ? <a routerLink="/register">Créer un compte</a></div>
 </div>

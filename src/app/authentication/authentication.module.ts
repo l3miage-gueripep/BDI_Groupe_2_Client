@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from '../app-routing.module';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 
 @NgModule({
@@ -22,6 +24,7 @@ import { AppRoutingModule } from '../app-routing.module';
     MatCardModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
     AppRoutingModule
   ]
 })

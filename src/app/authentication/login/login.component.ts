@@ -10,6 +10,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class LoginComponent {
   protected loginForm: FormGroup;
   protected error?: string | void;
+  protected isLoading = false;
 
 
   constructor(private firebaseService: FirebaseService) { 
@@ -22,6 +23,7 @@ export class LoginComponent {
   }
 
   public async login(){
+    this.isLoading = true;
     const { email, password } = this.loginForm.value;
     this.error = await this.firebaseService.login(email, password);
     console.log(this.error);
