@@ -7,6 +7,10 @@
         <form [formGroup]="this.registerForm" (ngSubmit)="this.register()">
             <h2 class="mat-primary">INSCRIPTION</h2>
             <mat-form-field>
+                <mat-label>Prénom</mat-label>
+                <input matInput placeholder="Your name" formControlName="prenom">
+            </mat-form-field>
+            <mat-form-field>
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="Your email address" formControlName="email">
             </mat-form-field>

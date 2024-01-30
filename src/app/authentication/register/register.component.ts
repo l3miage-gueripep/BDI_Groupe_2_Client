@@ -16,6 +16,7 @@ export class RegisterComponent {
   constructor(private firebaseService: FirebaseService) {
     this.passwordsMatchValidator = this.passwordsMatchValidator.bind(this);
     this.registerForm = new FormGroup({
+      prenom: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       //password
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -32,8 +33,9 @@ export class RegisterComponent {
 
   public async register(){
     this.isLoading = true;
-    const { email, password } = this.registerForm.value;
-    await this.firebaseService.register(email, password);
+    const { prenom,email, password } = this.registerForm.value;
+    await this.firebaseService.register(prenom,email, password);
+    console.log(prenom);
   }
 
 
