@@ -5,6 +5,7 @@ import {FilterQuery} from "../modele/filterQuery.model";
 import {Covoiturage} from "../modele/covoiturage.model";
 import { Adherent } from "../modele/adherent.model";
 import {Observable} from "rxjs";
+import {FestivalList} from "../modele/festivalList.model";
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,9 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  getFestivals(page?: number, size?: number): Observable<Festival[]> {
+  getFestivals(page?: number, size?: number): Observable<FestivalList> {
     let params = new HttpParams();
 
-    // 只有在参数存在时才添加它们
     if (page != null) {
       params = params.set('page', page.toString());
     }
@@ -24,7 +24,7 @@ export class AppService {
       params = params.set('size', size.toString());
     }
 
-    return this.http.get<Festival[]>('festival/', { params: params });
+    return this.http.get<FestivalList>('festival/', { params: params });
   }
 
   getAllCity() {
@@ -48,7 +48,7 @@ export class AppService {
   }
 
   getFestivalsByFilter(query: FilterQuery) {
-    return this.http.post<Festival[]>('festival/filter', query, {
+    return this.http.post<FestivalList>('festival/filter', query, {
     });
   }
 
