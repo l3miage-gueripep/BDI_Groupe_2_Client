@@ -10,17 +10,11 @@ import { HeaderComponent } from './header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { AuthenticationModule } from './authentication/authentication.module';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule} from '@angular/material/checkbox';
 import { CovoiturageRechercheModule } from './covoiturage-recherche/covoiturage-recherche.module';
-import {ReservationModule } from './reservation/reservation.module';
-import {ResultatRechercheModule} from "./resultat-recherche/resultat-recherche.module";
-import {MatMenuModule} from '@angular/material/menu';
-
-import {MatButton} from "@angular/material/button";
-import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
-
-
-
+import { ReservationModule } from './reservation/reservation.module';
+import { ResultatRechercheModule } from "./resultat-recherche/resultat-recherche.module";
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
