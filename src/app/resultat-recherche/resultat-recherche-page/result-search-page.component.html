@@ -23,8 +23,7 @@
 
     <mat-card *ngIf="isChoiceBarVisible">
         <mat-card-content class="search-page-choice-bar">
-            <div class="search-page-choice-bar-container">
-
+            <div class="search-page-choice-row">
                 <form class="example-form">
                     <mat-form-field class="example-full-width">
                         <mat-label>Ville</mat-label>
@@ -76,9 +75,9 @@
                         <mat-error>Invalide fin de date</mat-error>
                     }
                 </mat-form-field>
-                <button mat-flat-button color="primary" class="result-search-button" (click)="loadFestivalsByFilter(this.filterQuery)">Rechercher</button>
             </div>
 
+            <div class="search-page-choice-row">
             <mat-form-field class="example-form-field">
                 <mat-label>Ville départ</mat-label>
                 <input matInput type="text" [(ngModel)]="cityDepartureValue" (ngModelChange)="updateFilterQuery()">
@@ -87,8 +86,9 @@
                 </button>
             </mat-form-field>
 
+            <button mat-flat-button color="primary" class="result-search-button" (click)="loadFestivalsByFilter(this.filterQuery)">Rechercher</button>
 
-
+            </div>
         </mat-card-content>
     </mat-card>
     <br/>

@@ -15,7 +15,7 @@
   align-items: center;
 }
 
-.search-page-choice-bar-container {
+.search-page-choice-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -39,3 +39,15 @@
   font-size: 11pt;
 }
 
+@media screen and (max-width: 800px) {
+  .search-page-choice-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-page-choice-row > form, .search-page-choice-row > mat-form-field {
+    margin-left: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
