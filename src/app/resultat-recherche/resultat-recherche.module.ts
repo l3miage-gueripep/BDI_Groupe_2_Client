@@ -15,33 +15,35 @@ import {MatOption, provideNativeDateAdapter} from "@angular/material/core";
 import {MatAutocomplete, MatAutocompleteTrigger} from "@angular/material/autocomplete";
 import {MatIconModule} from '@angular/material/icon';
 import {MatInput, MatInputModule} from '@angular/material/input';
+import {MatPaginator} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
       ResultatCardComponent,
       ResultSearchPageComponent
   ],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatCardModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatCheckboxModule,
-    JsonPipe,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgIf,
-    MatIcon,
-    RouterLink,
-    MatInput,
-    MatAutocomplete,
-    MatOption,
-    MatAutocompleteTrigger
-  ],
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatCardModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatCheckboxModule,
+        JsonPipe,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgIf,
+        MatIcon,
+        RouterLink,
+        MatInput,
+        MatAutocomplete,
+        MatOption,
+        MatAutocompleteTrigger,
+        MatPaginator
+    ],
   providers: [provideNativeDateAdapter()],
 })
 export class ResultatRechercheModule { }

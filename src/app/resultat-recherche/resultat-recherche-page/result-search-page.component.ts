@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl} from '@angular/forms';
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {ActivatedRoute} from "@angular/router";
@@ -7,6 +7,28 @@ import { Festival } from '../../modele/festival.model';
 import { FilterQuery } from '../../modele/filterQuery.model';
 import {debounceTime, distinctUntilChanged, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+import {Subject} from 'rxjs';
+import { $localize } from '@angular/localize/init';
+@Injectable()
+export class MyCustomPaginatorIntl implements MatPaginatorIntl {
+    changes = new Subject<void>();
+
+    firstPageLabel = $localize`First page`;
+    itemsPerPageLabel = $localize`Items per page:`;
+    lastPageLabel = $localize`Last page`;
+
+    nextPageLabel = 'Next page';
+    previousPageLabel = 'Previous page';
+
+    getRangeLabel(page: number, pageSize: number, length: number): string {
+        if (length === 0) {
+            return $localize`Page 1 of 1`;
+        }
+        const amountPages = Math.ceil(length / pageSize);
+        return $localize`Page ${page + 1} of ${amountPages}`;
+    }
+}
 
 @Component({
   selector: 'app-resultat-recherche-page',
@@ -18,7 +40,7 @@ import {map, startWith} from 'rxjs/operators';
 
 export class ResultSearchPageComponent {
 
-  nbResult = 16;
+  nbResult = 0;
   isFilterMenuOpen = false;
   isChoiceBarVisible: boolean = true;
   filterSelected = 'Par pertinence'
@@ -41,6 +63,9 @@ export class ResultSearchPageComponent {
   domaineOptions: string[] = [];
   filteredDomaineOptions: Observable<string[]> | undefined;
 
+    totalFestivals = 140;
+    pageSize = 10;
+    currentPage = 0;
   constructor(private _formBuilder: FormBuilder, private route: ActivatedRoute, private appService: AppService ) {
   }
 
@@ -87,17 +112,20 @@ export class ResultSearchPageComponent {
         }
     }
 
-  loadAllFestivals() {
-    this.appService.getFestivals().subscribe(
-        (data) => {
-          this.festivals = data;
-          this.nbResult = data.length
-          console.log('this.festivals',this.festivals)
-        },
-        (error) => {
-          console.error('Error fetching festivals', error);
-        }
-    );
+    loadAllFestivals(page: number, pageSize: number) {
+        this.currentPage = page;
+        this.pageSize = pageSize;
+
+        this.appService.getFestivals(page, pageSize).subscribe(
+            (data) => {
+              this.festivals = data;
+              this.nbResult = this.totalFestivals
+              console.log('this.festivals',this.festivals)
+            },
+            (error) => {
+              console.error('Error fetching festivals', error);
+            }
+        );
   }
 
   loadFestivalsById(name: string) {
@@ -172,6 +200,12 @@ export class ResultSearchPageComponent {
     this.updateFilterQuery();
   }
 
+    onPageChange(event: any) {
+        const pageIndex = event.pageIndex;
+        const pageSize = event.pageSize;
+
+        this.loadAllFestivals(pageIndex, pageSize);
+    }
 
   async ngOnInit() {
       this.loadCities();
@@ -201,7 +235,7 @@ export class ResultSearchPageComponent {
           if (this.queryByName) {
               this.loadFestivalsById(this.queryByName);
           } else {
-              this.loadAllFestivals();
+              this.loadAllFestivals(this.currentPage, this.pageSize);
           }
       });
 

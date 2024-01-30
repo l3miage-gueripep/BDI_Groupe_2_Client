@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Festival} from "../modele/festival.model";
 import {FilterQuery} from "../modele/filterQuery.model";
 import {Covoiturage} from "../modele/covoiturage.model";
 import { Adherent } from "../modele/adherent.model";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,18 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  getFestivals() {
-    return this.http.get<Festival[]>('festival/');
+  getFestivals(page?: number, size?: number): Observable<Festival[]> {
+    let params = new HttpParams();
+
+    // 只有在参数存在时才添加它们
+    if (page != null) {
+      params = params.set('page', page.toString());
+    }
+    if (size != null) {
+      params = params.set('size', size.toString());
+    }
+
+    return this.http.get<Festival[]>('festival/', { params: params });
   }
 
   getAllCity() {
