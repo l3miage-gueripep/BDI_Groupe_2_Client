@@ -25,10 +25,12 @@ export class RegisterComponent {
   constructor(private firebaseService: FirebaseService, private appService: AppService) {
     this.passwordsMatchValidator = this.passwordsMatchValidator.bind(this);
     this.registerForm = new FormGroup({
+
       nom: new FormControl('', [Validators.required]),
       prenom: new FormControl('', [Validators.required]),
       tel: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.minLength(10)]),
+
       //password
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       //confirmPassword
@@ -69,14 +71,14 @@ export class RegisterComponent {
 
   public async register(){
     this.isLoading = true;
-    const { email, password } = this.registerForm.value;
-
-    const result =  await this.firebaseService.register(email, password);
+    const { prenom, email, password,  } = this.registerForm.value;
+    const result =  await this.firebaseService.register(prenom, email, password );
+    /*
     if (result !== "success" && result === "auth/email-already-in-use"){
       this.estMailExit = true;
     }
 
-
+     */
     this.creatAdherent(this.adherent)
 
   }
