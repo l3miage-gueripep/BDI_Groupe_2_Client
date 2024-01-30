@@ -6,4 +6,8 @@ export interface Festival {
     nomManifestation: string;
     siteWeb: string;
     tarifPass: number;
+    sousDomaine :{
+        nomDomaine: string,
+        nomSousDomaine: string,
+    }
 }

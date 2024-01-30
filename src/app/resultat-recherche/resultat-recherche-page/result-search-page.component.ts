@@ -40,7 +40,7 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
 
 
 export class ResultSearchPageComponent {
-
+  currentLoadMode: 'all' | 'byId' | 'byFilter' = 'all';
   nbResult = 0;
   isFilterMenuOpen = false;
   isChoiceBarVisible: boolean = true;
@@ -128,6 +128,7 @@ export class ResultSearchPageComponent {
     }
 
     loadAllFestivals(page: number, pageSize: number) {
+        this.currentLoadMode = 'all';
         this.currentPage = page;
         this.pageSize = pageSize;
 
@@ -145,17 +146,13 @@ export class ResultSearchPageComponent {
   }
 
   loadFestivalsById(name: string) {
-      this.currentPage = 1;
-      this.pageSize = 1;
+      this.currentLoadMode = 'byId';
     this.appService.getFestivalsById(name).subscribe(
         (data) => {
             this.festivals = Array.isArray(data) ? data : [data];
-            this.nbResult = data.length
-            const filterQueryValues = Object.keys(this.filterQuery)
-                .filter(key => this.filterQuery[key])
-                .map(key => this.filterQuery[key]);
+            this.nbResult = 1
 
-            this.queryByName = filterQueryValues.join(', ');
+            this.queryByName = name;
           console.log('this.festivals', this.festivals);
         },
         (error) => {
@@ -166,10 +163,11 @@ export class ResultSearchPageComponent {
 
 
   loadFestivalsByFilter(query: FilterQuery, page: number, pageSize: number) {
+      this.currentLoadMode = 'byFilter';
       this.currentPage = page;
       this.pageSize = pageSize;
 
-    this.appService.getFestivalsByFilter(query).subscribe(
+    this.appService.getFestivalsByFilter(query,page, pageSize ).subscribe(
         (data) => {
             this.festivalList = data;
             this.festivals = Array.isArray(data.content) ? data.content : [data.content];
@@ -226,7 +224,17 @@ export class ResultSearchPageComponent {
         const pageIndex = event.pageIndex;
         const pageSize = event.pageSize;
 
-        this.loadAllFestivals(pageIndex, pageSize);
+        switch (this.currentLoadMode) {
+            case 'all':
+                this.loadAllFestivals(pageIndex, pageSize);
+                break;
+            case 'byId':
+
+                break;
+            case 'byFilter':
+                this.loadFestivalsByFilter(this.filterQuery, pageIndex, pageSize);
+                break;
+        }
     }
 
   async ngOnInit() {

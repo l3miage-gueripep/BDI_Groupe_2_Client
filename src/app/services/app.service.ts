@@ -47,8 +47,17 @@ export class AppService {
     return this.http.get<Festival[]>(`festival/${idFestival}`);
   }
 
-  getFestivalsByFilter(query: FilterQuery) {
-    return this.http.post<FestivalList>('festival/filter', query, {
+  getFestivalsByFilter(query: FilterQuery, page?: number, size?: number) {
+    let params = new HttpParams();
+
+    if (page != null) {
+      params = params.set('page', page.toString());
+    }
+    if (size != null) {
+      params = params.set('size', size.toString());
+    }
+
+    return this.http.post<FestivalList>('festival/filter', query, {params: params
     });
   }
 

@@ -92,9 +92,15 @@
         </mat-card-content>
     </mat-card>
     <br/>
+    <div *ngIf="currentLoadMode !== 'byId'">
+    <mat-paginator [length]="festivalList.totalElements"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   (page)="onPageChange($event)">
+    </mat-paginator>
+    </div>
     <div *ngFor="let festival of festivals">
         <app-resultat-card
-                imageUrl="assets/musilac.jpg"
                 [festivalName]="festival.nomManifestation"
                 [codePostal]="festival.codePostal"
                 [lieuPrincipal]="festival.lieuPrincipal"
@@ -102,12 +108,15 @@
                 [startDate]="festival.dateDebut"
                 [endDate]="festival.dateFin"
                 [price]="festival.tarifPass"
+                [nomDomaine]="festival.sousDomaine.nomDomaine"
         ></app-resultat-card>
         <br/>
     </div>
-    <mat-paginator [length]="festivalList.totalElements"
-                   [pageSize]="pageSize"
-                   [pageSizeOptions]="[5, 10, 20]"
-                   (page)="onPageChange($event)">
-    </mat-paginator>
+    <div *ngIf="currentLoadMode !== 'byId'">
+        <mat-paginator [length]="festivalList.totalElements"
+                       [pageSize]="pageSize"
+                       [pageSizeOptions]="[5, 10, 20]"
+                       (page)="onPageChange($event)">
+        </mat-paginator>
+    </div>
 </div>

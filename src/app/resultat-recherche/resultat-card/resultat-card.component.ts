@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
   styleUrl: './resultat-card.component.scss'
 })
 export class ResultatCardComponent {
-    @Input() imageUrl: string = 'assets/musilac.jpg';
     @Input() festivalName: string = 'Default Festival Name';
     @Input() codePostal: string = 'Default codePostale';
     @Input() lieuPrincipal : string = 'Default lieuPrincipal';
@@ -14,6 +13,7 @@ export class ResultatCardComponent {
     @Input() startDate: string = 'Default StartDate';
     @Input() endDate: string = 'Default EndDate';
     @Input() price: number = 0;
+    @Input() nomDomaine: string = 'Default nomDomaine';
     constructor( private router: Router) {}
     navigateToCovoiturage() {
         this.router.navigate(['recherche/covoiturage'], { queryParams: { query: this.festivalName } });
