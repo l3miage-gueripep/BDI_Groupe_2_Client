@@ -11,7 +11,9 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatIcon} from "@angular/material/icon";
 import {RouterLink} from "@angular/router";
-import {provideNativeDateAdapter} from "@angular/material/core";
+import {MatOption, provideNativeDateAdapter} from "@angular/material/core";
+import {MatInput} from "@angular/material/input";
+import {MatAutocomplete, MatAutocompleteTrigger} from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,11 @@ import {provideNativeDateAdapter} from "@angular/material/core";
     ReactiveFormsModule,
     NgIf,
     MatIcon,
-    RouterLink
+    RouterLink,
+    MatInput,
+    MatAutocomplete,
+    MatOption,
+    MatAutocompleteTrigger
   ],
   providers: [provideNativeDateAdapter()],
 })
