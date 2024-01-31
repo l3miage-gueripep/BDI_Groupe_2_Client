@@ -1,7 +1,7 @@
 import {Component, Input, SimpleChanges} from '@angular/core';
 import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {CovoiturageLieu} from "../../modele/covoiturageLieu.model";
 
 @Component({
@@ -52,20 +52,21 @@ export class CovoiturageDriverCardComponent {
     price: number=0;
     placeLibre: number=0;
 
-    constructor() {
-        // 初始化为空值或默认值
+    constructor( private router: Router) {
         this.clearProperties();
     }
 
+    navigateToReservation() {
+        this.router.navigate(['/reservation'], { queryParams: { query: this.covoiturageLieu.offreCovoiturage.idOffreCovoiturage } });
+    }
+
     ngOnChanges(changes: SimpleChanges) {
-        // 当 covoiturageLieu 发生变化时，更新相关属性
         if (changes['covoiturageLieu']) {
             this.updateProperties();
         }
     }
 
     private updateProperties() {
-        // 基于 covoiturageLieu 更新属性
         if (this.covoiturageLieu) {
             this.nomConducteur = this.covoiturageLieu.offreCovoiturage.conducteur.nom;
             this.prenomConducteur = this.covoiturageLieu.offreCovoiturage.conducteur.prenom;
@@ -81,7 +82,6 @@ export class CovoiturageDriverCardComponent {
     }
 
     private clearProperties() {
-        // 将属性重置为空值或默认值
         this.nomConducteur = '';
         this.prenomConducteur = '';
         this.departureCity = '';

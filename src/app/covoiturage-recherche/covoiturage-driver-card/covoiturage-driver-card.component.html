@@ -26,9 +26,10 @@
                     <p>A partir de {{price}} euros </p>
                 </div>
             <div class="carpool-search-driver-card-row">
-            <a routerLink="/reservation">
-                <button mat-raised-button class="carpool-driver-card-reserve">Réserver maintenant</button>
-            </a>
+                <a (click)="navigateToReservation()">
+                    <button mat-raised-button class="carpool-driver-card-reserve">Réserver maintenant</button>
+                </a>
+
             </div>
         </mat-card-content>
     </mat-card>

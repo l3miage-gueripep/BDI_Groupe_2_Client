@@ -1,5 +1,5 @@
 <div class="carpool-search-page">
-<p class="carpool-word-search-phrase">Votre recherche pour <span class="word-search">{{wordSearch}}</span> a donné les résultats suivants</p>
+<p class="carpool-word-search-phrase">Votre recherche pour <span class="word-search">{{queryByFestivalId}}</span> a donné les résultats suivants</p>
 <p>{{ nbResult }} résultats</p>
 <mat-card class="carpool-search-bar">
     <mat-card-content>
@@ -52,8 +52,6 @@
         </div>
 
         <div class="carpool-search-bar-row">
-            <mat-checkbox class="example-margin">Réservable uniquement</mat-checkbox>
-
             <button mat-button class="carpool-search-filter" [matMenuTriggerFor]="categoriesMenu" (menuOpened)="isFilterMenuOpen = true" (menuClosed)="isFilterMenuOpen = false">
                 {{ filterSelected }}
                 <span class="material-icons">{{ isFilterMenuOpen ? 'expand_less' : 'expand_more' }}</span>
@@ -68,10 +66,21 @@
         </div>
     </mat-card-content>
 </mat-card>
-    <div *ngFor="let offerCarpool of offerCarpools">
-<app-covoiturage-driver-card
-        [covoiturageLieu]="offerCarpool"
->
-</app-covoiturage-driver-card>
-    </div>
+
+    <mat-paginator [length]="carpoolList.totalElements"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   (page)="onPageChange($event)">
+    </mat-paginator>
+        <div *ngFor="let offerCarpool of offerCarpools">
+            <app-covoiturage-driver-card
+                    [covoiturageLieu]="offerCarpool"
+            >
+            </app-covoiturage-driver-card>
+        </div>
+    <mat-paginator [length]="carpoolList.totalElements"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   (page)="onPageChange($event)">
+    </mat-paginator>
 </div>

@@ -92,8 +92,28 @@ export class AppService {
     });
   }
 
-  getAllCovoiturageLieu(){
-    return this.http.get<any>(`covoiturageLieu/`);
+  getAllCovoiturageLieu(page?: number, size?: number){
+    let params = new HttpParams();
+
+    if (page != null) {
+      params = params.set('page', page.toString());
+    }
+    if (size != null) {
+      params = params.set('size', size.toString());
+    }
+    return this.http.get<CovoiturageLieuList>(`covoiturageLieu/`,{ params: params });
+  }
+
+  getCovoiturageLieuByFestival(nomManifestation: string, page?: number, size?: number) {
+    let params = new HttpParams();
+
+    if (page != null) {
+      params = params.set('page', page.toString());
+    }
+    if (size != null) {
+      params = params.set('size', size.toString());
+    }
+    return this.http.get<CovoiturageLieuList>(`festival/${nomManifestation}/covoituragelieu`,{ params: params })
   }
 
 }
