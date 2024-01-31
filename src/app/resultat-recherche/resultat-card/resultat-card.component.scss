@@ -29,12 +29,18 @@
     font-size: 20px;
     color: #007f5fff;
 }
+.imageDomaine{
+    width: 19%;
+    height: 240px;
+    margin: 1%;
+}
 @media (max-width: 900px) {
     .search-page-result-card-row{
-       display : inline;
+     
     }
     .long {
         word-break: break-all;
     }
-
+    
+    
 }

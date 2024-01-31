@@ -1,13 +1,16 @@
 <mat-card class="search-page-result-card">
     <mat-card-content>
         <div class="search-page-result-card-row">
+            <img [src]="getImagePath()" alt="Image du domaine" class="imageDomaine">
             <div class="search-page-result-card-col">
-                <p class="search-page-festival-name">{{ festivalName }}</p>
-                <p>{{ nomDomaine }}</p>
-                <p class="long">{{ siteWeb }}</p>
-                <p>du {{startDate | date:'dd/MM/yyyy'}}</p>
-                <p>au {{endDate | date:'dd/MM/yyyy'}}</p>
-                <p>{{lieuPrincipal}}, {{codePostal}}</p>
+               <div>
+                    <p class="search-page-festival-name">{{ festivalName }}</p>
+                    <p>{{ nomDomaine }}</p>
+                    <p class="long">{{ siteWeb }}</p>
+                    <p>du {{startDate | date:'dd/MM/yyyy'}}</p>
+                    <p>au {{endDate | date:'dd/MM/yyyy'}}</p>
+                    <p>{{lieuPrincipal}}, {{codePostal}}</p>
+               </div>
             </div>
 
             <div class="search-page-result-card-col">
