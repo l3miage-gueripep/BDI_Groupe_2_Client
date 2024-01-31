@@ -7,6 +7,7 @@
 .search-page-result-card-col {
     flex: 1;
     padding: 10px;
+   
 }
 
 .festival-image {
@@ -27,4 +28,13 @@
     font-weight: bold;
     font-size: 20px;
     color: #007f5fff;
+}
+@media (max-width: 900px) {
+    .search-page-result-card-row{
+       display : inline;
+    }
+    .long {
+        word-break: break-all;
+    }
+
 }

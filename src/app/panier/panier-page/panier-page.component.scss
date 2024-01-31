@@ -53,10 +53,7 @@ h1{
     text-align: center;
     margin-left: 70%;
 }
-.quantite{
-    margin-right: 4%;
-    width: 10%;
-}
+
 .prix{
     width: 15%;
 }
@@ -74,7 +71,11 @@ button{
 
 }
   
-  
+.quantite{
+    color: #007f5fff;
+    font-weight: bold;
+    width: 100%;
+}
   button:hover {
     color: #fff;
     background-color: #1A1A1A;
@@ -98,10 +99,32 @@ button{
     .montant{
         padding-right: 3%;
     }
-    .quantiteCovoiturage{
-        width: 100%;
-    }
+    
     .selectionTicket{
         padding-top: 20%;
+
+    }
+    .panier{
+        padding: 2%;
+    }
+    .elementPanier{
+        margin-top: 3%;
+        margin-bottom: 2%;
+    }
+    .panier-valide-boutton{
+        margin-top: 2%;
+    }
+    .h1{
+        font-size: 15px;
+    }
+    .quantite{
+        color: #007f5fff;
+        width: 100%;
+    }
+    .detailTicket{
+        width: 60%;
+    }
+    .prixFestival{
+        padding-top: 15%;
     }
   }
