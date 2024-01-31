@@ -7,8 +7,12 @@
 .search-page-result-card-col {
     flex: 1;
     padding: 10px;
-   
+
 }
+.spacer{
+  flex: 1 1 auto;
+}
+
 
 .festival-image {
     width: 80%;
@@ -29,11 +33,12 @@
     font-size: 20px;
     color: #007f5fff;
 }
-.imageDomaine{
-    width: 19%;
-    height: 240px;
+.imageDomaine {
+    width: 200px; // Remplacez par la largeur souhaitée
+    height: 200px; // Remplacez par la hauteur souhaitée
+    object-fit: cover;
     margin: 1%;
-}
+  }
 @media (max-width: 900px) {
     .search-page-result-card-row{
      
