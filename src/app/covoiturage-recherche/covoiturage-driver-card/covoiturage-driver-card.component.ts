@@ -53,19 +53,16 @@ export class CovoiturageDriverCardComponent {
     placeLibre: number=0;
 
     constructor() {
-        // 初始化为空值或默认值
         this.clearProperties();
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        // 当 covoiturageLieu 发生变化时，更新相关属性
         if (changes['covoiturageLieu']) {
             this.updateProperties();
         }
     }
 
     private updateProperties() {
-        // 基于 covoiturageLieu 更新属性
         if (this.covoiturageLieu) {
             this.nomConducteur = this.covoiturageLieu.offreCovoiturage.conducteur.nom;
             this.prenomConducteur = this.covoiturageLieu.offreCovoiturage.conducteur.prenom;
@@ -81,7 +78,6 @@ export class CovoiturageDriverCardComponent {
     }
 
     private clearProperties() {
-        // 将属性重置为空值或默认值
         this.nomConducteur = '';
         this.prenomConducteur = '';
         this.departureCity = '';
