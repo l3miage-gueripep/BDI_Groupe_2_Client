@@ -15,6 +15,7 @@ import { Panier } from '../modele/panier.model';
 })
 export class AppService {
 
+
   constructor(private http: HttpClient) { }
 
   getFestivals(page?: number, size?: number): Observable<FestivalList> {
@@ -62,6 +63,10 @@ export class AppService {
 
     return this.http.post<FestivalList>('festival/filter', query, {params: params
     });
+  }
+
+  removePanierOffre(idPanierOffre: number) {
+    this.http.delete(`panierOffre/${idPanierOffre}`).subscribe();
   }
 
   getPanierByUserMail(mail: string) {

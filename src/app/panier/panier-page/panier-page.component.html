@@ -1,44 +1,61 @@
-<div class="panier">  
-    <div class="elementPanier" *ngFor="let panierOffre of (panier | async)?.panierOffres">
+<div class="panier">
+    <div *ngIf="isLoading">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div> <!-- Affichez un message de chargement si isLoading est vrai -->
+
+    <div class="elementPanier" *ngFor="let panierOffre of this.panierOffres">
         <div class="ticket">
             <div class="detailTicket">
                 <h2>Covoiturages</h2>
                 <p>
-                    <b>Départ</b> : {{panierOffre.covoiturageLieu.lieuCovoiturage.nomLieu}} {{ panierOffre.covoiturageLieu.horaire | date:'shortTime':'GMT+1' }}
+                    <b>Départ</b> : {{panierOffre.covoiturageLieu.lieuCovoiturage.nomLieu}} {{
+                    panierOffre.covoiturageLieu.horaire | date:'shortTime':'GMT+1' }}
                 </p>
                 <h2>Pass Festival</h2>
                 <p>
-                    <b>Titre Festival</b> : {{panierOffre.festival.nomManifestation}} (du {{panierOffre.festival.dateDebut | date:'dd/MM/yyyy'}} au {{panierOffre.festival.dateFin | date:'dd/MM/yyyy'}})
+                    <b>Titre Festival</b> : {{panierOffre.festival.nomManifestation}} (du
+                    {{panierOffre.festival.dateDebut | date:'dd/MM/yyyy'}} au {{panierOffre.festival.dateFin |
+                    date:'dd/MM/yyyy'}})
                 </p>
             </div>
             <div class="quantite">
                 <br>
                 <div class="quantiteCovoiturage">
-                   <b> <p>x {{panierOffre.quantite}}</p></b>
+                    <b>
+                        <p>x {{panierOffre.quantite}}</p>
+                    </b>
                 </div><br>
-               <div class="quantiteFestival">
-                   <b> <p>x {{panierOffre.quantite}}</p></b>
-               </div>
+                <div class="quantiteFestival">
+                    <b>
+                        <p>x {{panierOffre.quantite}}</p>
+                    </b>
+                </div>
             </div>
             <div class="prix">
                 <br>
                 <div class="prixCovoiturage">
                     <p>{{panierOffre.covoiturageLieu.prix}} euros</p>
                 </div><br>
-               <div class="prixFestival">
+                <div class="prixFestival">
                     <p>{{panierOffre.festival.tarifPass}} euros</p>
-               </div>
+                </div>
             </div>
             <span class="spacer"></span>
             <div class="selectionTicket">
-                <input type="checkbox" id="cb1" name="Ticket" class="custom-checkbox" />
+                <button mat-fab color="warn" aria-label="Example icon button with a delete icon" (click)="removePanierOffre(panierOffre)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <!-- <input type="checkbox" id="cb1" name="Ticket" class="custom-checkbox" /> -->
             </div>
         </div>
         <hr>
-       <div class="prixTotal">
-        <h1> PRIX TOTAL</h1>
-        <div class="montant"> <p>{{getPrixTotal(panierOffre)}} euros</p></div>
-       </div>
-    </div> 
-    <button class="panier-valide-boutton"> Valider le panier</button>
+        <div class="prixTotal">
+            <h1> PRIX TOTAL</h1>
+            <div class="montant">
+                <p>{{getPrixTotal(panierOffre)}} euros</p>
+            </div>
+        </div>
+    </div>
+    <button class="panier-valide-boutton" *ngIf="(panier | async)?.panierOffres?.length" (click)="openDialog()"> Valider
+        le panier</button>
 </div>
