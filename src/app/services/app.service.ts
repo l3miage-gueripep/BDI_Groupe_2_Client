@@ -51,6 +51,10 @@ export class AppService {
     return this.http.get<Festival[]>(`festival/${idFestival}`);
   }
 
+  payPanier(idPanier: number) {
+    return this.http.patch(`panier/pay/${idPanier}`, {}).subscribe();
+  }
+
   getFestivalsByFilter(query: FilterQuery, page?: number, size?: number) {
     let params = new HttpParams();
 

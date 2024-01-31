@@ -6,19 +6,23 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatIconModule} from '@angular/material/icon';
+import { AcceptedPaymentComponent } from './accepted-payment/accepted-payment.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
     PanierPageComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    AcceptedPaymentComponent,
   ],
   imports: [
     CommonModule,
     MatDialogModule,
     MatButtonModule,
     MatProgressBarModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ]
 })
 export class PanierModule { }

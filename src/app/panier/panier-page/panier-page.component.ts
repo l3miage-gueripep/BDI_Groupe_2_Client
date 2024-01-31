@@ -5,6 +5,7 @@ import { Panier, PanierOffre } from 'src/app/modele/panier.model';
 import { AppService } from 'src/app/services/app.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-panier-page',
@@ -15,16 +16,22 @@ export class PanierPageComponent {
   protected panier: Observable<Panier>;
   protected isLoading: boolean = true;
   protected panierOffres: PanierOffre[] = [];
+  private panierId: number = -1;
 
-  constructor(private appService: AppService, private firebaseService: FirebaseService, protected dialog: MatDialog) { 
+  constructor(private appService: AppService, private firebaseService: FirebaseService, protected dialog: MatDialog, private router: Router) { 
     //pas besoin de verifier si c'est nul ou non car l'utilisateur n'a pas le droit d'accéder à cette page s'il n'est pas connecté
-    let userMail = firebaseService.user?.email;
+    let userMail = this.firebaseService.user?.email;
     this.panier = this.appService.getPanierByUserMail(userMail!);
 
-    this.panier.subscribe(panierData => {
-      this.isLoading = false; // Mettez à jour isLoading lorsque les données sont chargées
-      this.panierOffres = panierData.panierOffres;
-      // Autre code ici
+    this.panier.subscribe({
+      next: panierData => {
+        this.isLoading = false;
+        this.panierOffres = panierData.panierOffres;
+        this.panierId = panierData.idPanier;
+      },
+      error: error => {
+        this.isLoading = false; 
+      }
     });
   }
 
@@ -35,8 +42,12 @@ export class PanierPageComponent {
   protected openDialog(){
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe(hasPaid => {
+      if(hasPaid){
+        this.appService.payPanier(this.panierId);
+        //redirige l'utilisateur vers la page de paiement
+        this.router.navigate(['/panier/accepted-payment']);
+      }
     });
   }
 

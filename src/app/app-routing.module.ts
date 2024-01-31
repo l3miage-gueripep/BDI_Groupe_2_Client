@@ -13,6 +13,7 @@ import { PanierPageComponent } from './panier/panier-page/panier-page.component'
 import { ReservationCovoiturageComponent } from './reservation/reservation-covoiturage/reservation-covoiturage.component';
 import { ReservationReussieComponent } from './reservation/reservation-reussie/reservation-reussie.component';
 import {HomePageComponent} from "./home-page/home-page/home-page.component";
+import { AcceptedPaymentComponent } from './panier/accepted-payment/accepted-payment.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'panier', component: PanierPageComponent, canActivate: [canActivateUser]},
   { path: 'reservation', component: ReservationCovoiturageComponent },
-  { path: 'reservationReussie', component: ReservationReussieComponent }
+  { path: 'reservationReussie', component: ReservationReussieComponent },
+  { path: 'panier/accepted-payment', component: AcceptedPaymentComponent }
 ];
 
 @NgModule({
