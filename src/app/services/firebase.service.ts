@@ -112,15 +112,12 @@ export class FirebaseService {
         localStorage.setItem('prenom', this.user.displayName);
       }
     }
-    this.router.navigate(['/recherche']).then(() => window.location.reload());
   }
 
   public logout() {
     this.auth.signOut().then(() => {
       this.user = undefined;
       localStorage.removeItem('userAuth');
-      //this.autoRedirect();
-      //this.router.navigate(['/login']);
       window.location.reload();
       console.log('logout');
       localStorage.removeItem('prenom');
@@ -138,7 +135,7 @@ export class FirebaseService {
       redirectTo = '';
     }
     console.log(redirectTo);
-    this.router.navigate([redirectTo]);
+    this.router.navigateByUrl(redirectTo);
   }
 
   private getUserFromLocalStorage(): User | undefined {
