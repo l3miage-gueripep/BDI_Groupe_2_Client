@@ -40,3 +40,74 @@
   height: 50px !important;
   width: 50px !important;
 }
+
+
+@media screen and (max-width: 600px) {
+  .responsive{
+    display: inline;
+  }
+  .carpool-search-driver-card{
+    display: inline-block;
+
+  }
+  mat-card{
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .carpool-search-driver-card {
+    
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  .carpool-search-driver-card-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    min-width: 20px;
+    min-height: 20px;
+  }
+  
+  .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .carpool-driver-card-reserve {
+    background-color: #f1ce53ff;
+    width: 100%;
+  }
+
+  .carpool-search-driver-card-row.responsive {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .driver-info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  .offers-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+
+  .search-page-driver-name {
+    margin-left: 10px;
+  }
+
+  /* 响应式设计：在小屏幕上调整布局 */
+  @media (max-width: 600px) {
+    .driver-info-container {
+      flex-direction: column;
+    }
+  }
+
+  
+}

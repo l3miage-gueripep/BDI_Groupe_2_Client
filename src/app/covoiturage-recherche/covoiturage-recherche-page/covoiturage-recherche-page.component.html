@@ -52,6 +52,7 @@
         </div>
 
         <div class="carpool-search-bar-row">
+
             <button mat-button class="carpool-search-filter" [matMenuTriggerFor]="categoriesMenu" (menuOpened)="isFilterMenuOpen = true" (menuClosed)="isFilterMenuOpen = false">
                 {{ filterSelected }}
                 <span class="material-icons">{{ isFilterMenuOpen ? 'expand_less' : 'expand_more' }}</span>
@@ -75,6 +76,8 @@
         <div *ngFor="let offerCarpool of offerCarpools">
             <app-covoiturage-driver-card
                     [covoiturageLieu]="offerCarpool"
+                    [festival]="festival"
+                    [nbPassenger]="nbPassenger"
             >
             </app-covoiturage-driver-card>
         </div>

@@ -1,0 +1,24 @@
+<mat-card class="trajetChoisi">
+        <h2>Trajet choisi</h2>
+        <br>
+        <div class="detailCovoiturage">
+            <p>{{ covoiturageLieu.horaire | date: 'dd/MM/yyyy HH:mm' }}
+                {{covoiturageLieu.lieuCovoiturage.nomLieu}}</p><br>
+            <p id="lightText">3h12</p><br>
+            <p>{{ covoiturageLieu.horaire | date: 'dd/MM/yyyy HH:mm' }}
+                {{nomManifestation}}</p>
+        </div>
+    <hr style="border: 1px solid #000; margin: 20px 0;">
+
+    <div class="detailCovoiturage" id="flex">
+            <h2>Prix total pour {{nbPassenger}} passagers </h2>
+            <span class="spacer"> </span>
+            <b> <p id="right"> {{covoiturageLieu.prix}} euros </p></b>
+        </div>
+        <div class="center">
+            <a routerLink="/reservationReussie">
+                <button class="reservation-button"> Ajouter au panier</button>
+            </a>
+
+        </div>
+</mat-card>

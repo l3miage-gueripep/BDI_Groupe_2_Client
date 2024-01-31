@@ -3,6 +3,8 @@ import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
 import {Router, RouterLink} from "@angular/router";
 import {CovoiturageLieu} from "../../modele/covoiturageLieu.model";
+import {Festival} from "../../modele/festival.model";
+import {AppService} from "../../services/app.service";
 
 @Component({
   selector: 'app-covoiturage-driver-card',
@@ -43,6 +45,19 @@ export class CovoiturageDriverCardComponent {
         prix: 0
     };
 
+    @Input() festival : Festival = {
+        codePostal: '',
+        dateDebut: '',
+        dateFin: '',
+        lieuPrincipal: '',
+        nomManifestation: '',
+        siteWeb: '',
+        tarifPass: 0,
+        sousDomaine: {
+            nomDomaine: '',
+            nomSousDomaine: ''
+        }
+    };
     nomConducteur: string ="";
     prenomConducteur: string ="";
     departureCity: string ="";
@@ -51,14 +66,13 @@ export class CovoiturageDriverCardComponent {
     arrivalTime: string ="";
     price: number=0;
     placeLibre: number=0;
+    @Input() nbPassenger!: number;
 
-    constructor( private router: Router) {
+    constructor( private router: Router, private appService: AppService) {
         this.clearProperties();
     }
 
-    navigateToReservation() {
-        this.router.navigate(['/reservation'], { queryParams: { query: this.covoiturageLieu.offreCovoiturage.idOffreCovoiturage } });
-    }
+
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes['covoiturageLieu']) {
@@ -71,7 +85,7 @@ export class CovoiturageDriverCardComponent {
             this.nomConducteur = this.covoiturageLieu.offreCovoiturage.conducteur.nom;
             this.prenomConducteur = this.covoiturageLieu.offreCovoiturage.conducteur.prenom;
             this.departureCity = this.covoiturageLieu.lieuCovoiturage.nomLieu;
-            this.arrivalCity = this.covoiturageLieu.offreCovoiturage.festival.nomManifestation;
+            this.arrivalCity = this.festival.nomManifestation;
             this.departureTime = this.covoiturageLieu.horaire;
             this.arrivalTime = this.covoiturageLieu.horaire;
             this.price = this.covoiturageLieu.prix;
@@ -90,5 +104,32 @@ export class CovoiturageDriverCardComponent {
         this.arrivalTime = '';
         this.price = 0;
         this.placeLibre = 0;
+    }
+    covoiturageLieus : CovoiturageLieu[] = [];
+    offreCovoiturage= {
+        conducteur: {
+            idAdherent: 0,
+            mail: '',
+            nom: '',
+            prenom: '',
+            role: '',
+            telephone: ''
+        }};
+
+    loadCovoiturageLieu(idOffreCovoiturage:number) {
+        this.appService.getCovoiturageLieuByIdOffreCovoiturage(idOffreCovoiturage).subscribe(
+            (data) => {
+                this.covoiturageLieus = Array.isArray(data) ? data : [data];
+                this.offreCovoiturage = data[0].offreCovoiturage
+                console.log('this.covoiturage', this.covoiturageLieus)
+            },
+            (error) => {
+                console.error('Error fetching covoiturage', error);
+            }
+        );
+    }
+
+    ngOnInit() {
+        this.loadCovoiturageLieu(this.covoiturageLieu.offreCovoiturage.idOffreCovoiturage)
     }
 }

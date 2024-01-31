@@ -48,7 +48,7 @@ export class AppService {
   }
 
   getFestivalsById(idFestival: string) {
-    return this.http.get<Festival[]>(`festival/${idFestival}`);
+    return this.http.get<Festival>(`festival/${idFestival}`);
   }
 
   payPanier(idPanier: number) {
@@ -125,4 +125,16 @@ export class AppService {
     return this.http.get<CovoiturageLieuList>(`festival/${nomManifestation}/covoituragelieu`,{ params: params })
   }
 
+  getCovoiturageLieuByIdOffreCovoiturage(idOffreCovoiturage: number) {
+    return this.http.get<CovoiturageLieu[]>(`covoiturageLieu/${idOffreCovoiturage}`);
+  }
+
+  getCovoiturageLieuById(idCovoiturageLieu: number) {
+    return this.http.get<CovoiturageLieu>(`covoiturageLieu/byid/${idCovoiturageLieu}`);
+  }
+
+  postOffrePanier(query: any) {
+    return this.http.post<any>('panier/add/', query, {
+    });
+  }
 }

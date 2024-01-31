@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, SimpleChanges} from '@angular/core';
 import {CovoiturageLieu} from "../../modele/covoiturageLieu.model";
 import {FormBuilder} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AppService} from "../../services/app.service";
+import {Covoiturage} from "../../modele/covoiturage.model";
+import {CovoiturageLieuList} from "../../modele/covoiturageLieuList.model";
 
 @Component({
   selector: 'app-reservation-covoiturage',
@@ -11,9 +13,11 @@ import {AppService} from "../../services/app.service";
 })
 export class ReservationCovoiturageComponent {
 
-  constructor(private route: ActivatedRoute, private appService: AppService ) {
+  constructor(private router: Router, private route: ActivatedRoute, private appService: AppService ) {
   }
-  idOffreCovoiturage=0;
+
+  idCovoiturageLieu=0;
+  nomManifestation = "";
   covoiturageLieu : CovoiturageLieu = {
     horaire: "",
     idCovoiturageLieu: 0,
@@ -46,34 +50,58 @@ export class ReservationCovoiturageComponent {
     },
     prix: 0
   };
-/*
-  loadCovoiturageLieu(idOffreCovoiturage:number) {
-    this.appService.ge(name).subscribe(
-        (data) => {
-          this.festivals = Array.isArray(data) ? data : [data];
-          this.nbResult = 1
 
-          this.queryByName = name;
+  offreCovoiturage= {
+  conducteur: {
+    idAdherent: 0,
+    mail: '',
+    nom: '',
+    prenom: '',
+    role: '',
+    telephone: ''
+  }};
+  nbPassenger = 0;
+  panier:any;
+  loadCovoiturageLieu(idOffreCovoiturage:number) {
+    this.appService.getCovoiturageLieuById(idOffreCovoiturage).subscribe(
+        (data) => {
+          this.covoiturageLieu = data;
+          console.log('this.covoiturage', this.covoiturageLieu)
         },
         (error) => {
-          console.error('Error fetching festivals', error);
+          console.error('Error fetching covoiturage', error);
         }
     );
   }
 
-
   ngOnInit() {
-
     this.route.queryParams.subscribe(params => {
-      this.idCovoiturageLieu = params['query'];
+      this.idCovoiturageLieu = params['query1'];
+      this.nomManifestation = params['query2'];
+      this.nbPassenger = params['query3'];
       if (this.idCovoiturageLieu) {
-
-        console.log("this.covoiturageLieu", this.covoiturageLieu.offreCovoiturage)
+        this.loadCovoiturageLieu(this.idCovoiturageLieu);
       } else {
 
       }
     });
   }
-   */
+
+  ajouterAuPanier(){
+    const query = {
+      idCovoiturageLieu: this.covoiturageLieu.idCovoiturageLieu,
+      quantite: this.nbPassenger
+    }
+    this.appService.postOffrePanier(query).subscribe(
+        (data) => {
+            this.panier= data;
+          this.router.navigate(['/reservationReussie']);
+          console.log('this.panier',this.panier)
+        },
+        (error) => {
+          console.error('Error posting panier', error);
+        }
+    )
+  }
 
 }

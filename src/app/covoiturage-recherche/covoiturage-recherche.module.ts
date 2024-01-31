@@ -13,6 +13,7 @@ import { RouterLink } from '@angular/router';
 import { CovoiturageRecherchePageComponent } from './covoiturage-recherche-page/covoiturage-recherche-page.component';
 import {MatIcon} from "@angular/material/icon";
 import {MatPaginator} from "@angular/material/paginator";
+import {OffreCovoiturageComponent} from "./offre-covoiturage/offre-covoiturage.component";
 
 
 
@@ -42,7 +43,8 @@ import {MatPaginator} from "@angular/material/paginator";
         MatButton,
         RouterLink,
         MatIcon,
-        MatPaginator
+        MatPaginator,
+        OffreCovoiturageComponent
     ]
 })
 export class CovoiturageRechercheModule { }
