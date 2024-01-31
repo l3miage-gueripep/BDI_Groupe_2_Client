@@ -3,12 +3,14 @@ import {CovoiturageLieu} from "../../modele/covoiturageLieu.model";
 import {MatButton} from "@angular/material/button";
 import {Router} from "@angular/router";
 import {AppService} from "../../services/app.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-offre-covoiturage',
   standalone: true,
   imports: [
-    MatButton
+    MatButton,
+    DatePipe
   ],
   templateUrl: './offre-covoiturage.component.html',
   styleUrl: './offre-covoiturage.component.scss'

@@ -1,6 +1,7 @@
 .carpool-search-driver-card {
   font-family: OPEN SANS SEMIBOLD, sans-serif;
   font-size: 14px;
+  border: #f1ce53ff dashed;
 }
 .carpool-search-driver-card-row {
   display: flex;
@@ -40,7 +41,11 @@
   height: 50px !important;
   width: 50px !important;
 }
-
+.offers-container-title {
+  font-family: OPEN SANS SEMIBOLD, sans-serif;
+  font-size: 11px;
+  color: #007f5fff;
+}
 
 @media screen and (max-width: 600px) {
   .responsive{

@@ -5,7 +5,6 @@ import { ReservationCovoiturageComponent } from './reservation-covoiturage/reser
 import {MatIconModule} from '@angular/material/icon';
 import { ReservationReussieComponent } from './reservation-reussie/reservation-reussie.component';
 import { AppRoutingModule } from '../app-routing.module';
-import {ReservationCardComponent} from "./reservation-card/reservation-card.component";
 
 
 @NgModule({
@@ -17,7 +16,6 @@ import {ReservationCardComponent} from "./reservation-card/reservation-card.comp
         CommonModule,
         MatIconModule,
         AppRoutingModule,
-        ReservationCardComponent
     ]
 })
 export class ReservationModule { }
