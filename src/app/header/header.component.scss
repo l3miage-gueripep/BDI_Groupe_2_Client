@@ -2,6 +2,11 @@
   font-family: OPEN SANS SEMIBOLD, sans-serif;
   font-size: 11px;
 }
+
+:host{
+  z-index: 99999;
+  position: sticky;
+}
 .spacer{
   flex: 1 1 auto;
 }

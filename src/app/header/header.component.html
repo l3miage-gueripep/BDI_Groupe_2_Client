@@ -7,7 +7,7 @@
             <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon>
           </a>
         </div>
-        <input type="text" placeholder="Rechercher ..." [(ngModel)]="searchQuery">
+        <input type="text" placeholder="Rechercher ..." [(ngModel)]="searchQuery" (keyup.enter)="navigateToRecherche()">
       </div>
       <span class="spacer"></span>
       <div class="icons">

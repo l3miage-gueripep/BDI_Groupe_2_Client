@@ -168,7 +168,7 @@ export class ResultSearchPageComponent {
       this.currentLoadMode = 'byFilter';
       this.currentPage = page;
       this.pageSize = pageSize;
-
+    this.isLoadingFestivals = true;
     this.appService.getFestivalsByFilter(query,page, pageSize ).subscribe(
         (data) => {
             this.festivalList = data;
@@ -179,6 +179,7 @@ export class ResultSearchPageComponent {
                 .map(key => this.filterQuery[key]);
 
             this.queryByName = filterQueryValues.join(', ');
+            this.isLoadingFestivals = false;
         },
         (error) => {
           console.error('Error fetching festivals', error);
