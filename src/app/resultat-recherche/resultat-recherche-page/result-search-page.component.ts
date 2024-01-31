@@ -137,7 +137,6 @@ export class ResultSearchPageComponent {
               this.festivalList = data;
               this.festivals = data.content;
               this.nbResult = data.totalElements
-              console.log('this.festivals',this.festivals)
             },
             (error) => {
               console.error('Error fetching festivals', error);
@@ -153,7 +152,6 @@ export class ResultSearchPageComponent {
             this.nbResult = 1
 
             this.queryByName = name;
-          console.log('this.festivals', this.festivals);
         },
         (error) => {
           console.error('Error fetching festivals', error);
@@ -177,10 +175,8 @@ export class ResultSearchPageComponent {
                 .map(key => this.filterQuery[key]);
 
             this.queryByName = filterQueryValues.join(', ');
-          console.log('this.festivals', this.festivals);
         },
         (error) => {
-          console.log('query',query)
           console.error('Error fetching festivals', error);
 
         }
@@ -191,7 +187,6 @@ export class ResultSearchPageComponent {
     const cityValue = this.cityControl.value;
     const domaineValue = this.domaineControl.value;
     const rangeValues = this.range.value;
-    console.log('rangeValues', rangeValues);
 
     const formatDate = (date: Date | null | undefined): string => {
       return date ? date.toISOString() : '';
@@ -206,12 +201,6 @@ export class ResultSearchPageComponent {
       cityDeparture: this.cityDepartureValue,
       nomDomaine: domaineValue || "",
     };
-
-
-    console.log('filterQuery', this.filterQuery);
-
-
-    console.log('Updated filterQuery:', this.filterQuery);
   }
 
 
@@ -261,7 +250,6 @@ export class ResultSearchPageComponent {
 
       this.route.queryParams.subscribe(params => {
           this.queryByName = params['query'];
-          console.log('this.query', this.queryByName);
           if (this.queryByName) {
               this.loadFestivalsById(this.queryByName);
           } else {

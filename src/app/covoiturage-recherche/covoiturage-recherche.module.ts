@@ -12,6 +12,7 @@ import { CovoiturageDriverCardComponent } from './covoiturage-driver-card/covoit
 import { RouterLink } from '@angular/router';
 import { CovoiturageRecherchePageComponent } from './covoiturage-recherche-page/covoiturage-recherche-page.component';
 import {MatIcon} from "@angular/material/icon";
+import {MatPaginator} from "@angular/material/paginator";
 
 
 
@@ -20,27 +21,28 @@ import {MatIcon} from "@angular/material/icon";
     CovoiturageDriverCardComponent,
     CovoiturageRecherchePageComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatCard,
-    MatCardContent,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    FormsModule,
-    ReactiveFormsModule,
-    JsonPipe,
-    MatButton,
-    MatCheckbox,
-    MatMenu,
-    MatButtonModule,
-    MatMenuModule,
-    MatButton,
-    RouterLink,
-    MatIcon
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatCard,
+        MatCardContent,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        FormsModule,
+        ReactiveFormsModule,
+        JsonPipe,
+        MatButton,
+        MatCheckbox,
+        MatMenu,
+        MatButtonModule,
+        MatMenuModule,
+        MatButton,
+        RouterLink,
+        MatIcon,
+        MatPaginator
+    ]
 })
 export class CovoiturageRechercheModule { }
