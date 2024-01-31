@@ -1,7 +1,7 @@
 import {Component, Input, SimpleChanges} from '@angular/core';
 import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {CovoiturageLieu} from "../../modele/covoiturageLieu.model";
 
 @Component({
@@ -52,8 +52,12 @@ export class CovoiturageDriverCardComponent {
     price: number=0;
     placeLibre: number=0;
 
-    constructor() {
+    constructor( private router: Router) {
         this.clearProperties();
+    }
+
+    navigateToReservation() {
+        this.router.navigate(['/reservation'], { queryParams: { query: this.covoiturageLieu.offreCovoiturage.idOffreCovoiturage } });
     }
 
     ngOnChanges(changes: SimpleChanges) {

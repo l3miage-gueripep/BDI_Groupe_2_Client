@@ -217,9 +217,6 @@ export class ResultSearchPageComponent {
             case 'all':
                 this.loadAllFestivals(pageIndex, pageSize);
                 break;
-            case 'byId':
-
-                break;
             case 'byFilter':
                 this.loadFestivalsByFilter(this.filterQuery, pageIndex, pageSize);
                 break;
