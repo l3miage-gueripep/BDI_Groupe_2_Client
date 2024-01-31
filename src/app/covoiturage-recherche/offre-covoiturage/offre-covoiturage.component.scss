@@ -1,0 +1,10 @@
+.offre-covoiturage {
+  display: flex; /* 使这个容器成为Flex容器 */
+  justify-content: space-between; /* 在子元素之间添加等间距 */
+  align-items: center; /* 垂直居中所有子元素 */
+}
+
+.offre-col {
+  flex: 1; /* 使所有子元素平均分配空间 */
+  padding: 0 10px; /* 添加一些内边距，使布局不那么紧凑 */
+}

@@ -1,24 +1,29 @@
 <div class="carpool-search-driver-card">
     <mat-card class="carpool-search-driver-card-info">
         <mat-card-content>
-            <div class="carpool-search-driver-card-row">
-                <div class="responsive">
-                    <div class="carpool-search-driver-card-col">
-                        <mat-icon aria-hidden="false" aria-label="person icon" fontIcon="person" class="person-icon"></mat-icon>
-                    </div>
-    
-                    <div class="carpool-search-driver-card-col">
-                        <p class="search-page-driver-name">{{nomConducteur}} {{prenomConducteur}}</p>
-                    </div>
+            <div class="carpool-search-driver-card-row responsive">
+                <div class="driver-info-container">
+                    <mat-icon aria-hidden="false" aria-label="person icon" class="person-icon">person</mat-icon>
+                    <p class="search-page-driver-name">{{nomConducteur}} {{prenomConducteur}}</p>
                 </div>
-                <div class="carpool-search-driver-card-col">
-                    <p>{{departureTime}} {{departureCity}}</p>
-                    <p>{{arrivalTime}}  {{arrivalCity}}</p>
+
+                <div class="offers-container">
+                    <p>destination : {{festival.nomManifestation}}</p>
+                    <div *ngFor="let offre of covoiturageLieus">
+                        <hr/>
+                        <app-offre-covoiturage
+                        [offreCovoiturage]="offre"
+                        [nomManifestation]="festival.nomManifestation"
+                        [nbPassenger]="nbPassenger"
+                        ></app-offre-covoiturage>
+
+                    </div>
                 </div>
             </div>
         </mat-card-content>
-    </mat-card>
 
+    </mat-card>
+<!--
     <mat-card class="carpool-search-driver-card-price">
         <mat-card-content>
                 <div class="carpool-search-driver-card-row">
@@ -35,4 +40,5 @@
             </div>
         </mat-card-content>
     </mat-card>
+    -->
 </div>

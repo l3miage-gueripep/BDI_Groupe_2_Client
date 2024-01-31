@@ -114,4 +114,13 @@ export class AppService {
   getCovoiturageLieuByIdOffreCovoiturage(idOffreCovoiturage: number) {
     return this.http.get<CovoiturageLieu[]>(`covoiturageLieu/${idOffreCovoiturage}`);
   }
+
+  getCovoiturageLieuById(idCovoiturageLieu: number) {
+    return this.http.get<CovoiturageLieu>(`covoiturageLieu/byid/${idCovoiturageLieu}`);
+  }
+
+  postOffrePanier(query: any) {
+    return this.http.post<any>('panier/add/', query, {
+    });
+  }
 }

@@ -4,6 +4,7 @@ import {MatButton} from "@angular/material/button";
 import {Router, RouterLink} from "@angular/router";
 import {CovoiturageLieu} from "../../modele/covoiturageLieu.model";
 import {Festival} from "../../modele/festival.model";
+import {AppService} from "../../services/app.service";
 
 @Component({
   selector: 'app-covoiturage-driver-card',
@@ -67,13 +68,11 @@ export class CovoiturageDriverCardComponent {
     placeLibre: number=0;
     @Input() nbPassenger!: number;
 
-    constructor( private router: Router) {
+    constructor( private router: Router, private appService: AppService) {
         this.clearProperties();
     }
 
-    navigateToReservation() {
-        this.router.navigate(['/reservation'], { queryParams: { query1: this.covoiturageLieu.offreCovoiturage.idOffreCovoiturage, query2: this.festival.nomManifestation , query3: this.nbPassenger} });
-    }
+
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes['covoiturageLieu']) {
@@ -105,5 +104,32 @@ export class CovoiturageDriverCardComponent {
         this.arrivalTime = '';
         this.price = 0;
         this.placeLibre = 0;
+    }
+    covoiturageLieus : CovoiturageLieu[] = [];
+    offreCovoiturage= {
+        conducteur: {
+            idAdherent: 0,
+            mail: '',
+            nom: '',
+            prenom: '',
+            role: '',
+            telephone: ''
+        }};
+
+    loadCovoiturageLieu(idOffreCovoiturage:number) {
+        this.appService.getCovoiturageLieuByIdOffreCovoiturage(idOffreCovoiturage).subscribe(
+            (data) => {
+                this.covoiturageLieus = Array.isArray(data) ? data : [data];
+                this.offreCovoiturage = data[0].offreCovoiturage
+                console.log('this.covoiturage', this.covoiturageLieus)
+            },
+            (error) => {
+                console.error('Error fetching covoiturage', error);
+            }
+        );
+    }
+
+    ngOnInit() {
+        this.loadCovoiturageLieu(this.covoiturageLieu.offreCovoiturage.idOffreCovoiturage)
     }
 }

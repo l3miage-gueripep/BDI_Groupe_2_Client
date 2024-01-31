@@ -78,6 +78,36 @@
     width: 100%;
   }
 
+  .carpool-search-driver-card-row.responsive {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .driver-info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  .offers-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+
+  .search-page-driver-name {
+    margin-left: 10px;
+  }
+
+  /* 响应式设计：在小屏幕上调整布局 */
+  @media (max-width: 600px) {
+    .driver-info-container {
+      flex-direction: column;
+    }
+  }
 
   
 }

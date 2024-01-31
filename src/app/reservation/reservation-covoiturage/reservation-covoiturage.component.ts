@@ -1,7 +1,7 @@
 import {Component, SimpleChanges} from '@angular/core';
 import {CovoiturageLieu} from "../../modele/covoiturageLieu.model";
 import {FormBuilder} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AppService} from "../../services/app.service";
 import {Covoiturage} from "../../modele/covoiturage.model";
 import {CovoiturageLieuList} from "../../modele/covoiturageLieuList.model";
@@ -13,9 +13,10 @@ import {CovoiturageLieuList} from "../../modele/covoiturageLieuList.model";
 })
 export class ReservationCovoiturageComponent {
 
-  constructor(private route: ActivatedRoute, private appService: AppService ) {
+  constructor(private router: Router, private route: ActivatedRoute, private appService: AppService ) {
   }
-  idOffreCovoiturage=0;
+
+  idCovoiturageLieu=0;
   nomManifestation = "";
   covoiturageLieu : CovoiturageLieu = {
     horaire: "",
@@ -50,7 +51,6 @@ export class ReservationCovoiturageComponent {
     prix: 0
   };
 
-  covoiturageLieus : CovoiturageLieu[] = [];
   offreCovoiturage= {
   conducteur: {
     idAdherent: 0,
@@ -61,12 +61,12 @@ export class ReservationCovoiturageComponent {
     telephone: ''
   }};
   nbPassenger = 0;
+  panier:any;
   loadCovoiturageLieu(idOffreCovoiturage:number) {
-    this.appService.getCovoiturageLieuByIdOffreCovoiturage(idOffreCovoiturage).subscribe(
+    this.appService.getCovoiturageLieuById(idOffreCovoiturage).subscribe(
         (data) => {
-          this.covoiturageLieus = Array.isArray(data) ? data : [data];
-          this.offreCovoiturage = data[0].offreCovoiturage
-          console.log('this.covoiturage', this.covoiturageLieus)
+          this.covoiturageLieu = data;
+          console.log('this.covoiturage', this.covoiturageLieu)
         },
         (error) => {
           console.error('Error fetching covoiturage', error);
@@ -74,25 +74,34 @@ export class ReservationCovoiturageComponent {
     );
   }
 
-
-  private updateProperties() {
-    if (this.covoiturageLieus) {
-      this.offreCovoiturage = this.covoiturageLieus[0].offreCovoiturage
-    }
-  }
-
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.idOffreCovoiturage = params['query1'];
+      this.idCovoiturageLieu = params['query1'];
       this.nomManifestation = params['query2'];
       this.nbPassenger = params['query3'];
-      if (this.idOffreCovoiturage) {
-        this.loadCovoiturageLieu(this.idOffreCovoiturage);
+      if (this.idCovoiturageLieu) {
+        this.loadCovoiturageLieu(this.idCovoiturageLieu);
       } else {
 
       }
     });
   }
 
+  ajouterAuPanier(){
+    const query = {
+      idCovoiturageLieu: this.covoiturageLieu.idCovoiturageLieu,
+      quantite: this.nbPassenger
+    }
+    this.appService.postOffrePanier(query).subscribe(
+        (data) => {
+            this.panier= data;
+          this.router.navigate(['/reservationReussie']);
+          console.log('this.panier',this.panier)
+        },
+        (error) => {
+          console.error('Error posting panier', error);
+        }
+    )
+  }
 
 }
