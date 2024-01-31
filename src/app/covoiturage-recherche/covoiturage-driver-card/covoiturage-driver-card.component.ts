@@ -65,13 +65,14 @@ export class CovoiturageDriverCardComponent {
     arrivalTime: string ="";
     price: number=0;
     placeLibre: number=0;
+    @Input() nbPassenger!: number;
 
     constructor( private router: Router) {
         this.clearProperties();
     }
 
     navigateToReservation() {
-        this.router.navigate(['/reservation'], { queryParams: { query: this.covoiturageLieu.offreCovoiturage.idOffreCovoiturage } });
+        this.router.navigate(['/reservation'], { queryParams: { query1: this.covoiturageLieu.offreCovoiturage.idOffreCovoiturage, query2: this.festival.nomManifestation , query3: this.nbPassenger} });
     }
 
     ngOnChanges(changes: SimpleChanges) {

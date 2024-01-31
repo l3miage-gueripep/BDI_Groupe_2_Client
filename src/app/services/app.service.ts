@@ -7,6 +7,7 @@ import { Adherent } from "../modele/adherent.model";
 import {Observable} from "rxjs";
 import {FestivalList} from "../modele/festivalList.model";
 import {CovoiturageLieuList} from "../modele/covoiturageLieuList.model";
+import {CovoiturageLieu} from "../modele/covoiturageLieu.model";
 
 @Injectable({
   providedIn: 'root'
@@ -110,4 +111,7 @@ export class AppService {
     return this.http.get<CovoiturageLieuList>(`festival/${nomManifestation}/covoituragelieu`,{ params: params })
   }
 
+  getCovoiturageLieuByIdOffreCovoiturage(idOffreCovoiturage: number) {
+    return this.http.get<CovoiturageLieu[]>(`covoiturageLieu/${idOffreCovoiturage}`);
+  }
 }

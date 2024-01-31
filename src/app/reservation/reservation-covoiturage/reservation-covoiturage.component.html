@@ -1,41 +1,33 @@
 <div class="reservation">
     <div class="trajetChoisi">
-        <h2>Trajet choisi</h2>
-        <br>
-        <div class="detailCovoiturage">
-            <p>10h00 Grenoble Gare</p><br>
-            <p id="lightText">3h12</p><br>
-            <p>13h12 Paris Gare de Lyon</p>
+        <div *ngFor="let covoiturageLieu of covoiturageLieus ">
+            <app-reservation-card
+            [covoiturageLieu] = covoiturageLieu
+            [nomManifestation] =nomManifestation
+            [nbPassenger] = nbPassenger
+            ></app-reservation-card>
+            <br/>
         </div>
-        <hr>
-        <div class="detailCovoiturage" id="flex">
-            <h2>Prix total pour 2 passagers </h2>
-            <span class="spacer"> </span>
-           <b> <p id="right"> 20,00 euros </p></b>
-        </div>
-        <div class="center">
-            <a routerLink="/reservationReussie">
-                <button class="reservation-button"> Ajouter au panier</button>
-            </a>
-            
-        </div>
+
     </div>
     <div class="contactezMoi">
         <h2 class="center">Contactez moi </h2>
         <div class="conducteur">
-            <p>Jérome</p>
+            <p>{{offreCovoiturage.conducteur.prenom}}</p>
             <span class="spacer"></span>
             <mat-icon aria-hidden="false" aria-label="person icon" fontIcon="person" class="person-icon"></mat-icon>
         </div>
         <div class="contactConducteur">
           <div class="flex">
             <mat-icon id="icon-chat" aria-hidden="false" aria-label="chat icon" fontIcon="chat" ></mat-icon>
-            <p class="nav-text">M'envoyer un message</p>
+                <p class="nav-text">M'envoyer un message</p>
           </div>
+            <p class="nav-text">{{offreCovoiturage.conducteur.mail}}</p>
           <div class="flex">
             <mat-icon id="icon-call"aria-hidden="false" aria-label="call icon" fontIcon="call" ></mat-icon>
-            <p>Me contacter par téléphone</p>
+              <p>Me contacter par téléphone</p>
           </div>
+            <p>{{offreCovoiturage.conducteur.telephone}}</p>
         </div>
     </div>
 </div>

@@ -1,11 +1,17 @@
 import {Component, Input, SimpleChanges} from '@angular/core';
 import {CovoiturageLieu} from "../../modele/covoiturageLieu.model";
 import {Router} from "@angular/router";
+import {MatCard, MatCardContent} from "@angular/material/card";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-reservation-card',
   standalone: true,
-  imports: [],
+  imports: [
+    MatCard,
+    MatCardContent,
+    DatePipe
+  ],
   templateUrl: './reservation-card.component.html',
   styleUrl: './reservation-card.component.scss'
 })
@@ -51,44 +57,19 @@ export class ReservationCardComponent {
   arrivalTime: string ="";
   price: number=0;
   placeLibre: number=0;
+  @Input() nomManifestation: string="";
+  @Input() nbPassenger!: number;
 
   constructor( private router: Router) {
-    this.clearProperties();
   }
 
   navigateToPanier() {
-    this.router.navigate(['/reservation'], { queryParams: { query:"" } });
+    this.router.navigate(['/panier'], { queryParams: { query:"" } });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['covoiturageLieu']) {
-      this.updateProperties();
-    }
-  }
 
-  private updateProperties() {
-    if (this.covoiturageLieu) {
-      this.nomConducteur = this.covoiturageLieu.offreCovoiturage.conducteur.nom;
-      this.prenomConducteur = this.covoiturageLieu.offreCovoiturage.conducteur.prenom;
-      this.departureCity = this.covoiturageLieu.lieuCovoiturage.nomLieu;
-      this.departureTime = this.covoiturageLieu.horaire;
-      this.arrivalTime = this.covoiturageLieu.horaire;
-      this.price = this.covoiturageLieu.prix;
-      this.placeLibre = this.covoiturageLieu.offreCovoiturage.nbPlaces;
-    } else {
-      this.clearProperties();
-    }
-  }
 
-  private clearProperties() {
-    this.nomConducteur = '';
-    this.prenomConducteur = '';
-    this.departureCity = '';
-    this.arrivalCity = '';
-    this.departureTime = '';
-    this.arrivalTime = '';
-    this.price = 0;
-    this.placeLibre = 0;
-  }
+
+
 
 }

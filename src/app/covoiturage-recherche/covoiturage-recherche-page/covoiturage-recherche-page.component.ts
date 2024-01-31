@@ -93,6 +93,7 @@ export class CovoiturageRecherchePageComponent {
             this.carpoolList=data;
             this.offerCarpools = data.content;
             this.nbResult = data.totalElements;
+          console.log('this.offerCarpools loadAllCarpools',this.offerCarpools)
         },
         (error) => {
           console.error('Error fetching offerCarpools', error);
@@ -139,6 +140,7 @@ export class CovoiturageRecherchePageComponent {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.queryByFestivalId = params['query'];
+      console.log('this.queryByFestivalId', this.queryByFestivalId);
       if (this.queryByFestivalId) {
         this.loadCarpoolsByFestivalId(this.queryByFestivalId, this.currentPage, this.pageSize);
       } else {

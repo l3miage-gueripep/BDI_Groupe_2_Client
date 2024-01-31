@@ -1,19 +1,19 @@
-.reservation{
+
+.trajetChoisi{
   margin-top: 2%;
   margin-bottom: 2%;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 2%;
+  margin-right: 2%;
   height: auto;
   width: auto;
   overflow: hidden;
   display: flex;
   font-family: OPEN SANS SEMIBOLD, sans-serif;
-}
-.trajetChoisi{
   background-color: #f5f5f5;
-  width: 80%;
+  width: 90%;
   margin-right: 1%;
-  padding: 1%;
+  padding: 3%;
+  border: #f1ce53ff dashed;
 }
 h2{
   font-size: 15px;
