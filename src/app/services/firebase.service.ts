@@ -37,11 +37,7 @@ export class FirebaseService {
     return await signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         this.authenticate(userCredential);
-        const user = userCredential.user;
-        if (user) {
-          console.log("User's name is", user.displayName);
-        }
-        //window.location.reload();
+        this.autoRedirect();
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -60,7 +56,7 @@ export class FirebaseService {
         // The signed-in user info.
         this.user = userCredential.user;
         this.authenticate(userCredential);
-
+        this.autoRedirect();
         // IdP data available using getAdditionalUserInfo(result)
         // ...
       }).catch((error) => {
@@ -135,11 +131,13 @@ export class FirebaseService {
     let redirectTo: string;
     if (this.user) {
       const returnUrl = this.route.snapshot.queryParams['returnUrl'];
+      console.log(returnUrl);
       redirectTo = returnUrl ? returnUrl : '';
     }
     else {
       redirectTo = '';
     }
+    console.log(redirectTo);
     this.router.navigate([redirectTo]);
   }
 

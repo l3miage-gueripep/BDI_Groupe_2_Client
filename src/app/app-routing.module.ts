@@ -23,7 +23,7 @@ const routes: Routes = [
   { path:'recherche/covoiturage', component: CovoiturageRecherchePageComponent},
   { path: 'login', component: LoginComponent },
   { path: 'panier', component: PanierPageComponent, canActivate: [canActivateUser]},
-  { path: 'reservation', component: ReservationCovoiturageComponent },
+  { path: 'reservation', component: ReservationCovoiturageComponent, canActivate: [canActivateUser]},
   { path: 'reservationReussie', component: ReservationReussieComponent },
   { path: 'panier/accepted-payment', component: AcceptedPaymentComponent }
 ];
