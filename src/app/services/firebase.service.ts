@@ -4,6 +4,7 @@ import { environment } from '../../environment';
 import { User, signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth, Auth, UserCredential, GoogleAuthProvider, signInWithPopup, updateProfile } from 'firebase/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar'; 
 
 
 @Injectable({
@@ -17,7 +18,7 @@ export class FirebaseService {
   prenomSource = new BehaviorSubject<string>('');
   currentPrenom = this.prenomSource.asObservable();
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private _snackBar: MatSnackBar) {
     this.app = initializeApp(environment.firebaseConfig);
     this.auth = getAuth();
     this.auth.useDeviceLanguage();
@@ -91,7 +92,7 @@ export class FirebaseService {
           console.warn("Error updating profile", error);
         }
       }
-
+      this.autoRedirect();
       return "success";
     } catch (error: any) {
       const errorCode = error.code;
@@ -118,9 +119,8 @@ export class FirebaseService {
     this.auth.signOut().then(() => {
       this.user = undefined;
       localStorage.removeItem('userAuth');
-      window.location.reload();
-      console.log('logout');
       localStorage.removeItem('prenom');
+      this.autoRedirect();
     });
   }
 
@@ -130,11 +130,13 @@ export class FirebaseService {
       const returnUrl = this.route.snapshot.queryParams['returnUrl'];
       console.log(returnUrl);
       redirectTo = returnUrl ? returnUrl : '';
+      this._snackBar.open("Vous êtes désormais connecté", "OK", {duration: 2000, panelClass: ['snackbar-error']});
     }
     else {
+      this._snackBar.open("Vous êtes désormais déconnecté", "OK", {duration: 2000, panelClass: ['snackbar-error']});
       redirectTo = '';
     }
-    console.log(redirectTo);
+    //utilisation de la snackbar pour afficher un message)
     this.router.navigateByUrl(redirectTo);
   }
 
