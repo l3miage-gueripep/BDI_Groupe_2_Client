@@ -7,6 +7,8 @@ import { Adherent } from "../modele/adherent.model";
 import {Observable} from "rxjs";
 import {FestivalList} from "../modele/festivalList.model";
 import {CovoiturageLieuList} from "../modele/covoiturageLieuList.model";
+import { CovoiturageLieu } from '../modele/covoiturageLieu.model';
+import { Panier } from '../modele/panier.model';
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +65,7 @@ export class AppService {
   }
 
   getPanierByUserMail(mail: string) {
-    return this.http.get<Festival[]>(`panier/${mail}`);
+    return this.http.get<Panier>(`panier/${mail}`);
   }
 
   getCarpools() {

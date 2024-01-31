@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,6 +18,9 @@ import { CovoiturageRechercheModule } from './covoiturage-recherche/covoiturage-
 import { ReservationModule } from './reservation/reservation.module';
 import { ResultatRechercheModule } from "./resultat-recherche/resultat-recherche.module";
 import { MatMenuModule } from '@angular/material/menu';
+import { PanierModule } from './panier/panier.module';
+
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -37,6 +43,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule,
     ResultatRechercheModule,
     FormsModule,
+    PanierModule
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of
@@ -71,7 +78,7 @@ import { MatMenuModule } from '@angular/material/menu';
      * See: https://github.com/ngrx/platform/blob/master/docs/effects/api.md#forroot
      */
   ],
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
