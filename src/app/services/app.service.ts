@@ -6,6 +6,7 @@ import {Covoiturage} from "../modele/covoiturage.model";
 import { Adherent } from "../modele/adherent.model";
 import {Observable} from "rxjs";
 import {FestivalList} from "../modele/festivalList.model";
+import {CovoiturageLieuList} from "../modele/covoiturageLieuList.model";
 
 @Injectable({
   providedIn: 'root'
@@ -66,10 +67,19 @@ export class AppService {
   }
 
   getCarpools() {
-    return this.http.get<Covoiturage[]>('covoiturage/');
+    return this.http.get<CovoiturageLieuList>('covoiturage/');
   }
-  getCarpoolByIdFestival(idFestival: string){
-    return this.http.get<Covoiturage[]>(`covoiturage/festival/${idFestival}`);
+  getCarpoolByIdFestival(idFestival: string, page?: number, size?: number){
+    let params = new HttpParams();
+
+    if (page != null) {
+      params = params.set('page', page.toString());
+    }
+    if (size != null) {
+      params = params.set('size', size.toString());
+    }
+    return this.http.get<CovoiturageLieuList>(`covoiturage/festival/${idFestival}`,{params: params
+    });
   }
   getCarpoolByIdOffre(idOffre: number){
     return this.http.get<Covoiturage[]>(`covoiturage/${idOffre}`);
@@ -79,4 +89,9 @@ export class AppService {
     return this.http.post<Adherent>('adherent/', query, {
     });
   }
+
+  getAllCovoiturageLieu(){
+    return this.http.get<any>(`covoiturageLieu/`);
+  }
+
 }

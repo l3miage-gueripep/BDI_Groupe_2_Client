@@ -70,13 +70,7 @@
 </mat-card>
     <div *ngFor="let offerCarpool of offerCarpools">
 <app-covoiturage-driver-card
-        driverName="Jérome"
-        departureTime="8: 00"
-        departureCity="Grenoble"
-        arrivalCity="Musilac"
-        arrivalTime="13: 12"
-        [placeLibre]= "offerCarpool.nbPlaces"
-        [price]="offerCarpool.prixCovoiturage"
+        [covoiturageLieu]="offerCarpool"
 >
 </app-covoiturage-driver-card>
     </div>
