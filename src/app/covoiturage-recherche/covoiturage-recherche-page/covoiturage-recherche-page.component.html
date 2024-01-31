@@ -43,10 +43,18 @@
 
 
             <div class="carpool-search-passenger-button">
+
+                <button mat-icon-button (click)="decreasePassenger()">
+                    <span class="material-icons">remove</span>
+                </button>
                 <span class="material-icons">person</span>
                 {{nbPassenger}}
-                <button mat-flat-button><span class="material-icons">add</span></button>
+                <button mat-icon-button (click)="increasePassenger()">
+                    <span class="material-icons">add</span>
+                </button>
             </div>
+
+
 
             <button mat-flat-button color="primary" class="carpool-search-button">Rechercher</button>
         </div>

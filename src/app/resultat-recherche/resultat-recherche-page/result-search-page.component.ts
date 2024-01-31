@@ -249,6 +249,14 @@ export class ResultSearchPageComponent {
               this.updateFilterQuery();
           });
 
+      this.range.valueChanges
+          ?.pipe(
+              debounceTime(300),
+              distinctUntilChanged()
+          )
+          ?.subscribe(() => {
+              this.updateFilterQuery();
+          });
 
       this.route.queryParams.subscribe(params => {
           this.queryByName = params['query'];

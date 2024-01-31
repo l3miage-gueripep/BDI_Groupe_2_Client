@@ -84,6 +84,16 @@ export class CovoiturageRecherchePageComponent {
     }
 };
 
+    increasePassenger() {
+        this.nbPassenger++;
+    }
+
+    decreasePassenger() {
+        if (this.nbPassenger > 1) {
+            this.nbPassenger--;
+        }
+    }
+
   loadAllCarpools(page: number, pageSize: number) {
       this.currentLoadMode = 'all';
       this.currentPage = page;
