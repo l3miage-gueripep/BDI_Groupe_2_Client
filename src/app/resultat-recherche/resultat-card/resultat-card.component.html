@@ -5,8 +5,8 @@
                 <p class="search-page-festival-name">{{ festivalName }}</p>
                 <p>{{ nomDomaine }}</p>
                 <p class="long">{{ siteWeb }}</p>
-                <p>du {{startDate}}</p>
-                <p>au {{endDate}}</p>
+                <p>du {{startDate | date:'dd/MM/yyyy'}}</p>
+                <p>au {{endDate | date:'dd/MM/yyyy'}}</p>
                 <p>{{lieuPrincipal}}, {{codePostal}}</p>
             </div>
 
