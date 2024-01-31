@@ -61,6 +61,10 @@ export class AppService {
     });
   }
 
+  getPanierByUserMail(mail: string) {
+    return this.http.get<Festival[]>(`panier/${mail}`);
+  }
+
   getCarpools() {
     return this.http.get<Covoiturage[]>('covoiturage/');
   }

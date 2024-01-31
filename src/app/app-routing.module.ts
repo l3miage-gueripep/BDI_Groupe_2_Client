@@ -21,7 +21,7 @@ const routes: Routes = [
   { path:'recherche', component: ResultSearchPageComponent },
   { path:'recherche/covoiturage', component: CovoiturageRecherchePageComponent},
   { path: 'login', component: LoginComponent },
-  { path: 'panier', component: PanierPageComponent},
+  { path: 'panier', component: PanierPageComponent, canActivate: [canActivateUser]},
   { path: 'reservation', component: ReservationCovoiturageComponent },
   { path: 'reservationReussie', component: ReservationReussieComponent }
 ];
