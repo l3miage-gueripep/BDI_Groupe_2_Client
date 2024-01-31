@@ -3,6 +3,7 @@ import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
 import {Router, RouterLink} from "@angular/router";
 import {CovoiturageLieu} from "../../modele/covoiturageLieu.model";
+import {Festival} from "../../modele/festival.model";
 
 @Component({
   selector: 'app-covoiturage-driver-card',
@@ -43,6 +44,19 @@ export class CovoiturageDriverCardComponent {
         prix: 0
     };
 
+    @Input() festival : Festival = {
+        codePostal: '',
+        dateDebut: '',
+        dateFin: '',
+        lieuPrincipal: '',
+        nomManifestation: '',
+        siteWeb: '',
+        tarifPass: 0,
+        sousDomaine: {
+            nomDomaine: '',
+            nomSousDomaine: ''
+        }
+    };
     nomConducteur: string ="";
     prenomConducteur: string ="";
     departureCity: string ="";
@@ -71,7 +85,7 @@ export class CovoiturageDriverCardComponent {
             this.nomConducteur = this.covoiturageLieu.offreCovoiturage.conducteur.nom;
             this.prenomConducteur = this.covoiturageLieu.offreCovoiturage.conducteur.prenom;
             this.departureCity = this.covoiturageLieu.lieuCovoiturage.nomLieu;
-            this.arrivalCity = this.covoiturageLieu.offreCovoiturage.festival.nomManifestation;
+            this.arrivalCity = this.festival.nomManifestation;
             this.departureTime = this.covoiturageLieu.horaire;
             this.arrivalTime = this.covoiturageLieu.horaire;
             this.price = this.covoiturageLieu.prix;

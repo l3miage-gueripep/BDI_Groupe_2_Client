@@ -45,7 +45,7 @@ export class AppService {
   }
 
   getFestivalsById(idFestival: string) {
-    return this.http.get<Festival[]>(`festival/${idFestival}`);
+    return this.http.get<Festival>(`festival/${idFestival}`);
   }
 
   getFestivalsByFilter(query: FilterQuery, page?: number, size?: number) {

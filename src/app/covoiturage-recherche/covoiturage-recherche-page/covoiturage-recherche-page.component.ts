@@ -9,6 +9,7 @@ import {CovoiturageLieuList} from "../../modele/covoiturageLieuList.model";
 import {MatPaginatorIntl} from "@angular/material/paginator";
 import {Subject} from "rxjs";
 import {$localize} from "@angular/localize/init";
+import {Festival} from "../../modele/festival.model";
 
 @Injectable()
 export class MyCustomPaginatorIntl implements MatPaginatorIntl {
@@ -69,6 +70,19 @@ export class CovoiturageRecherchePageComponent {
       totalPages: 0
   };
   offerCarpools : CovoiturageLieu[] = [];
+  festival: Festival = {
+    codePostal: '',
+    dateDebut: '',
+    dateFin: '',
+    lieuPrincipal: '',
+    nomManifestation: '',
+    siteWeb: '',
+    tarifPass: 0,
+    sousDomaine: {
+        nomDomaine: '',
+        nomSousDomaine: ''
+    }
+};
 
   loadAllCarpools(page: number, pageSize: number) {
       this.currentLoadMode = 'all';
@@ -100,6 +114,12 @@ export class CovoiturageRecherchePageComponent {
           console.error('Error fetching festivals', error);
         }
     );
+
+      this.appService.getFestivalsById(festivalName).subscribe(
+          (data) => {
+              this.festival = data;
+          }
+      )
   }
 
     onPageChange(event: any) {
