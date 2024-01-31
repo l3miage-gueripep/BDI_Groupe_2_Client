@@ -4,6 +4,8 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import {ActivatedRoute} from "@angular/router";
 import {AppService} from "../../services/app.service";
 import {Covoiturage} from "../../modele/covoiturage.model";
+import {CovoiturageLieu} from "../../modele/covoiturageLieu.model";
+import {CovoiturageLieuList} from "../../modele/covoiturageLieuList.model";
 
 @Component({
   selector: 'app-covoiturage-recherche-page',
@@ -27,13 +29,27 @@ export class CovoiturageRecherchePageComponent {
   isFilterMenuOpen = false;
   filterSelected = 'Départ le plus tôt';
   queryByFestivalId='';
-  offerCarpools : Covoiturage[] = [];
+  carpoolList : CovoiturageLieuList = {
+      content: [],
+      empty: false,
+      first: false,
+      last: false,
+      number: 0,
+      numberOfElements: 0,
+      pageable: {offset: 0, pageNumber: 0, pageSize: 0, paged: false, sort: {}, unpaged: false},
+      size: 0,
+      sort: {},
+      totalElements: 0,
+      totalPages: 0
+  };
+  offerCarpools : CovoiturageLieu[] = [];
 
   loadAllCarpools() {
-    this.appService.getCarpools().subscribe(
+    this.appService.getAllCovoiturageLieu().subscribe(
         (data) => {
-          this.offerCarpools = data;
-          console.log('this.offerCarpools',this.offerCarpools)
+            this.carpoolList=data;
+            this.offerCarpools = data.content;
+          console.log('this.offerCarpools loadAllCarpools',this.offerCarpools)
         },
         (error) => {
           console.error('Error fetching offerCarpools', error);
@@ -44,8 +60,9 @@ export class CovoiturageRecherchePageComponent {
   loadCarpoolsByFestivalId(festivalName: string) {
     this.appService.getCarpoolByIdFestival(festivalName).subscribe(
         (data) => {
-          this.offerCarpools = Array.isArray(data) ? data : [data];
-          console.log('this.offerCarpools', this.offerCarpools);
+            this.carpoolList = data;
+          this.offerCarpools = data.content;
+          console.log('this.offerCarpools loadCarpoolsByFestivalId', this.offerCarpools);
         },
         (error) => {
           console.error('Error fetching festivals', error);
