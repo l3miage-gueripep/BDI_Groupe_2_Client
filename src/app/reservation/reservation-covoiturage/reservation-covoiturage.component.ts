@@ -5,6 +5,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AppService} from "../../services/app.service";
 import {Covoiturage} from "../../modele/covoiturage.model";
 import {CovoiturageLieuList} from "../../modele/covoiturageLieuList.model";
+import {AuthGuard} from "../../services/permissions.service";
+import {getAuth} from "firebase/auth";
+import {FirebaseService} from "../../services/firebase.service";
 
 @Component({
   selector: 'app-reservation-covoiturage',
@@ -13,9 +16,9 @@ import {CovoiturageLieuList} from "../../modele/covoiturageLieuList.model";
 })
 export class ReservationCovoiturageComponent {
 
-  constructor(private router: Router, private route: ActivatedRoute, private appService: AppService ) {
+  constructor(private firebaseService: FirebaseService,private router: Router, private route: ActivatedRoute, private appService: AppService, private authGuard: AuthGuard ) {
   }
-
+  user: any;
   idCovoiturageLieu=0;
   nomManifestation = "";
   covoiturageLieu : CovoiturageLieu = {
@@ -75,6 +78,7 @@ export class ReservationCovoiturageComponent {
   }
 
   ngOnInit() {
+    this.user = getAuth();
     this.route.queryParams.subscribe(params => {
       this.idCovoiturageLieu = params['query1'];
       this.nomManifestation = params['query2'];
@@ -88,10 +92,14 @@ export class ReservationCovoiturageComponent {
   }
 
   ajouterAuPanier(){
+    let userMail = this.firebaseService.user?.email;
     const query = {
       idCovoiturageLieu: this.covoiturageLieu.idCovoiturageLieu,
-      quantite: this.nbPassenger
+      quantite: this.nbPassenger,
+      userMail: userMail
     }
+    console.log("this.user", this.user)
+    console.log("query",query)
     this.appService.postOffrePanier(query).subscribe(
         (data) => {
             this.panier= data;
