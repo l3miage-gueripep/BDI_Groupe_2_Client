@@ -16,6 +16,8 @@ import {MatAutocomplete, MatAutocompleteTrigger} from "@angular/material/autocom
 import {MatIconModule} from '@angular/material/icon';
 import {MatInput, MatInputModule} from '@angular/material/input';
 import {MatPaginator} from "@angular/material/paginator";
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import {MatPaginator} from "@angular/material/paginator";
         MatAutocomplete,
         MatOption,
         MatAutocompleteTrigger,
-        MatPaginator
+        MatPaginator,
+        MatProgressBarModule
     ],
   providers: [provideNativeDateAdapter()],
 })

@@ -99,6 +99,7 @@
                    (page)="onPageChange($event)">
     </mat-paginator>
     </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="this.isLoadingFestivals"></mat-progress-bar>
     <div *ngFor="let festival of festivals">
         <app-resultat-card
                 [festivalName]="festival.nomManifestation"
@@ -112,7 +113,7 @@
         ></app-resultat-card>
         <br/>
     </div>
-    <div *ngIf="currentLoadMode !== 'byId'">
+    <div *ngIf="currentLoadMode !== 'byId' && !this.isLoadingFestivals">
         <mat-paginator [length]="festivalList.totalElements"
                        [pageSize]="pageSize"
                        [pageSizeOptions]="[5, 10, 20]"

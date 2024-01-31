@@ -81,6 +81,8 @@ export class ResultSearchPageComponent {
 
     pageSize = 10;
     currentPage = 0;
+
+    protected isLoadingFestivals: boolean = true;
   constructor(private _formBuilder: FormBuilder, private route: ActivatedRoute, private appService: AppService ) {
   }
 
@@ -137,9 +139,11 @@ export class ResultSearchPageComponent {
               this.festivalList = data;
               this.festivals = data.content;
               this.nbResult = data.totalElements
+              this.isLoadingFestivals = false;
             },
             (error) => {
               console.error('Error fetching festivals', error);
+              this.isLoadingFestivals = false;
             }
         );
   }
