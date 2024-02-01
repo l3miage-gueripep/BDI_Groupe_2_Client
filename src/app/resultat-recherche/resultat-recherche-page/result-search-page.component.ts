@@ -51,10 +51,8 @@ export class ResultSearchPageComponent {
     dateDebut: "",
     dateFin: "",
     lieuPrincipal:"",
-    cityDeparture:"",
-    nomDomaine:"",
+    sousDomaine:"",
   };
-  cityDepartureValue = '';
   protected nomManifestation: string = '';
 
   festivalList : FestivalList = {
@@ -207,14 +205,12 @@ export class ResultSearchPageComponent {
       lieuPrincipal: cityValue || "",
       dateDebut: formatDate(rangeValues.start),
       dateFin: formatDate(rangeValues.end),
-      cityDeparture: this.cityDepartureValue,
-      nomDomaine: domaineValue || "",
+      sousDomaine: domaineValue || "",
     };
   }
 
 
   clearCityDeparture() {
-    this.cityDepartureValue = '';
     this.updateFilterQuery();
   }
 

@@ -4,6 +4,5 @@ export interface FestivalFilterQuery {
     nomManifestation: string;
     dateDebut: string;
     dateFin: string;
-    cityDeparture: string;
-    nomDomaine: string;
+    sousDomaine: string;
 }

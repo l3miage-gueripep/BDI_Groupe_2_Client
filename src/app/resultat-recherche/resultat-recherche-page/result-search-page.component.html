@@ -82,13 +82,6 @@
                     <mat-label>Nom manifestation</mat-label>
                     <input matInput placeholder="Ex. Cabaret Frappé" [(ngModel)]="this.nomManifestation" (ngModelChange)="updateFilterQuery()">
                   </mat-form-field>
-            <mat-form-field class="example-form-field">
-                <mat-label>Ville départ</mat-label>
-                <input matInput type="text" [(ngModel)]="cityDepartureValue" (ngModelChange)="updateFilterQuery()">
-                <button *ngIf="cityDepartureValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearCityDeparture()">
-                    <mat-icon>close</mat-icon>
-                </button>
-            </mat-form-field>
 
             <button mat-flat-button color="primary" class="result-search-button" (click)="loadFestivalsByFilter(this.filterQuery, currentPage, pageSize)">Rechercher</button>
 
