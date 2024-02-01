@@ -1,12 +1,12 @@
 <div class="offre-covoiturage">
     <div class="offre-col">
-    <div class="offre-covoiturage-title">Lieu départ</div>  {{offreCovoiturage.lieuCovoiturage.nomLieu}}
-        <div class="offre-covoiturage-title">Temp départ </div>{{ offreCovoiturage.horaire | date: 'dd/MM/yyyy HH:mm':'+0100' }}
+    <div class="offre-covoiturage-title">Lieu de départ</div>  {{offreCovoiturage.lieuCovoiturage.nomLieu}}
+        <div class="offre-covoiturage-title">Jour de départ </div>{{ offreCovoiturage.horaire | date: 'dd/MM/yyyy HH:mm':'+0100' }}
 
     </div>
     <div class="offre-col">
-        <p>{{offreCovoiturage.offreCovoiturage.nbPlaces}} place(s) reste(s)</p>
-        <p> à partir du {{offreCovoiturage.prix}} euros</p>
+        <p>{{offreCovoiturage.offreCovoiturage.nbPlaces}} place(s) restante(s)</p>
+        <p> à partir de {{offreCovoiturage.prix}}€</p>
     </div>
     <div class="offre-col">
         <a (click)="handleClic()">
