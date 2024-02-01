@@ -24,7 +24,7 @@
         <div class="detailCovoiturage" id="flex">
             <h2>Prix total pour {{nbPassenger}} passagers </h2>
             <span class="spacer"> </span>
-            <b> <p id="right"> {{ covoiturageLieu.prix * nbPassenger }} euros </p></b>
+            <b> <p id="right"> {{ covoiturageLieu.prix * nbPassenger }}€</p></b>
         </div>
 
         <div class="center">
@@ -41,16 +41,10 @@
         <div class="contactConducteur">
             <div class="flex">
                 <mat-icon id="icon-chat" aria-hidden="false" aria-label="chat icon" fontIcon="chat" ></mat-icon>
-                <p class="nav-text">M'envoyer un message</p>
-            </div>
-            <div class="flex">
-                <p>{{covoiturageLieu.offreCovoiturage.conducteur.mail}}</p>
+                <p class="nav-text">{{covoiturageLieu.offreCovoiturage.conducteur.mail}}</p>
             </div>
             <div class="flex">
                 <mat-icon id="icon-call"aria-hidden="false" aria-label="call icon" fontIcon="call" ></mat-icon>
-                <p>Me contacter par téléphone</p>
-            </div>
-            <div class="flex">
                 <p>{{covoiturageLieu.offreCovoiturage.conducteur.telephone}}</p>
             </div>
         </div>

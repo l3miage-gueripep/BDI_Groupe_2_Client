@@ -16,6 +16,7 @@
 }
 h2{
   font-size: 15px;
+  color: #343a40;
 }
 .ticket{
   display: flex;
@@ -109,7 +110,11 @@ button:active {
   .montant{
     padding-right: 3%;
   }
-
+  .prixCovoiturage{
+    padding-top: 30%;
+    padding-left: 10%;
+    font-weight: bold;
+  }
   .selectionTicket{
     padding-top: 20%;
 
@@ -124,9 +129,7 @@ button:active {
   .panier-valide-boutton{
     margin-top: 2%;
   }
-  .h1{
-    font-size: 15px;
-  }
+  
   .quantite{
     color: #007f5fff;
     width: 100%;
@@ -136,5 +139,12 @@ button:active {
   }
   .prixFestival{
     padding-top: 15%;
+    font-weight: bold;
+    padding-left: 10%;
+  }
+  .date{
+    width: 100%;
+    font-weight: lighter;
+    color: grey;
   }
 }

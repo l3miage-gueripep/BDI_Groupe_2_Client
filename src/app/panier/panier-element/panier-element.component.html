@@ -1,13 +1,14 @@
 <div class="ticket">
     <div class="detailTicket">
-        <h2>Covoiturages</h2>
+        <h2>COVOITURAGE</h2>
         <p>
             <b>Départ</b> : {{panierOffre.covoiturageLieu.lieuCovoiturage.nomLieu}} {{
                 panierOffre.covoiturageLieu.horaire | date:'shortTime':'GMT+1' }}
         </p>
-        <h2>Pass Festival</h2>
+        <h2>PASS FESTIVAL</h2>
         <p>
-            <b>Titre Festival</b> : {{panierOffre.festival.nomManifestation}} (du
+            <b>Titre Festival</b> : {{panierOffre.festival.nomManifestation}} </p>
+            <p class="date">(du
             {{panierOffre.festival.dateDebut | date:'dd/MM/yyyy'}} au {{panierOffre.festival.dateFin |
             date:'dd/MM/yyyy'}})
         </p>
@@ -15,10 +16,10 @@
     <div class="prix">
         <br>
         <div class="prixCovoiturage">
-            <p>{{panierOffre.covoiturageLieu.prix * panierOffre.quantite}} euros</p>
+            <p>{{panierOffre.covoiturageLieu.prix * panierOffre.quantite}}€</p>
         </div><br>
         <div class="prixFestival">
-            <p>{{panierOffre.festival.tarifPass * panierOffre.quantite}} euros</p>
+            <p>{{panierOffre.festival.tarifPass * panierOffre.quantite}}€</p>
         </div>
     </div>
     <span class="spacer"></span>
@@ -26,14 +27,13 @@
         <button mat-fab color="warn" aria-label="Example icon button with a delete icon" (click)="removePanierOffre(panierOffre)">
             <mat-icon>delete</mat-icon>
         </button>
-        <!-- <input type="checkbox" id="cb1" name="Ticket" class="custom-checkbox" /> -->
     </div>
 </div>
 <hr>
 <div class="prixTotal">
     <div class="panier-element-row">
             <div class="panier-element-col">
-                <h1> Places pris </h1>
+                <h1> Places prises </h1>
             </div>
             <div class="panier-element-col"></div>
             <div class="panier-element-col">
@@ -53,7 +53,7 @@
             </div>
             <div class="panier-element-col"></div>
             <div class="panier-element-col">
-                <p>{{getPrixTotal(panierOffre)}} euros</p>
+                <p>{{getPrixTotal(panierOffre)}}€</p>
             </div>
     </div>
 </div>

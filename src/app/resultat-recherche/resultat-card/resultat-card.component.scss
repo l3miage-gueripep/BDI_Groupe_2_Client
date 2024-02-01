@@ -34,15 +34,26 @@
     color: #007f5fff;
 }
 .imageDomaine {
-    width: 200px; // Remplacez par la largeur souhaitée
-    height: 200px; // Remplacez par la hauteur souhaitée
+    width: 200px; 
+    height: 200px; 
     object-fit: cover;
     margin: 1%;
   }
 @media (max-width: 900px) {
     .search-page-result-card-row{
-     
+     display: inline;
+     text-align: center;
     }
+    .imageDomaine {
+        width: 150px; 
+        height: 150px; 
+        
+      }
+      .imageContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     .long {
         word-break: break-all;
     }

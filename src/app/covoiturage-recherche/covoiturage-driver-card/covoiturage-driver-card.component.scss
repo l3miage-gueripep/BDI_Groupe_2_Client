@@ -94,6 +94,7 @@
     flex-direction: row;
     align-items: center;
     flex-grow: 1;
+    
   }
 
   .offers-container {
@@ -107,7 +108,6 @@
     margin-left: 10px;
   }
 
-  /* 响应式设计：在小屏幕上调整布局 */
   @media (max-width: 600px) {
     .driver-info-container {
       flex-direction: column;
