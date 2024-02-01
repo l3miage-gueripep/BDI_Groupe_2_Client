@@ -133,6 +133,7 @@ export class ResultSearchPageComponent {
         this.currentLoadMode = 'all';
         this.currentPage = page;
         this.pageSize = pageSize;
+        this.isLoadingFestivals = true;
 
         this.appService.getFestivals(page, pageSize).subscribe(
             (data) => {
@@ -196,7 +197,6 @@ export class ResultSearchPageComponent {
         const formatDate = (date: Date | null | undefined): string => {
             return date ? date.toISOString() : '';
         };
-
 
 
         this.filterQuery = {
