@@ -265,7 +265,15 @@ export class ResultSearchPageComponent {
       this.route.queryParams.subscribe(params => {
           this.queryByName = params['query'];
           if (this.queryByName) {
-              this.loadFestivalsById(this.queryByName);
+              const query = {
+                  nomManifestation: this.queryByName ,
+                  lieuPrincipal: "",
+                  dateDebut: "",
+                  dateFin:"",
+                  cityDeparture: "",
+                  nomDomaine: "",
+              }
+              this.loadFestivalsByFilter(query, this.currentPage, this.pageSize);
           } else {
               this.loadAllFestivals(this.currentPage, this.pageSize);
           }
