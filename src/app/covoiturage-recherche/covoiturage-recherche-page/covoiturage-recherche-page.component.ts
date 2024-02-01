@@ -47,7 +47,7 @@ export class CovoiturageRecherchePageComponent {
   nbResult = 0;
   departureFormControl = new FormControl('', [Validators.required]);
   arrivalFormControl = new FormControl('', [Validators.required]);
-  nbPassenger = 2;
+  nbPassenger = 1;
 
   range = new FormGroup({
     start: new FormControl<Date | null>(null),

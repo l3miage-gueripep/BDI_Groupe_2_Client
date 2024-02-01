@@ -59,9 +59,8 @@ export class PanierPageComponent {
     });
   }
 
-  protected removePanierOffre(panierOffreToRemove: PanierOffre) {
-    this.appService.removePanierOffre(panierOffreToRemove.idPanierOffre);
-    //remove de la liste en local
-    this.panierOffres = this.panierOffres.filter(panierOffre => panierOffre.idPanierOffre != panierOffreToRemove.idPanierOffre);
+  protected reloadPanierOffre(idPanierOffre: number) {
+    this.panierOffres = this.panierOffres.filter(panierOffre => panierOffre.idPanierOffre != idPanierOffre);
   }
+
 }

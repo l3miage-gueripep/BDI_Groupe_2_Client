@@ -8,6 +8,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatIconModule} from '@angular/material/icon';
 import { AcceptedPaymentComponent } from './accepted-payment/accepted-payment.component';
 import { RouterModule } from '@angular/router';
+import {PanierElementComponent} from "./panier-element/panier-element.component";
 
 
 @NgModule({
@@ -16,13 +17,14 @@ import { RouterModule } from '@angular/router';
     ConfirmationDialogComponent,
     AcceptedPaymentComponent,
   ],
-  imports: [
-    CommonModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatProgressBarModule,
-    MatIconModule,
-    RouterModule
-  ]
+    imports: [
+        CommonModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatProgressBarModule,
+        MatIconModule,
+        RouterModule,
+        PanierElementComponent
+    ]
 })
 export class PanierModule { }
