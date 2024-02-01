@@ -15,10 +15,11 @@
         </div>
         <br>
         <div class="detailCovoiturage">
-            <p>{{ covoiturageLieu.horaire | date: 'dd/MM/yyyy HH:mm':'+0100' }}
-                {{covoiturageLieu.lieuCovoiturage.nomLieu}}</p><br>
-            <p id="lightText">3h12</p><br>
-            <p>{{ covoiturageLieu.horaire | date: 'dd/MM/yyyy HH:mm':'+0100' }}  {{nomManifestation}}</p>
+            <p class="titre">Départ</p>
+            <p>
+                {{covoiturageLieu.lieuCovoiturage.nomLieu}}</p>
+                <br><p  class="titre">Destination</p>
+            <p>{{nomManifestation}}</p>
         </div>
         <hr>
         <div class="detailCovoiturage" id="flex">
@@ -50,7 +51,7 @@
         </div>
         <div class="modeleVoiture">
             <div class="flex">
-                <p>Modele de voiture</p>
+                <mat-icon id="icon-call"aria-hidden="false" aria-label="call icon" fontIcon="local_taxi" ></mat-icon>
                 <p>{{covoiturageLieu.offreCovoiturage.modeleVoiture}}</p>
             </div>
         </div>

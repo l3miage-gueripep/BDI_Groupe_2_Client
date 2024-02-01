@@ -59,9 +59,15 @@ h2{
     overflow: hidden; 
 
 }
+.titre{
+    font-weight: bold;
+    font-size: 15px;
+    color: #007f5fff;
+}
 #lightText{
     font-weight: lighter;
     font-size: 14px;
+    
 }
 hr{
     border: 1px solid black;
@@ -79,7 +85,7 @@ button{
     background-color: transparent;
     border: 2px solid #1A1A1A;
     border-radius: 10px;
-
+    cursor: pointer;
 } 
 button:hover {
     color: #fff;
