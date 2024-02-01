@@ -266,8 +266,7 @@ export class ResultSearchPageComponent {
                   lieuPrincipal: "",
                   dateDebut: "",
                   dateFin:"",
-                  cityDeparture: "",
-                  nomDomaine: "",
+                  sousDomaine: "",
               }
               this.loadFestivalsByFilter(query, this.currentPage, this.pageSize);
           } else {
