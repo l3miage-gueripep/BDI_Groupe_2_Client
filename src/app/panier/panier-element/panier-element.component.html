@@ -1,0 +1,59 @@
+<div class="ticket">
+    <div class="detailTicket">
+        <h2>Covoiturages</h2>
+        <p>
+            <b>Départ</b> : {{panierOffre.covoiturageLieu.lieuCovoiturage.nomLieu}} {{
+                panierOffre.covoiturageLieu.horaire | date:'shortTime':'GMT+1' }}
+        </p>
+        <h2>Pass Festival</h2>
+        <p>
+            <b>Titre Festival</b> : {{panierOffre.festival.nomManifestation}} (du
+            {{panierOffre.festival.dateDebut | date:'dd/MM/yyyy'}} au {{panierOffre.festival.dateFin |
+            date:'dd/MM/yyyy'}})
+        </p>
+    </div>
+    <div class="prix">
+        <br>
+        <div class="prixCovoiturage">
+            <p>{{panierOffre.covoiturageLieu.prix * panierOffre.quantite}} euros</p>
+        </div><br>
+        <div class="prixFestival">
+            <p>{{panierOffre.festival.tarifPass * panierOffre.quantite}} euros</p>
+        </div>
+    </div>
+    <span class="spacer"></span>
+    <div class="selectionTicket">
+        <button mat-fab color="warn" aria-label="Example icon button with a delete icon" (click)="removePanierOffre(panierOffre)">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <!-- <input type="checkbox" id="cb1" name="Ticket" class="custom-checkbox" /> -->
+    </div>
+</div>
+<hr>
+<div class="prixTotal">
+    <div class="panier-element-row">
+            <div class="panier-element-col">
+                <h1> Places pris </h1>
+            </div>
+            <div class="panier-element-col"></div>
+            <div class="panier-element-col">
+                <button mat-icon-button (click)="decreasePassenger()">
+                    <span class="material-icons">remove</span>
+                </button>
+                <span class="material-icons">person</span>
+                {{panierOffre.quantite}}
+                <button mat-icon-button (click)="increasePassenger()">
+                    <span class="material-icons">add</span>
+                </button>
+            </div>
+    </div>
+    <div class="panier-element-row">
+            <div class="panier-element-col">
+                <h1> PRIX TOTAL</h1>
+            </div>
+            <div class="panier-element-col"></div>
+            <div class="panier-element-col">
+                <p>{{getPrixTotal(panierOffre)}} euros</p>
+            </div>
+    </div>
+</div>

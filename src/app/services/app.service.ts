@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 import {FestivalList} from "../modele/festivalList.model";
 import {CovoiturageLieuList} from "../modele/covoiturageLieuList.model";
 import { CovoiturageLieu } from '../modele/covoiturageLieu.model';
-import { Panier } from '../modele/panier.model';
+import {Panier, PanierOffre} from '../modele/panier.model';
 
 @Injectable({
   providedIn: 'root'
@@ -70,7 +70,7 @@ export class AppService {
   }
 
   removePanierOffre(idPanierOffre: number) {
-    this.http.delete(`panierOffre/${idPanierOffre}`).subscribe();
+    return this.http.delete(`panierOffre/${idPanierOffre}`);
   }
 
   getPanierByUserMail(mail: string) {
@@ -136,5 +136,9 @@ export class AppService {
   postOffrePanier(query: any) {
     return this.http.post<any>('panier/add/', query, {
     });
+  }
+
+  updateOffrePanier(idOffre: number, quantite: number) {
+    return this.http.patch<PanierOffre>(`panierOffre/${idOffre}`,quantite)
   }
 }
