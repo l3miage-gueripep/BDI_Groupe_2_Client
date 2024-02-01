@@ -6,6 +6,7 @@ import { AppService } from 'src/app/services/app.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Router } from '@angular/router';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-panier-page',
@@ -18,7 +19,7 @@ export class PanierPageComponent {
   protected panierOffres: PanierOffre[] = [];
   private panierId: number = -1;
 
-  constructor(private appService: AppService, private firebaseService: FirebaseService, protected dialog: MatDialog, private router: Router) { 
+  constructor(private appService: AppService, private firebaseService: FirebaseService, protected dialog: MatDialog, private router: Router, private snackBar: MatSnackBar) {
     //pas besoin de verifier si c'est nul ou non car l'utilisateur n'a pas le droit d'accéder à cette page s'il n'est pas connecté
     let userMail = this.firebaseService.user?.email;
     this.panier = this.appService.getPanierByUserMail(userMail!);
@@ -35,6 +36,7 @@ export class PanierPageComponent {
     });
   }
 
+
   protected getPrixTotal(panierOffre: PanierOffre): number {
     return (panierOffre.covoiturageLieu.prix + panierOffre.festival.tarifPass) * panierOffre.quantite;
   }
@@ -44,9 +46,15 @@ export class PanierPageComponent {
 
     dialogRef.afterClosed().subscribe(hasPaid => {
       if(hasPaid){
-        this.appService.payPanier(this.panierId);
-        //redirige l'utilisateur vers la page de paiement
-        this.router.navigate(['/panier/accepted-payment']);
+        this.appService.payPanier(this.panierId).subscribe({
+          next: (response) => {
+            this.router.navigate(['/panier/accepted-payment']);
+          },
+          error: (error) => {
+            console.error('Payment failed:', error);
+            this.snackBar.open('Paiement échoué: Pas assez de places ', 'Close');
+          }
+        });
       }
     });
   }

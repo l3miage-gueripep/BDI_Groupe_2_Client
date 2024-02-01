@@ -65,6 +65,17 @@ export class ReservationCovoiturageComponent {
   }};
   nbPassenger = 0;
   panier:any;
+
+  increasePassenger() {
+    this.nbPassenger++;
+  }
+
+  decreasePassenger() {
+    if (this.nbPassenger > 1) {
+      this.nbPassenger--;
+    }
+  }
+
   loadCovoiturageLieu(idOffreCovoiturage:number) {
     this.appService.getCovoiturageLieuById(idOffreCovoiturage).subscribe(
         (data) => {
