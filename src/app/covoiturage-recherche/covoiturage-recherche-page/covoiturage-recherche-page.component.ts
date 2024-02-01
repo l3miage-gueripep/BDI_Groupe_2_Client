@@ -11,7 +11,6 @@ import {Subject} from "rxjs";
 import {$localize} from "@angular/localize/init";
 import {Festival} from "../../modele/festival.model";
 import { CovoiturageLieuFilter } from 'src/app/modele/covoiturage-lieu-filter.model';
-import { formatDate } from '@angular/common';
 
 @Injectable()
 export class MyCustomPaginatorIntl implements MatPaginatorIntl {
@@ -117,6 +116,7 @@ export class CovoiturageRecherchePageComponent {
   loadCarpoolsByFestivalIdAndFilter(festivalName: string, page: number, pageSize: number) {
       this.currentLoadMode = 'byId';
       this.currentPage = page;
+      this.isLoading = true;
       this.pageSize = pageSize;
       const formatDate = (date: Date | null | undefined): string => {
         return date ? date.toISOString() : '';

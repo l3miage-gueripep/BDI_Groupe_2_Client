@@ -1,18 +1,10 @@
 <div class="search-page">
-    <p class="word-search-phrase">Votre recherche pour <span class="word-search">{{queryByName? queryByName : "Tous" }}</span> a donné les résultats suivants</p>
+    <p class="word-search-phrase">Votre recherche pour <span class="word-search">{{queryByName? queryByName : "Tous"
+            }}</span> a donné les résultats suivants</p>
     <div class="search-page-toolbar-container">
         <p>{{ nbResult }} résultats</p>
 
         <div class="search-page-toolbar-container-fliter">
-        <button mat-button [matMenuTriggerFor]="filterMenu" (menuOpened)="isFilterMenuOpen = true" (menuClosed)="isFilterMenuOpen = false">
-            <span class="material-icons">{{ isFilterMenuOpen ? 'expand_less' : 'expand_more' }}</span>
-            {{ filterSelected }}
-        </button>
-        <mat-menu #filterMenu="matMenu">
-            <button mat-menu-item>Par pertinence</button>
-            <button mat-menu-item>De A à Z</button>
-            <button mat-menu-item>Par dates</button>
-        </mat-menu>
 
             <button mat-button (click)="toggleChoiceBar()">
                 <span class="material-icons">tune</span>
@@ -27,15 +19,11 @@
                 <form class="example-form">
                     <mat-form-field class="example-full-width">
                         <mat-label>Ville</mat-label>
-                        <input type="text"
-                               placeholder="Ville"
-                               aria-label="Number"
-                               matInput
-                               [formControl]="cityControl"
-                               [matAutocomplete]="autoCity">
+                        <input type="text" placeholder="Ville" aria-label="Number" matInput [formControl]="cityControl"
+                            [matAutocomplete]="autoCity">
                         <mat-autocomplete autoActiveFirstOption #autoCity="matAutocomplete">
                             @for (option of filteredCityOptions | async; track option) {
-                                <mat-option [value]="option">{{option}}</mat-option>
+                            <mat-option [value]="option">{{option}}</mat-option>
                             }
                         </mat-autocomplete>
                     </mat-form-field>
@@ -45,15 +33,11 @@
                 <form class="example-form">
                     <mat-form-field class="example-full-width">
                         <mat-label>Domaine</mat-label>
-                        <input type="text"
-                               placeholder="Domaine"
-                               aria-label="Number"
-                               matInput
-                               [formControl]="domaineControl"
-                               [matAutocomplete]="autoDomaine">
+                        <input type="text" placeholder="Domaine" aria-label="Number" matInput
+                            [formControl]="domaineControl" [matAutocomplete]="autoDomaine">
                         <mat-autocomplete autoActiveFirstOption #autoDomaine="matAutocomplete">
                             @for (option of filteredDomaineOptions | async; track option) {
-                                <mat-option [value]="option">{{option}}</mat-option>
+                            <mat-option [value]="option">{{option}}</mat-option>
                             }
                         </mat-autocomplete>
                     </mat-form-field>
@@ -69,10 +53,10 @@
                     <mat-date-range-picker #picker></mat-date-range-picker>
 
                     @if (range.controls.start.hasError('matStartDateInvalid')) {
-                        <mat-error>Invalide début de date </mat-error>
+                    <mat-error>Invalide début de date </mat-error>
                     }
                     @if (range.controls.end.hasError('matEndDateInvalid')) {
-                        <mat-error>Invalide fin de date</mat-error>
+                    <mat-error>Invalide fin de date</mat-error>
                     }
                 </mat-form-field>
             </div>
@@ -80,42 +64,34 @@
             <div class="search-page-choice-row">
                 <mat-form-field class="example-full-width">
                     <mat-label>Nom manifestation</mat-label>
-                    <input matInput placeholder="Ex. Cabaret Frappé" [(ngModel)]="this.nomManifestation" (ngModelChange)="updateFilterQuery()">
-                  </mat-form-field>
+                    <input matInput placeholder="Ex. Cabaret Frappé" [(ngModel)]="this.nomManifestation"
+                        (ngModelChange)="updateFilterQuery()"
+                        (keyup.enter)="loadFestivalsByFilter(this.filterQuery, currentPage, pageSize)">
+                </mat-form-field>
 
-            <button mat-flat-button color="primary" class="result-search-button" (click)="loadFestivalsByFilter(this.filterQuery, currentPage, pageSize)">Rechercher</button>
+                <button mat-flat-button color="primary" class="result-search-button"
+                    (click)="loadFestivalsByFilter(this.filterQuery, currentPage, pageSize)">Rechercher</button>
 
             </div>
         </mat-card-content>
     </mat-card>
-    <br/>
+    <br />
     <div *ngIf="currentLoadMode !== 'byId'">
-    <mat-paginator [length]="festivalList.totalElements"
-                   [pageSize]="pageSize"
-                   [pageSizeOptions]="[5, 10, 20]"
-                   (page)="onPageChange($event)">
-    </mat-paginator>
+        <mat-paginator [length]="festivalList.totalElements" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]"
+            (page)="onPageChange($event)">
+        </mat-paginator>
     </div>
     <mat-progress-bar mode="indeterminate" *ngIf="this.isLoadingFestivals"></mat-progress-bar>
     <div *ngFor="let festival of festivals" [hidden]="this.isLoadingFestivals">
-        <app-resultat-card
-                [festivalName]="festival.nomManifestation"
-                [codePostal]="festival.codePostal"
-                [lieuPrincipal]="festival.lieuPrincipal"
-                [siteWeb]="festival.siteWeb"
-                [startDate]="festival.dateDebut"
-                [endDate]="festival.dateFin"
-                [price]="festival.tarifPass"
-                [nomDomaine]="festival.sousDomaine.nomDomaine"
-
-        ></app-resultat-card>
-        <br/>
+        <app-resultat-card [festivalName]="festival.nomManifestation" [codePostal]="festival.codePostal"
+            [lieuPrincipal]="festival.lieuPrincipal" [siteWeb]="festival.siteWeb" [startDate]="festival.dateDebut"
+            [endDate]="festival.dateFin" [price]="festival.tarifPass"
+            [nomDomaine]="festival.sousDomaine.nomDomaine"></app-resultat-card>
+        <br />
     </div>
     <div *ngIf="currentLoadMode !== 'byId' && !this.isLoadingFestivals">
-        <mat-paginator [length]="festivalList.totalElements"
-                       [pageSize]="pageSize"
-                       [pageSizeOptions]="[5, 10, 20]"
-                       (page)="onPageChange($event)">
+        <mat-paginator [length]="festivalList.totalElements" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]"
+            (page)="onPageChange($event)">
         </mat-paginator>
     </div>
 </div>
