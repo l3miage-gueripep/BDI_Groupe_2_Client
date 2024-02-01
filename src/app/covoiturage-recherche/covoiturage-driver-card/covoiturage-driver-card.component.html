@@ -2,13 +2,14 @@
     <mat-card class="carpool-search-driver-card-info">
         <mat-card-content>
             <div class="carpool-search-driver-card-row responsive">
+                <div class="flex-spacer"></div>
                 <div class="driver-info-container">
                     <mat-icon aria-hidden="false" aria-label="person icon" class="person-icon">person</mat-icon>
                     <p class="search-page-driver-name">{{nomConducteur}} {{prenomConducteur}}</p>
                 </div>
 
                 <div class="offers-container">
-                    <p>destination : {{festival.nomManifestation}}</p>
+                    <div class="offers-container-title">Destination</div>  {{festival.nomManifestation}}
                     <div *ngFor="let offre of covoiturageLieus">
                         <hr/>
                         <app-offre-covoiturage
@@ -16,29 +17,11 @@
                         [nomManifestation]="festival.nomManifestation"
                         [nbPassenger]="nbPassenger"
                         ></app-offre-covoiturage>
-
                     </div>
                 </div>
+                <div class="flex-spacer"></div>
             </div>
         </mat-card-content>
 
     </mat-card>
-<!--
-    <mat-card class="carpool-search-driver-card-price">
-        <mat-card-content>
-                <div class="carpool-search-driver-card-row">
-                    <p>{{placeLibre}} place(s) restante(s)</p>
-                </div>
-                <div class="carpool-search-driver-card-row">
-                    <p>A partir de {{price}} euros </p>
-                </div>
-            <div class="carpool-search-driver-card-row">
-                <a (click)="navigateToReservation()">
-                    <button mat-raised-button class="carpool-driver-card-reserve">Réserver maintenant</button>
-                </a>
-
-            </div>
-        </mat-card-content>
-    </mat-card>
-    -->
 </div>

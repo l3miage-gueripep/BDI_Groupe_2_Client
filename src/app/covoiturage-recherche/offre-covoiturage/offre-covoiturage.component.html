@@ -1,15 +1,18 @@
 <div class="offre-covoiturage">
     <div class="offre-col">
-    <p>lieu départ : {{offreCovoiturage.lieuCovoiturage.nomLieu}}</p>
-    <p>temp départ : {{offreCovoiturage.horaire}}</p>
+    <div class="offre-covoiturage-title">Lieu départ</div>  {{offreCovoiturage.lieuCovoiturage.nomLieu}}
+        <div class="offre-covoiturage-title">Temp départ </div>{{ offreCovoiturage.horaire | date: 'dd/MM/yyyy HH:mm':'+0100' }}
+
     </div>
     <div class="offre-col">
         <p>{{offreCovoiturage.offreCovoiturage.nbPlaces}} place(s) reste(s)</p>
         <p> à partir du {{offreCovoiturage.prix}} euros</p>
     </div>
     <div class="offre-col">
-        <a (click)="navigateToReservation()">
-            <button mat-raised-button class="carpool-driver-card-reserve">Réserver maintenant</button>
+        <a (click)="handleClic()">
+            <button mat-raised-button class="offre-covoiturage-reserve">Réserver maintenant</button>
         </a>
+
+
     </div>
 </div>
