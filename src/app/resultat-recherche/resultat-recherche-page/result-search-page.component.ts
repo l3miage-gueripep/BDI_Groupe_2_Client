@@ -44,7 +44,7 @@ export class ResultSearchPageComponent {
   nbResult = 0;
   isFilterMenuOpen = false;
   isChoiceBarVisible: boolean = true;
-  filterSelected = 'Par pertinence'
+  filterSelected = 'De A à Z'
   queryByName: string | undefined;
   filterQuery: FestivalFilterQuery =  {
     nomManifestation: "",
@@ -133,7 +133,8 @@ export class ResultSearchPageComponent {
         this.currentLoadMode = 'all';
         this.currentPage = page;
         this.pageSize = pageSize;
-
+        this.isLoadingFestivals = true;
+/*
         this.appService.getFestivals(page, pageSize).subscribe(
             (data) => {
               this.festivalList = data;
@@ -146,7 +147,40 @@ export class ResultSearchPageComponent {
               this.isLoadingFestivals = false;
             }
         );
+
+ */
+        if (this.filterSelected === 'Par dates') {
+            this.appService.getFestivalsByDate(page, pageSize).subscribe(
+                (data) => {
+                    this.handleFestivalData(data);
+                },
+                (error) => {
+                    this.handleError(error);
+                }
+            );
+        } else {
+            this.appService.getFestivals(page, pageSize).subscribe(
+                (data) => {
+                    this.handleFestivalData(data);
+                },
+                (error) => {
+                    this.handleError(error);
+                }
+            );
+        }
   }
+
+    handleFestivalData(data: FestivalList) {
+        this.festivalList = data;
+        this.festivals = data.content;
+        this.nbResult = data.totalElements;
+        this.isLoadingFestivals = false;
+    }
+
+    handleError(error: any) {
+        console.error('Error fetching festivals', error);
+        this.isLoadingFestivals = false;
+    }
 
   loadFestivalsById(name: string) {
       this.currentLoadMode = 'byId';
@@ -208,7 +242,15 @@ export class ResultSearchPageComponent {
       sousDomaine: domaineValue || "",
     };
   }
+    handleTriByDate() {
+        this.filterSelected='Par dates';
+        this.loadAllFestivals(this.currentPage, this.pageSize);
+    }
 
+    handleTriByAlphabet() {
+        this.filterSelected='De A à Z';
+        this.loadAllFestivals(this.currentPage, this.pageSize);
+    }
 
   clearCityDeparture() {
     this.updateFilterQuery();
@@ -273,6 +315,7 @@ export class ResultSearchPageComponent {
               this.loadAllFestivals(this.currentPage, this.pageSize);
           }
       });
+
 
 
       this.filteredCityOptions = this.cityControl.valueChanges.pipe(

@@ -9,9 +9,8 @@
             {{ filterSelected }}
         </button>
         <mat-menu #filterMenu="matMenu">
-            <button mat-menu-item>Par pertinence</button>
-            <button mat-menu-item>De A à Z</button>
-            <button mat-menu-item>Par dates</button>
+            <button mat-menu-item (click)="handleTriByAlphabet()">De A à Z</button>
+            <button mat-menu-item (click)="handleTriByDate()">Par dates</button>
         </mat-menu>
 
             <button mat-button (click)="toggleChoiceBar()">

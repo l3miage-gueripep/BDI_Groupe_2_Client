@@ -31,6 +31,19 @@ export class AppService {
     return this.http.get<FestivalList>('festival/', { params: params });
   }
 
+  getFestivalsByDate(page?: number, size?: number): Observable<FestivalList> {
+    let params = new HttpParams();
+
+    if (page != null) {
+      params = params.set('page', page.toString());
+    }
+    if (size != null) {
+      params = params.set('size', size.toString());
+    }
+
+    return this.http.get<FestivalList>('festival/date', { params: params });
+  }
+
   getAllCity() {
     return this.http.get<string[]>('festival/allCity');
   }
@@ -80,21 +93,6 @@ export class AppService {
   getCarpools() {
     return this.http.get<CovoiturageLieuList>('covoiturage/');
   }
-  getCarpoolByIdFestival(idFestival: string, page?: number, size?: number){
-    let params = new HttpParams();
-
-    if (page != null) {
-      params = params.set('page', page.toString());
-    }
-    if (size != null) {
-      params = params.set('size', size.toString());
-    }
-    return this.http.get<CovoiturageLieuList>(`covoiturage/festival/${idFestival}`,{params: params
-    });
-  }
-  getCarpoolByIdOffre(idOffre: number){
-    return this.http.get<Covoiturage[]>(`covoiturage/${idOffre}`);
-  }
 
   postAdherent(query: Adherent) {
     return this.http.post<Adherent>('adherent/', query, {
@@ -140,5 +138,9 @@ export class AppService {
 
   updateOffrePanier(idOffre: number, quantite: number) {
     return this.http.patch<PanierOffre>(`panierOffre/${idOffre}`,quantite)
+  }
+
+  downloadPdf(idPanier: number): Observable<Blob> {
+    return this.http.get(`download-pdf/${idPanier}`, { responseType: 'blob' });
   }
 }

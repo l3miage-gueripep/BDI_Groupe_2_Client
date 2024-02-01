@@ -41,6 +41,21 @@ export class PanierPageComponent {
     return (panierOffre.covoiturageLieu.prix + panierOffre.festival.tarifPass) * panierOffre.quantite;
   }
 
+  downloadPdf(idPanier: number) {
+    this.appService.downloadPdf(idPanier).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `pdf-download-${idPanier}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    }, error => {
+      console.error('Download error:', error);
+    });
+  }
+
   protected openDialog(){
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
@@ -49,6 +64,7 @@ export class PanierPageComponent {
         this.appService.payPanier(this.panierId).subscribe({
           next: (response) => {
             this.router.navigate(['/panier/accepted-payment']);
+            this.downloadPdf(this.panierId)
           },
           error: (error) => {
             console.error('Payment failed:', error);
