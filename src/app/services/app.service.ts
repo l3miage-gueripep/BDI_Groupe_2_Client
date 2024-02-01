@@ -52,7 +52,7 @@ export class AppService {
   }
 
   payPanier(idPanier: number) {
-    return this.http.patch(`panier/pay/${idPanier}`, {}).subscribe();
+    return this.http.patch(`panier/pay/${idPanier}`, {});
   }
 
   getFestivalsByFilter(query: FestivalFilterQuery, page?: number, size?: number) {

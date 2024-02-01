@@ -14,9 +14,19 @@
             <span class="spacer"> </span>
             <b> <p id="right"> {{ covoiturageLieu.prix * nbPassenger }} euros </p></b>
         </div>
+        <div class="carpool-search-passenger-button">
+
+            <button mat-icon-button (click)="decreasePassenger()">
+                <span class="material-icons">remove</span>
+            </button>
+            <span class="material-icons">person</span>
+            {{nbPassenger}}
+            <button mat-icon-button (click)="increasePassenger()">
+                <span class="material-icons">add</span>
+            </button>
+        </div>
         <div class="center">
             <button class="reservation-button" (click)="ajouterAuPanier()">Ajouter au panier</button>
-
 
         </div>
     </div>
