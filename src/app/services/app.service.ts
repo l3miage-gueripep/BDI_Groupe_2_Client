@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { Festival} from "../modele/festival.model";
-import {FilterQuery} from "../modele/filterQuery.model";
+import {FestivalFilterQuery} from "../modele/filterQuery.model";
 import {Covoiturage} from "../modele/covoiturage.model";
 import { Adherent } from "../modele/adherent.model";
 import {Observable} from "rxjs";
@@ -55,7 +55,7 @@ export class AppService {
     return this.http.patch(`panier/pay/${idPanier}`, {}).subscribe();
   }
 
-  getFestivalsByFilter(query: FilterQuery, page?: number, size?: number) {
+  getFestivalsByFilter(query: FestivalFilterQuery, page?: number, size?: number) {
     let params = new HttpParams();
 
     if (page != null) {

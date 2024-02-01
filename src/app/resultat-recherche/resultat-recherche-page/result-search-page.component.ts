@@ -4,7 +4,7 @@ import {provideNativeDateAdapter} from "@angular/material/core";
 import {ActivatedRoute} from "@angular/router";
 import { AppService } from '../../services/app.service';
 import { Festival } from '../../modele/festival.model';
-import { FilterQuery } from '../../modele/filterQuery.model';
+import { FestivalFilterQuery } from '../../modele/filterQuery.model';
 import {debounceTime, distinctUntilChanged, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
@@ -46,7 +46,8 @@ export class ResultSearchPageComponent {
   isChoiceBarVisible: boolean = true;
   filterSelected = 'Par pertinence'
   queryByName: string | undefined;
-  filterQuery: FilterQuery =  {
+  filterQuery: FestivalFilterQuery =  {
+    nomManifestation: "",
     dateDebut: "",
     dateFin: "",
     lieuPrincipal:"",
@@ -54,6 +55,7 @@ export class ResultSearchPageComponent {
     nomDomaine:"",
   };
   cityDepartureValue = '';
+  protected nomManifestation: string = '';
 
   festivalList : FestivalList = {
       content: [],
@@ -164,11 +166,12 @@ export class ResultSearchPageComponent {
   }
 
 
-  loadFestivalsByFilter(query: FilterQuery, page: number, pageSize: number) {
+  loadFestivalsByFilter(query: FestivalFilterQuery, page: number, pageSize: number) {
       this.currentLoadMode = 'byFilter';
       this.currentPage = page;
       this.pageSize = pageSize;
     this.isLoadingFestivals = true;
+    console.log(query);
     this.appService.getFestivalsByFilter(query,page, pageSize ).subscribe(
         (data) => {
             this.festivalList = data;
@@ -200,6 +203,7 @@ export class ResultSearchPageComponent {
 
 
     this.filterQuery = {
+        nomManifestation: this.nomManifestation || "",
       lieuPrincipal: cityValue || "",
       dateDebut: formatDate(rangeValues.start),
       dateFin: formatDate(rangeValues.end),

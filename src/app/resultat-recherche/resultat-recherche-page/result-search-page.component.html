@@ -78,6 +78,10 @@
             </div>
 
             <div class="search-page-choice-row">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nom manifestation</mat-label>
+                    <input matInput placeholder="Ex. Cabaret Frappé" [(ngModel)]="this.nomManifestation" (ngModelChange)="updateFilterQuery()">
+                  </mat-form-field>
             <mat-form-field class="example-form-field">
                 <mat-label>Ville départ</mat-label>
                 <input matInput type="text" [(ngModel)]="cityDepartureValue" (ngModelChange)="updateFilterQuery()">
