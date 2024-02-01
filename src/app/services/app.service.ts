@@ -9,6 +9,7 @@ import {FestivalList} from "../modele/festivalList.model";
 import {CovoiturageLieuList} from "../modele/covoiturageLieuList.model";
 import { CovoiturageLieu } from '../modele/covoiturageLieu.model';
 import {Panier, PanierOffre} from '../modele/panier.model';
+import { CovoiturageLieuFilter } from '../modele/covoiturage-lieu-filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -123,6 +124,10 @@ export class AppService {
       params = params.set('size', size.toString());
     }
     return this.http.get<CovoiturageLieuList>(`festival/${nomManifestation}/covoituragelieu`,{ params: params })
+  }
+
+  getCovoiturageLieuByFestivalAndFilter(nomManifestation: string, query: CovoiturageLieuFilter, page?: number, size?: number) {
+    return this.http.post<CovoiturageLieuList>(`festival/${nomManifestation}/covoituragelieu/filter`, query, {});
   }
 
   getCovoiturageLieuByIdOffreCovoiturage(idOffreCovoiturage: number) {

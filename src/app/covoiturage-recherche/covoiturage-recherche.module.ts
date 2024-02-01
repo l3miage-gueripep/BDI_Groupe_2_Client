@@ -14,6 +14,7 @@ import { CovoiturageRecherchePageComponent } from './covoiturage-recherche-page/
 import {MatIcon} from "@angular/material/icon";
 import {MatPaginator} from "@angular/material/paginator";
 import {OffreCovoiturageComponent} from "./offre-covoiturage/offre-covoiturage.component";
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -44,7 +45,8 @@ import {OffreCovoiturageComponent} from "./offre-covoiturage/offre-covoiturage.c
         RouterLink,
         MatIcon,
         MatPaginator,
-        OffreCovoiturageComponent
+        OffreCovoiturageComponent,
+        MatProgressBarModule
     ]
 })
 export class CovoiturageRechercheModule { }

@@ -10,6 +10,8 @@ import {MatPaginatorIntl} from "@angular/material/paginator";
 import {Subject} from "rxjs";
 import {$localize} from "@angular/localize/init";
 import {Festival} from "../../modele/festival.model";
+import { CovoiturageLieuFilter } from 'src/app/modele/covoiturage-lieu-filter.model';
+import { formatDate } from '@angular/common';
 
 @Injectable()
 export class MyCustomPaginatorIntl implements MatPaginatorIntl {
@@ -39,6 +41,7 @@ export class MyCustomPaginatorIntl implements MatPaginatorIntl {
   styleUrl: './covoiturage-recherche-page.component.scss'
 })
 export class CovoiturageRecherchePageComponent {
+  protected isLoading: boolean = true;
   constructor(private route: ActivatedRoute, private appService: AppService) {
   }
   currentLoadMode: 'all' | 'byId' = 'all';
@@ -111,18 +114,28 @@ export class CovoiturageRecherchePageComponent {
     );
   }
 
-  loadCarpoolsByFestivalId(festivalName: string, page: number, pageSize: number) {
+  loadCarpoolsByFestivalIdAndFilter(festivalName: string, page: number, pageSize: number) {
       this.currentLoadMode = 'byId';
       this.currentPage = page;
       this.pageSize = pageSize;
-    this.appService.getCovoiturageLieuByFestival(festivalName, page, pageSize).subscribe(
+      const formatDate = (date: Date | null | undefined): string => {
+        return date ? date.toISOString() : '';
+    };
+      let query: CovoiturageLieuFilter = {
+        horaireDepartMin: this.range.value.start ? formatDate(this.range.value.start) : null,
+        horaireDepartMax: this.range.value.end ? formatDate(this.range.value.end) : null,
+        nbPlacesMin: this.nbPassenger
+      };
+    this.appService.getCovoiturageLieuByFestivalAndFilter(festivalName, query, page, pageSize).subscribe(
         (data) => {
             this.carpoolList = data;
             this.offerCarpools = data.content;
             this.nbResult = data.totalElements;
+            this.isLoading = false;
         },
         (error) => {
           console.error('Error fetching festivals', error);
+          this.isLoading = false;
         }
     );
 
@@ -136,13 +149,13 @@ export class CovoiturageRecherchePageComponent {
     onPageChange(event: any) {
         const pageIndex = event.pageIndex;
         const pageSize = event.pageSize;
-
+        this.isLoading = true;
         switch (this.currentLoadMode) {
             case 'all':
                 this.loadAllCarpools(pageIndex, pageSize);
                 break;
             case 'byId':
-                this.loadCarpoolsByFestivalId(this.queryByFestivalId, pageIndex, pageSize);
+                this.loadCarpoolsByFestivalIdAndFilter(this.queryByFestivalId, pageIndex, pageSize);
                 break;
         }
     }
@@ -152,7 +165,7 @@ export class CovoiturageRecherchePageComponent {
       this.queryByFestivalId = params['query'];
       console.log('this.queryByFestivalId', this.queryByFestivalId);
       if (this.queryByFestivalId) {
-        this.loadCarpoolsByFestivalId(this.queryByFestivalId, this.currentPage, this.pageSize);
+        this.loadCarpoolsByFestivalIdAndFilter(this.queryByFestivalId, this.currentPage, this.pageSize);
       } else {
         this.loadAllCarpools(this.currentPage, this.pageSize);
       }

@@ -97,7 +97,7 @@
     </mat-paginator>
     </div>
     <mat-progress-bar mode="indeterminate" *ngIf="this.isLoadingFestivals"></mat-progress-bar>
-    <div *ngFor="let festival of festivals">
+    <div *ngFor="let festival of festivals" [hidden]="this.isLoadingFestivals">
         <app-resultat-card
                 [festivalName]="festival.nomManifestation"
                 [codePostal]="festival.codePostal"
@@ -107,6 +107,7 @@
                 [endDate]="festival.dateFin"
                 [price]="festival.tarifPass"
                 [nomDomaine]="festival.sousDomaine.nomDomaine"
+
         ></app-resultat-card>
         <br/>
     </div>

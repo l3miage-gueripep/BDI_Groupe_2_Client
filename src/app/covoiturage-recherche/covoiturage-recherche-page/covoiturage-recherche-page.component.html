@@ -4,25 +4,6 @@
 <mat-card class="carpool-search-bar">
     <mat-card-content>
         <div class="carpool-search-bar-row">
-            <form class="carpool-departure-form">
-                <mat-form-field class="carpool-departure-full-width">
-                    <mat-label>Ville départ</mat-label>
-                    <input type="string" matInput [formControl]="departureFormControl" placeholder="Ville">
-                    @if (departureFormControl.hasError('required')) {
-                        <mat-error>Veuillez saisir une ville</mat-error>
-                    }
-                </mat-form-field>
-            </form>
-
-            <form class="carpool-arrival-form">
-                <mat-form-field class="carpool-arrival-full-width">
-                    <mat-label>Ville arrivée</mat-label>
-                    <input type="string" matInput [formControl]="arrivalFormControl" placeholder="Ville">
-                    @if (arrivalFormControl.hasError('required')) {
-                        <mat-error>Veuillez saisir une ville</mat-error>
-                    }
-                </mat-form-field>
-            </form>
 
             <mat-form-field class="carpool-search-page-calendar">
                 <mat-label>Choisir la date</mat-label>
@@ -56,23 +37,9 @@
 
 
 
-            <button mat-flat-button color="primary" class="carpool-search-button">Rechercher</button>
+            <button mat-flat-button color="primary" class="carpool-search-button" (click)="this.loadCarpoolsByFestivalIdAndFilter(this.queryByFestivalId, this.currentPage, this.pageSize)">Rechercher</button>
         </div>
 
-        <div class="carpool-search-bar-row">
-
-            <button mat-button class="carpool-search-filter" [matMenuTriggerFor]="categoriesMenu" (menuOpened)="isFilterMenuOpen = true" (menuClosed)="isFilterMenuOpen = false">
-                {{ filterSelected }}
-                <span class="material-icons">{{ isFilterMenuOpen ? 'expand_less' : 'expand_more' }}</span>
-            </button>
-            <mat-menu #categoriesMenu="matMenu">
-                <section class="example-section">
-                    <p><button mat-flat-button>Départ le plus tôt</button></p>
-                    <p><button mat-flat-button>Trajet le plus court</button></p>
-                    <p><button mat-flat-button>Prix le moins cher</button></p>
-                </section>
-            </mat-menu>
-        </div>
     </mat-card-content>
 </mat-card>
 
@@ -81,7 +48,8 @@
                    [pageSizeOptions]="[5, 10, 20]"
                    (page)="onPageChange($event)">
     </mat-paginator>
-        <div *ngFor="let offerCarpool of offerCarpools">
+        <mat-progress-bar mode="indeterminate" *ngIf="this.isLoading"></mat-progress-bar>
+        <div *ngFor="let offerCarpool of offerCarpools" [hidden]="isLoading">
             <app-covoiturage-driver-card
                     [covoiturageLieu]="offerCarpool"
                     [festival]="festival"
@@ -92,6 +60,7 @@
     <mat-paginator [length]="carpoolList.totalElements"
                    [pageSize]="pageSize"
                    [pageSizeOptions]="[5, 10, 20]"
-                   (page)="onPageChange($event)">
+                   (page)="onPageChange($event)"
+                   *ngIf="!this.isLoading">
     </mat-paginator>
 </div>
